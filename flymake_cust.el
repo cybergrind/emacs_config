@@ -43,4 +43,14 @@
       (flymake-mode 1)
       (define-key python-mode-map "\C-c\C-n" 'flymake-goto-next-error)))
 
+(defun flymake-erlang-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                     'flymake-create-temp-inplace))
+         (local-file (file-relative-name temp-file
+                                         (file-name-directory buffer-file-name))))
+    (list "/home/kpi/.emacs.d/check_erlang.erl" (list local-file))))
+(add-to-list 'flymake-allowed-file-name-masks '("\\.erl\\'" flymake-erlang-init))
+(setq flymake-log-level 3)
+(add-hook 'erlang-mode-hook '(lambda () (flymake-mode t)))
+
 (provide 'flymake_cust)
