@@ -1,4 +1,8 @@
 
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 
@@ -20,6 +24,7 @@
 
 (autopair-global-mode t)
 (show-paren-mode 1)
+(ido-mode t)
 
 
 ;;(autoload 'espresso-mode "espresso" nil t)
