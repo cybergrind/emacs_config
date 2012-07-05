@@ -8,14 +8,18 @@
 
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/auto-complete"))
+(add-to-list 'load-path (concat dotfiles-dir "/icicles"))
+(add-to-list 'load-path (concat dotfiles-dir "/bookmark-plus"))
+(add-to-list 'load-path (concat dotfiles-dir "/anything-config"))
 
+(require 'anything-config)
 (require 'flymake_cust)
-(require 'auto-complete)
+(autoload 'auto-complete "auto-complete" nil t)
 (require 'vis_cust)
-(require 'autopair)
-(require 'paredit)
-(require 'espresso)
-(require 'smex)
+(autoload 'autopair-global-mode "autopair" nil t)
+(autoload 'paredit "paredit" nil t)
+(autoload 'espresso "escpresso" nil t)
+(autoload 'smex-initialize "smex" "smex-initialize" t)
 ;; smex delayed initialization
 (global-set-key [(meta x)] (lambda ()
                              (interactive)
@@ -30,6 +34,9 @@
                                        (smex-initialize))
                                    (global-set-key [(shift meta x)] 'smex-major-mode-commands)
                                    (smex-major-mode-commands)))
+
+(autoload 'icicles "icicles" nil t)
+(run-at-time "5 sec" nil 'icicles)
 
 (setq erlang-root-dir "/usr/lib/erlang")
 (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
