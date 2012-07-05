@@ -7,3 +7,9 @@
 [submodule "anything-config"]
 	path = anything-config
 	url = git://repo.or.cz/anything-config.git
+[submodule "magit"]
+	path = magit
+	url = https://github.com/magit/magit.git
+[submodule "tramp"]
+	path = tramp
+	url = https://github.com/emacsmirror/tramp.git

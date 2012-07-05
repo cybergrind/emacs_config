@@ -9,6 +9,8 @@ lib-cov
 
 pids
 logs
-
-
+backups
+places
 auto-save-list
+elpa
+*~
