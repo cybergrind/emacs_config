@@ -33,7 +33,10 @@
 '((tramp-parse-sconfig "/etc/ssh_config")
 (tramp-parse-sconfig "~/.ssh/config")))
 (setenv "SHELL" "/bin/sh") ;; workaround for zsh
+(setq tramp-default-method "scp")
 (setq tramp-default-method "ssh")
+(setq tramp-debug-buffer t)
+(setq tramp-verbose 10)
 
 
 ;; smex delayed initialization
