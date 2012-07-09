@@ -68,6 +68,13 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq confirm-kill-emacs nil)
+;; remove <2> on doubled buffers
+(require 'uniquify)
+(setq 
+  uniquify-buffer-name-style 'forward
+  uniquify-separator ":")
+;; no tabs
+(setq-default indent-tabs-mode nil)
 
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
