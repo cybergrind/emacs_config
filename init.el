@@ -114,6 +114,7 @@
  ;; If there is more than one, they won't work right.
  '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
  '(flymake-warnline ((t (:background "#999" :foreground "black"))))
+ '(rst-level-1-face ((t (:background "grey10"))) t)
  '(whitespace-empty ((t nil)))
  '(whitespace-indentation ((t nil)))
  '(whitespace-space ((t nil)))
