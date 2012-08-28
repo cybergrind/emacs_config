@@ -105,7 +105,8 @@
  ;; If there is more than one, they won't work right.
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
- '(nil nil t))
+ '(nil nil t)
+ '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
