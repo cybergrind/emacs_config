@@ -105,7 +105,8 @@
  ;; If there is more than one, they won't work right.
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
- '(nil nil t))
+ '(nil nil t)
+ '(safe-local-variable-values (quote ((test-case-name . twotp\.test) (test-case-name . twotp\.test\.test_term) (test-case-name . twotp\.test\.test_server) (test-case-name . twotp\.test\.test_client) (test-case-name . twotp\.test\.test_node) (test-case-name . twotp\.test\.test_epmd)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -114,6 +115,8 @@
  '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
  '(flymake-warnline ((t (:background "#999" :foreground "black"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
+ '(rst-level-2-face ((t nil)) t)
+ '(rst-level-3-face ((t nil)) t)
  '(whitespace-empty ((t nil)))
  '(whitespace-indentation ((t nil)))
  '(whitespace-space ((t nil)))
