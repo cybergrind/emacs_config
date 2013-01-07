@@ -118,7 +118,7 @@
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
  '(nil nil t)
- '(safe-local-variable-values (quote ((test-case-name . twotp\.test) (test-case-name . twotp\.test\.test_term) (test-case-name . twotp\.test\.test_server) (test-case-name . twotp\.test\.test_client) (test-case-name . twotp\.test\.test_node) (test-case-name . twotp\.test\.test_epmd)))))
+ '(safe-local-variable-values (quote ((test-case-name . twotp\.test) (test-case-name . twotp\.test\.test_term) (test-case-name . twotp\.test\.test_server) (test-case-name . twotp\.test\.test_client) (test-case-name . twotp\.test\.test_node) (test-case-name . twotp\.test\.test_epmd))))
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
