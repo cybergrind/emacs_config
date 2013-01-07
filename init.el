@@ -18,8 +18,16 @@
 
 (require 'anything-config)
 (require 'flymake_cust)
+(require 'auto-complete)
+
+(define-globalized-minor-mode real-global-auto-complete-mode
+  auto-complete-mode (lambda ()
+                       (if (not (minibufferp (current-buffer)))
+                         (auto-complete-mode 1))
+                       ))
+(real-global-auto-complete-mode t)
 ;;(require 'tramp)
-(autoload 'auto-complete "auto-complete" nil t)
+;(autoload 'auto-complete "auto-complete" nil t)
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
 (autoload 'paredit "paredit" nil t)
@@ -67,6 +75,9 @@
 
 
 (autopair-global-mode t)
+;;(auto-complete-mode 1)
+(add-to-list 'ac-modes 'python)
+(add-to-list 'ac-modes 'emacs-lisp-mode)
 (show-paren-mode 1)
 (ido-mode t)
 (setq ido-enable-flex-matching t)
@@ -90,6 +101,7 @@
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
+;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
 ;;additional repos
 (require 'package)
@@ -107,6 +119,11 @@
  '(icicle-files-ido-like-flag t)
  '(nil nil t)
  '(safe-local-variable-values (quote ((test-case-name . twotp\.test) (test-case-name . twotp\.test\.test_term) (test-case-name . twotp\.test\.test_server) (test-case-name . twotp\.test\.test_client) (test-case-name . twotp\.test\.test_node) (test-case-name . twotp\.test\.test_epmd)))))
+ '(org-directory "~/Dropbox/gtd")
+ '(org-mobile-directory "~/Dropbox/gtd")
+ '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
+ '(safe-local-variable-values (quote ((codiing . utf-8))))
+ '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
