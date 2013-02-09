@@ -141,3 +141,10 @@
                            (- (+ lo ms) (+ (second *emacs-load-start*) (third *emacs-load-start*)))))
 
 (message "%s" (current-time))
+
+(setq inferior-lisp-program "/usr/bin/sbcl") ; your Lisp system
+(add-to-list 'load-path "/usr/lib/sbcl")
+(add-to-list 'load-path "~/.emacs.d/slime")  ; your SLIME directory
+(require 'slime)
+(slime-setup '(slime-repl))
+

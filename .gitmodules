@@ -13,3 +13,6 @@
 [submodule "tramp"]
 	path = tramp
 	url = https://github.com/emacsmirror/tramp.git
+[submodule "slime"]
+	path = slime
+	url = git://github.com/nablaone/slime.git
