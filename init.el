@@ -74,7 +74,7 @@
 (require 'erlang-start)
 
 
-(autopair-global-mode t)
+;(autopair-global-mode t)
 ;;(auto-complete-mode 1)
 (add-to-list 'ac-modes 'python)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
@@ -148,3 +148,7 @@
 (require 'slime)
 (slime-setup '(slime-repl))
 
+(add-hook 'slime-mode-hook
+           #'(lambda () (setq autopair-dont-activate t)))
+(add-hook 'not-working-mode-hook
+           #'(lambda () (setq autopair-dont-activate t)))
