@@ -74,7 +74,7 @@
 (require 'erlang-start)
 
 
-(autopair-global-mode t)
+;(autopair-global-mode t)
 ;;(auto-complete-mode 1)
 (add-to-list 'ac-modes 'python)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
@@ -118,6 +118,7 @@
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
  '(nil nil t)
+ '(safe-local-variable-values (quote ((test-case-name . twotp\.test) (test-case-name . twotp\.test\.test_term) (test-case-name . twotp\.test\.test_server) (test-case-name . twotp\.test\.test_client) (test-case-name . twotp\.test\.test_node) (test-case-name . twotp\.test\.test_epmd))))
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
@@ -132,6 +133,7 @@
  '(flymake-warnline ((t (:background "#999" :foreground "black"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
  '(rst-level-2-face ((t nil)) t)
+ '(rst-level-3-face ((t nil)) t)
  '(whitespace-empty ((t nil)))
  '(whitespace-indentation ((t nil)))
  '(whitespace-space ((t nil)))
@@ -143,3 +145,14 @@
 
 (message "%s" (current-time))
 (put 'set-goal-column 'disabled nil)
+
+(setq inferior-lisp-program "/usr/bin/sbcl") ; your Lisp system
+(add-to-list 'load-path "/usr/lib/sbcl")
+(add-to-list 'load-path "~/.emacs.d/slime")  ; your SLIME directory
+(require 'slime)
+(slime-setup '(slime-repl))
+
+(add-hook 'slime-mode-hook
+           #'(lambda () (setq autopair-dont-activate t)))
+(add-hook 'not-working-mode-hook
+           #'(lambda () (setq autopair-dont-activate t)))
