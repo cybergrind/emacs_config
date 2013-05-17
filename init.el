@@ -14,6 +14,7 @@
 (add-to-list 'load-path (concat dotfiles-dir "/anything-config"))
 (add-to-list 'load-path (concat dotfiles-dir "/magit"))
 (add-to-list 'load-path (concat dotfiles-dir "/tramp"))
+(add-to-list 'load-path (concat dotfiles-dir "/tramp/lisp"))
 
 
 (require 'anything-config)
@@ -26,7 +27,7 @@
                          (auto-complete-mode 1))
                        ))
 (real-global-auto-complete-mode t)
-;;(require 'tramp)
+(require 'tramp)
 ;(autoload 'auto-complete "auto-complete" nil t)
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
@@ -45,6 +46,7 @@
 (setq tramp-default-method "ssh")
 (setq tramp-debug-buffer t)
 (setq tramp-verbose 10)
+(require 'tramp-cmds)
 
 
 ;; smex delayed initialization
