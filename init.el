@@ -103,6 +103,8 @@
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
+(autoload 'yaml-mode "yaml-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 ;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
 ;;additional repos
@@ -120,11 +122,10 @@
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
  '(nil nil t)
- '(safe-local-variable-values (quote ((test-case-name . twotp\.test) (test-case-name . twotp\.test\.test_term) (test-case-name . twotp\.test\.test_server) (test-case-name . twotp\.test\.test_client) (test-case-name . twotp\.test\.test_node) (test-case-name . twotp\.test\.test_epmd))))
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(safe-local-variable-values (quote ((test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
+ '(safe-local-variable-values (quote ((test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
