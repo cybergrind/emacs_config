@@ -103,6 +103,8 @@
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
+(autoload 'yaml-mode "yaml-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 ;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
 ;;additional repos
