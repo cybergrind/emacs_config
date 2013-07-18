@@ -99,7 +99,8 @@ splitaround_(F,NF,N,L) ->
 
 os_cmd(Cmd,Args,F)-> % os:cmd/1 is buggy in most versions of Erlang
     RelExec = os:find_executable(Cmd), % spawn failed on w1n without this
-    CmdLine = string:join([RelExec|Args]," "),
+    GrepArgs = Args ++ " | grep -v lager",
+    CmdLine = string:join([RelExec|GrepArgs]," "),
     Opts = [stderr_to_stdout, exit_status, in, hide,
             stream, {line,max_line_length()}],
     Port = open_port({spawn,CmdLine},Opts),
