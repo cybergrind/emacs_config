@@ -61,8 +61,7 @@
 ;    (list "/home/kpi/.emacs.d/check_erlang.erl" (list local-file))))
 (defun flymake-erlang-init ()
      ; Make sure it's not a remote buffer or flymake would not work
-  (require 'tramp-cmds)
-  (when (not (subsetp (list (current-buffer)) (tramp-list-remote-buffers)))
+  (when 't
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
                               'flymake-create-temp-inplace))
            (local-file (file-relative-name

@@ -10,6 +10,7 @@
 -compile([export_all]).
 
 main([FileName]) ->
+    io:format("CURR DIR: ~p~n", [os:cmd("pwd")]),
     correct_modname(FileName),
     Result =
         compile:file(
@@ -19,7 +20,7 @@ main([FileName]) ->
            warn_export_vars, warn_shadow_vars,
            warn_obsolete_guard, warn_unused_import, bin_opt_info, verbose,
            {i, filename:join("..","include")},
-           {i, filename:join("..","..")}]),
+           {i, filename:join("..","..")}] ++ find_comp_includes()),
     case Result of
         error ->
             Result;
@@ -28,7 +29,7 @@ main([FileName]) ->
                 C when C==0; C==2 ->
                     halt(0);
                 _ ->
-                    halt(1)
+                    halt(0)
             end
     end.
 
@@ -45,7 +46,7 @@ dia(FileName)->
     PLTName = ".dialyzer_prj.plt",
     Var = case os:type() of
               {win32,_} -> "USERPROFILE"; %% @todo test
-              {unix,_}  -> "HOME";
+              {unix,_}  -> "DIA_DIR";
               vxworks   -> "HOME" %% @todo find out
           end,
     OTP_PLT = filename:join(os:getenv(Var),PLTName),
@@ -70,12 +71,36 @@ max_line_length()->
     255.
 
 dia_plt(FileName,OTP_PLT)->
-    Args = ["--plt", OTP_PLT, "--quiet", "--no_check_plt", "--src",
+    Args = find_includes() ++
+           ["--plt", OTP_PLT, "--quiet", "--no_check_plt", "--src",
             "-I", filename:join("..","include"),
             "-I", filename:join("..",".."),
             "-Wunmatched_returns", "-Werror_handling", "-Wspecdiffs",
             "-c", FileName],
     os_cmd("dialyzer",Args,print_line_filename(FileName)).
+
+find_includes() ->
+  ProjDir = os:getenv("EPROJ_DIR"),
+  Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
+  Out = lists:flatten([["-I", Dir, " "] || Dir <- Dirs]),
+  io:format("Got includes2: ~p~n", [Out]),
+  [Out].
+
+find_comp_includes() ->
+  ProjDir = os:getenv("EPROJ_DIR"),
+  Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
+  Out = lists:flatten([{i, Dir} || Dir <- Dirs]),
+  io:format("Got includes: ~p~n", [Out]),
+  Out.
+
+split(Str, Sym) ->
+  NewStr = string:strip(Str, both, $\n),
+  lists:foldl(fun (FSym, Acc) ->
+                  check_with(FSym, Sym, Acc) end, [], NewStr).
+
+check_with(Sym, Sym, Acc) -> [[] | Acc];
+check_with(FSym, _, []) -> [[FSym]];
+check_with(FSym, _, [Head|Rest]) -> [Head ++[FSym]|Rest].
 
 print_line_filename(FileName)->
     fun("")->
@@ -99,7 +124,7 @@ splitaround_(F,NF,N,L) ->
 
 os_cmd(Cmd,Args,F)-> % os:cmd/1 is buggy in most versions of Erlang
     RelExec = os:find_executable(Cmd), % spawn failed on w1n without this
-    GrepArgs = Args ++ " | grep -v lager",
+    GrepArgs = Args ++ [" | grep -v lager"],
     CmdLine = string:join([RelExec|GrepArgs]," "),
     Opts = [stderr_to_stdout, exit_status, in, hide,
             stream, {line,max_line_length()}],
