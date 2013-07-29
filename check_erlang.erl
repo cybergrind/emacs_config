@@ -80,14 +80,18 @@ dia_plt(FileName,OTP_PLT)->
     os_cmd("dialyzer",Args,print_line_filename(FileName)).
 
 find_includes() ->
-  ProjDir = os:getenv("EPROJ_DIR"),
+  case os:getenv("EPROJ_DIR") of
+    false -> ProjDir = ".";
+    ProjDir -> ok end,
   Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
   Out = lists:flatten([["-I", Dir, " "] || Dir <- Dirs]),
   io:format("Got includes2: ~p~n", [Out]),
   [Out].
 
 find_comp_includes() ->
-  ProjDir = os:getenv("EPROJ_DIR"),
+  case os:getenv("EPROJ_DIR") of
+    false -> ProjDir = ".";
+    ProjDir -> ok end,
   Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
   Out = lists:flatten([{i, Dir} || Dir <- Dirs]),
   io:format("Got includes: ~p~n", [Out]),
