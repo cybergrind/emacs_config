@@ -83,7 +83,7 @@ find_includes() ->
   case os:getenv("EPROJ_DIR") of
     false -> ProjDir = ".";
     ProjDir -> ok end,
-  Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
+  Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname deps"), $\n),
   Out = lists:flatten([["-I", Dir, " "] || Dir <- Dirs]),
   io:format("Got includes2: ~p~n", [Out]),
   [Out].
@@ -92,7 +92,8 @@ find_comp_includes() ->
   case os:getenv("EPROJ_DIR") of
     false -> ProjDir = ".";
     ProjDir -> ok end,
-  Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
+  %Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
+  Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname deps"), $\n),
   Out = lists:flatten([{i, Dir} || Dir <- Dirs]),
   io:format("Got includes: ~p~n", [Out]),
   Out.
