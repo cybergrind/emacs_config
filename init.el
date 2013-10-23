@@ -119,6 +119,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
  '(nil nil t)
@@ -132,7 +133,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-completion-face ((t (:foreground "black" :underline t))))
+ '(ac-completion-face ((t (:underline t))))
  '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
  '(flymake-warnline ((t (:background "#999" :foreground "black"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
@@ -160,3 +161,13 @@
            #'(lambda () (setq autopair-dont-activate t)))
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
+
+;(add-to-list 'load-path "/home/kpi/.emacs.d/edts")
+;(require 'edts-start)
+
+(add-to-list 'auto-mode-alist '("\\.cljs$" . clj-mode))
+
+;(setq clojure-swank-command
+;  (if (or (locate-file "lein" exec-path) (locate-file "lein.bat" exec-path))
+;    "lein ritz-in %s"
+;    "echo \"lein ritz-in %s\" | $SHELL -l"))
