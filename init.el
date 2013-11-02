@@ -125,14 +125,14 @@
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(safe-local-variable-values (quote ((test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
+ '(safe-local-variable-values (quote ((test-case-name . twisted\.web\.test) (test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-completion-face ((t (:foreground "black" :underline t))))
+ '(ac-completion-face ((t (:underline t))))
  '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
  '(flymake-warnline ((t (:background "#999" :foreground "black"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
@@ -160,3 +160,5 @@
            #'(lambda () (setq autopair-dont-activate t)))
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
+
+(require 'bookmark+)

@@ -93,6 +93,7 @@ find_comp_includes() ->
     false -> ProjDir = ".";
     ProjDir -> ok end,
   %Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname include && find -iname deps"), $\n),
+  io:format("EPROJ IS ~p~n", [ProjDir]),
   Dirs = split(os:cmd("find " ++ ProjDir ++ " -iname deps"), $\n),
   Out = lists:flatten([{i, Dir} || Dir <- Dirs]),
   io:format("Got includes: ~p~n", [Out]),
