@@ -34,7 +34,7 @@
 (autoload 'paredit "paredit" nil t)
 (autoload 'espresso-mode "espresso" nil t)
 (autoload 'smex-initialize "smex" "smex-initialize" t)
-(require 'magit)
+;(require 'magit)
 
 
 ;; tramp configs
@@ -126,7 +126,7 @@
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(safe-local-variable-values (quote ((test-case-name . twisted\.web\.test) (test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
+ '(safe-local-variable-values (quote ((test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -136,6 +136,8 @@
  '(ac-completion-face ((t (:underline t))))
  '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
  '(flymake-warnline ((t (:background "#999" :foreground "black"))))
+ '(font-lock-function-name-face ((t (:foreground "brightblue"))))
+ '(font-lock-string-face ((t (:foreground "color-34"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
  '(rst-level-2-face ((t nil)) t)
  '(rst-level-3-face ((t nil)) t)
@@ -172,3 +174,6 @@
 ;  (if (or (locate-file "lein" exec-path) (locate-file "lein.bat" exec-path))
 ;    "lein ritz-in %s"
 ;    "echo \"lein ritz-in %s\" | $SHELL -l"))
+
+(package-initialize)
+(require 'key_chord_setup)
