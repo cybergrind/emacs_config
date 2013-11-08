@@ -119,6 +119,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
@@ -142,8 +143,13 @@
  '(font-lock-preprocessor-face ((t (:foreground "#e5786d"))))
  '(font-lock-string-face ((t (:foreground "color-34"))))
  '(font-lock-variable-name-face ((t (:foreground "color-51"))))
+ '(highlight ((t (:background "darkseagreen4"))))
+ '(isearch-fail ((t (:background "Grey10"))))
+ '(lazy-highlight ((t (:background "grey20"))))
+ '(minibuffer-prompt ((t (:foreground "Yellow1"))))
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
+ '(region ((t (:background "color-235"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
  '(rst-level-2-face ((t nil)) t)
  '(rst-level-3-face ((t nil)) t)
