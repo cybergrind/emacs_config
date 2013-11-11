@@ -135,6 +135,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:underline t))))
+ '(diff-added ((t (:foreground "green"))))
+ '(diff-changed ((t (:underline t))))
+ '(diff-context ((t nil)))
+ '(diff-file-header ((t (:background "grey10" :weight bold))))
+ '(diff-header ((t (:background "grey10"))))
+ '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
  '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
  '(flymake-warnline ((t (:foreground "#6c6c6c" :underline (:color "#ff0087" :style wave)))))
  '(font-lock-builtin-face ((t (:foreground "color-208"))))
