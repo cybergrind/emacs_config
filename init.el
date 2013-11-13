@@ -141,7 +141,7 @@
  '(diff-file-header ((t (:background "grey10" :weight bold))))
  '(diff-header ((t (:background "grey10"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
- '(flymake-errline ((t (:background "lightyellow" :foreground "black"))))
+ '(flymake-errline ((t (:foreground "yellow2" :underline t))))
  '(flymake-warnline ((t (:foreground "#6c6c6c" :underline (:color "#ff0087" :style wave)))))
  '(font-lock-builtin-face ((t (:foreground "color-208"))))
  '(font-lock-function-name-face ((t (:foreground "brightblue"))))
