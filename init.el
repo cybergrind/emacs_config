@@ -135,7 +135,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:underline t))))
- '(bmkp-local-file-without-region ((t (:foreground "color-68"))))
  '(diff-added ((t (:foreground "green"))))
  '(diff-changed ((t (:underline t))))
  '(diff-context ((t nil)))
@@ -157,7 +156,9 @@
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
  '(region ((t (:background "color-235"))))
+ '(rst-level-1 ((t (:background "grey8"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
+ '(rst-level-2 ((t (:background "grey1"))))
  '(rst-level-2-face ((t nil)) t)
  '(rst-level-3-face ((t nil)) t)
  '(whitespace-empty ((t nil)))
