@@ -5,9 +5,8 @@
 (key-chord-define-global "jk" 'ace-jump-char-mode)
 (key-chord-define-global "JJ" 'switch-to-prev-buffer)
 (key-chord-define-global "KK" 'switch-to-next-buffer)
-(key-chord-define-global "uu" 'undo-tree-visualize)
 (key-chord-define-global "fj" 'jump-to-register)
-(key-chord-define-global "ty" 'point-to-register)
+(key-chord-define-global "fy" 'point-to-register)
 (key-chord-define-global "vm" 'bookmark-bmenu-list)
 
 (key-chord-mode +1)
