@@ -1,5 +1,8 @@
 (require 'key-chord)
 
+(setq key-chord-two-keys-delay 0.05)
+(setq key-chord-one-key-delay 0.2)
+
 (key-chord-define-global "jj" 'ace-jump-word-mode)
 (key-chord-define-global "jl" 'ace-jump-line-mode)
 (key-chord-define-global "jk" 'ace-jump-char-mode)
