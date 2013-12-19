@@ -152,6 +152,7 @@
  '(highlight ((t (:background "darkseagreen4"))))
  '(isearch-fail ((t (:background "Grey10"))))
  '(lazy-highlight ((t (:background "grey20"))))
+ '(match ((t (:background "pink" :foreground "darkblue"))))
  '(minibuffer-prompt ((t (:foreground "Yellow1"))))
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
