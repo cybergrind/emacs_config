@@ -14,4 +14,7 @@
 
 ;(key-chord-mode +1)
 
-;(provide 'key_chord_setup)
+(require 'ace-jump-mode)
+(define-key global-map (kbd "M-n") 'ace-jump-mode)
+(define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
+(provide 'key_chord_setup)
