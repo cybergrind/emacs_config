@@ -8,7 +8,7 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-(setq packages-list '(clojure-mode magit paredit anything
+(setq packages-list '(clojure-mode magit paredit anything smex
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
                                    puppet-mode))
