@@ -11,7 +11,8 @@
 (setq packages-list '(clojure-mode magit paredit anything smex
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
-                                   puppet-mode hexrgb fuzzy-match prolog-el))
+                                   puppet-mode hexrgb fuzzy-match prolog-el
+                                   js2-mode))
 (el-get 'sync packages-list)
 
 (require 'cl)
@@ -43,7 +44,7 @@
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
 (autoload 'paredit "paredit" nil t)
-(autoload 'espresso-mode "espresso" nil t)
+;(autoload 'espresso-mode "espresso" nil t)
 (autoload 'smex-initialize "smex" "smex-initialize" t)
 ;(require 'magit)
 
@@ -112,8 +113,8 @@
   (flet ((process-list ())) ad-do-it))
 
 
-;;(autoload 'espresso-mode "espresso" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . espresso-mode))
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
@@ -122,12 +123,6 @@
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 ;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
-;;additional repos
-;(require 'package)
-;(add-to-list 'package-archives
-;             '("elpa" . "http://tromey.com/elpa/"))
-;(add-to-list 'package-archives
-;             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -201,16 +196,9 @@
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
 
-;(require 'bookmark+)
-;(add-to-list 'load-path "/home/kpi/.emacs.d/edts")
-;(require 'edts-start)
 
 (add-to-list 'auto-mode-alist '("\\.cljs$" . clj-mode))
 
-;(setq clojure-swank-command
-;  (if (or (locate-file "lein" exec-path) (locate-file "lein.bat" exec-path))
-;    "lein ritz-in %s"
-;    "echo \"lein ritz-in %s\" | $SHELL -l"))
 
 (package-initialize)
 (require 'key_chord_setup)
