@@ -11,7 +11,7 @@
 (setq packages-list '(clojure-mode magit paredit anything smex
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
-                                   puppet-mode))
+                                   puppet-mode hexrgb fuzzy-match prolog-el))
 (el-get 'sync packages-list)
 
 (require 'cl)
