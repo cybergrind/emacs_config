@@ -1,3 +1,19 @@
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
+(setq packages-list '(clojure-mode magit paredit anything
+                                   python-mode slim-mode slime ace-jump-mode
+                                   tramp auto-complete scala-mode2
+                                   puppet-mode))
+(el-get 'sync packages-list)
+
 (require 'cl)
 (defvar *emacs-load-start* (current-time))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -8,13 +24,7 @@
                     (or (buffer-file-name) load-file-name)))
 
 (add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path (concat dotfiles-dir "/auto-complete"))
-(add-to-list 'load-path (concat dotfiles-dir "/icicles"))
-(add-to-list 'load-path (concat dotfiles-dir "/bookmark-plus"))
-(add-to-list 'load-path (concat dotfiles-dir "/anything-config"))
-(add-to-list 'load-path (concat dotfiles-dir "/magit"))
-(add-to-list 'load-path (concat dotfiles-dir "/tramp"))
-(add-to-list 'load-path (concat dotfiles-dir "/tramp/lisp"))
+;(add-to-list 'load-path (concat dotfiles-dir "/tramp/lisp"))
 
 
 (require 'anything-config)
@@ -27,7 +37,8 @@
                          (auto-complete-mode 1))
                        ))
 (real-global-auto-complete-mode t)
-(require 'tramp)
+
+;(require 'tramp)
 ;(autoload 'auto-complete "auto-complete" nil t)
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
@@ -38,15 +49,15 @@
 
 
 ;; tramp configs
-(tramp-set-completion-function "ssh"
-'((tramp-parse-sconfig "/etc/ssh_config")
-(tramp-parse-sconfig "~/.ssh/config")))
-(setenv "SHELL" "/bin/sh") ;; workaround for zsh
-(setq tramp-default-method "scp")
-(setq tramp-default-method "ssh")
-(setq tramp-debug-buffer t)
-(setq tramp-verbose 10)
-(require 'tramp-cmds)
+;(tramp-set-completion-function "ssh"
+;'((tramp-parse-sconfig "/etc/ssh_config")
+;(tramp-parse-sconfig "~/.ssh/config")))
+;(setenv "SHELL" "/bin/sh") ;; workaround for zsh
+;(setq tramp-default-method "scp")
+;(setq tramp-default-method "ssh")
+;(setq tramp-debug-buffer t)
+;(setq tramp-verbose 10)
+;(require 'tramp-cmds)
 
 
 ;; smex delayed initialization
@@ -81,8 +92,12 @@
 (add-to-list 'ac-modes 'python)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
 (show-paren-mode 1)
-(ido-mode t)
+
+;(ido-mode t)
+(ido-mode 'both)
+(setq ido-save-directory-list-file "~/.emacs.d/var/ido")
 (setq ido-enable-flex-matching t)
+
 (setq confirm-kill-emacs nil)
 ;; remove <2> on doubled buffers
 (require 'uniquify)
@@ -108,11 +123,11 @@
 ;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
 ;;additional repos
-(require 'package)
-(add-to-list 'package-archives
-             '("elpa" . "http://tromey.com/elpa/"))
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+;(require 'package)
+;(add-to-list 'package-archives
+;             '("elpa" . "http://tromey.com/elpa/"))
+;(add-to-list 'package-archives
+;             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -161,6 +176,7 @@
  '(rst-level-1-face ((t (:background "grey10"))) t)
  '(rst-level-2 ((t (:background "grey1"))))
  '(rst-level-2-face ((t nil)) t)
+ '(rst-level-3 ((t (:background "grey10"))))
  '(rst-level-3-face ((t nil)) t)
  '(whitespace-empty ((t nil)))
  '(whitespace-indentation ((t nil)))
@@ -185,7 +201,7 @@
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
 
-(require 'bookmark+)
+;(require 'bookmark+)
 ;(add-to-list 'load-path "/home/kpi/.emacs.d/edts")
 ;(require 'edts-start)
 
@@ -198,3 +214,6 @@
 
 (package-initialize)
 (require 'key_chord_setup)
+
+;; open archives
+(auto-compression-mode t)
