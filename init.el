@@ -116,7 +116,7 @@
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-(add-to-list 'auto-mode-alist '("\\.py$" . python))
+(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
