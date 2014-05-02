@@ -146,6 +146,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:underline t))))
+ '(custom-state ((t (:foreground "color-43"))))
  '(diff-added ((t (:foreground "green"))))
  '(diff-changed ((t (:underline t))))
  '(diff-context ((t nil)))
@@ -159,6 +160,7 @@
  '(font-lock-keyword-face ((t (:foreground "DarkOliveGreen1"))))
  '(font-lock-preprocessor-face ((t (:foreground "#e5786d"))))
  '(font-lock-string-face ((t (:foreground "color-34"))))
+ '(font-lock-type-face ((t (:foreground "color-47"))))
  '(font-lock-variable-name-face ((t (:foreground "color-51"))))
  '(highlight ((t (:background "darkseagreen4"))))
  '(isearch-fail ((t (:background "Grey10"))))
