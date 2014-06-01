@@ -199,6 +199,11 @@
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
 
+;; python mode
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
+          ))
 
 (add-to-list 'auto-mode-alist '("\\.cljs$" . clj-mode))
 
