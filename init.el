@@ -12,7 +12,7 @@
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
                                    puppet-mode hexrgb fuzzy-match prolog-el
-                                   js2-mode yaml-mode))
+                                   js2-mode yaml-mode bookmark+))
 (el-get 'sync packages-list)
 
 (require 'cl)
@@ -138,7 +138,7 @@
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(safe-local-variable-values (quote ((encoding . utf-8) (test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
+ '(safe-local-variable-values (quote ((erlang-mode . 1) (erlang-mode\;erlang-indent-level . 4) (erlang\;erlang-indent-level . 4) (encoding . utf-8) (test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -149,7 +149,7 @@
  '(custom-state ((t (:foreground "color-43"))))
  '(diff-added ((t (:foreground "green"))))
  '(diff-changed ((t (:underline t))))
- '(diff-context ((t nil)) t)
+ '(diff-context ((t nil)))
  '(diff-file-header ((t (:background "grey10" :weight bold))))
  '(diff-header ((t (:background "grey10"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
@@ -159,7 +159,7 @@
  '(font-lock-function-name-face ((t (:foreground "brightblue"))))
  '(font-lock-keyword-face ((t (:foreground "DarkOliveGreen1"))))
  '(font-lock-preprocessor-face ((t (:foreground "#e5786d"))))
- '(font-lock-string-face ((t (:foreground "color-46"))))
+ '(font-lock-string-face ((t (:foreground "color-34"))))
  '(font-lock-type-face ((t (:foreground "color-47"))))
  '(font-lock-variable-name-face ((t (:foreground "color-51"))))
  '(highlight ((t (:background "darkseagreen4"))))
@@ -170,11 +170,11 @@
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
  '(region ((t (:background "color-235"))))
- '(rst-level-1 ((t (:background "grey8"))) t)
+ '(rst-level-1 ((t (:background "grey8"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
- '(rst-level-2 ((t (:background "grey1"))) t)
+ '(rst-level-2 ((t (:background "grey1"))))
  '(rst-level-2-face ((t nil)) t)
- '(rst-level-3 ((t (:background "grey10"))) t)
+ '(rst-level-3 ((t (:background "grey10"))))
  '(rst-level-3-face ((t nil)) t)
  '(whitespace-empty ((t nil)))
  '(whitespace-indentation ((t nil)))
