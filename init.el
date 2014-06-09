@@ -124,6 +124,7 @@
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 ;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
+(require 'multi_desktop)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -213,4 +214,4 @@
 
 ;; open archives
 (auto-compression-mode t)
-(require 'multi_desktop)
+
