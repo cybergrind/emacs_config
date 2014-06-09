@@ -213,3 +213,4 @@
 
 ;; open archives
 (auto-compression-mode t)
+(require 'multi_desktop)
