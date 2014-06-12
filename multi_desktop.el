@@ -45,11 +45,10 @@
 
 ;; ask user whether to restore desktop at start-up
 (add-hook 'after-init-hook
-            '(lambda ()
-                    (if (saved-session)
-                         (if (y-or-n-p "Restore desktop? ")
-                                  (session-restore)))))
-
+          '(lambda ()
+             (if (and (saved-session)
+                      (y-or-n-p "Restore desktop"))
+                 (session-restore))))
 
 ;; frame save/restore support
 ;; originally http://www.emacswiki.org/emacs/frame-restore.el
