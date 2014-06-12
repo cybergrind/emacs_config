@@ -1,13 +1,14 @@
 
 (require 'flymake-cursor)
+
+(defun get_linter ()
+  (if (file-exists-p "/usr/bin/flake8-python2")
+      "/usr/bin/flake8-python2"
+    "flake8-python2"
+    "pyflakes-python2"
+  ))
+
 (when (load "flymake" t)
-  ;(defun flymake-pyflakes-init ()
-  ;  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-  ;                     'flymake-create-temp-inplace))
-  ;         (local-file (file-relative-name
-  ;                      temp-file
-  ;                      (file-name-directory buffer-file-name))))
-  ;    (list "pyflakes" (list local-file))))
   (defun flymake-pyflakes-init ()
      ; Make sure it's not a remote buffer or flymake would not work
      (when (not (subsetp (list (current-buffer)) ()))
@@ -16,7 +17,7 @@
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-    (list "pyflakes-python2" (list local-file)))))
+    (list (get_linter) (list local-file)))))
 
 
   (add-to-list 'flymake-allowed-file-name-masks
