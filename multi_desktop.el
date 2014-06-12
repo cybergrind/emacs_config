@@ -56,6 +56,7 @@
 (defun open-buffer (name)
   (let ((len (length (window-list))))
     (cond
+     ((not (get-buffer name)) ())
      ((equal len 1) (progn
                       (split-window-horizontally)
                       (set-window-buffer (first (window-list)) name)))

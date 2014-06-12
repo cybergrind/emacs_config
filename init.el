@@ -214,4 +214,4 @@
 
 ;; open archives
 (auto-compression-mode t)
-
+(set-terminal-coding-system 'utf-8-unix)
