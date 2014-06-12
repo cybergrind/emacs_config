@@ -55,17 +55,19 @@
 ;; originally http://www.emacswiki.org/emacs/frame-restore.el
 
 (defun open-buffer (name)
-  (if (equal (length (window-list)) 1)
-      (progn
-        (split-window-horizontally)
-        (set-window-buffer (first (window-list)) name))
-    (set-window-buffer (second (window-list)) name)
-    ))
+  (let ((len (length (window-list))))
+    (cond
+     ((equal len 1) (progn
+                      (split-window-horizontally)
+                      (set-window-buffer (first (window-list)) name)))
+     ((equal len 2) (set-window-buffer (second (window-list)) name))
+     (t ()))))
 
 
 (defun windows-restore ()
   "Restore frame from `frame-restore-params'."
-  (mapcar 'open-buffer w-restore-params))
+  (if (boundp 'w-restore-params)
+      (mapcar 'open-buffer w-restore-params)))
 
 ;(add-hook 'desktop-after-read-hook 'windows-restore)
 
