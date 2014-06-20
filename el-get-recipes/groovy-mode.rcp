@@ -1,0 +1,7 @@
+(:name groovy-mode
+       :website "https://github.com/russel/Emacs-Groovy-Mode"
+       :description "groovy-mode"
+       :type github
+       :pkgname "russel/Emacs-Groovy-Mode"
+       :load-path (".")
+       :features groovy-mode)

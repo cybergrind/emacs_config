@@ -12,7 +12,8 @@
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
                                    puppet-mode hexrgb fuzzy-match prolog-el
-                                   js2-mode yaml-mode bookmark+))
+                                   js2-mode yaml-mode bookmark+
+                                   groovy-mode))
 (el-get 'sync packages-list)
 
 (require 'cl)
