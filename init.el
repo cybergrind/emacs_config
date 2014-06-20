@@ -139,7 +139,7 @@
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(safe-local-variable-values (quote ((erlang-mode . 1) (erlang-mode\;erlang-indent-level . 4) (erlang\;erlang-indent-level . 4) (encoding . utf-8) (test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
+ '(safe-local-variable-values (quote ((python-indent-offset . 4) (erlang-mode . 1) (erlang-mode\;erlang-indent-level . 4) (erlang\;erlang-indent-level . 4) (encoding . utf-8) (test-case-name . twisted\.web\.test\.test_xmlrpc) (test-case-name . test\.test_txpostgres) (test-case-name . twisted\.test\.test_logfile) (test-case-name . twisted\.test\.test_log) (test-case-name . twisted\.test\.test_internet) (test-case-name . twisted\.test\.test_reflect) (codiing . utf-8))))
  '(tab-width 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
