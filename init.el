@@ -13,7 +13,7 @@
                                    tramp auto-complete scala-mode2
                                    puppet-mode hexrgb fuzzy-match prolog-el
                                    js2-mode yaml-mode bookmark+
-                                   groovy-mode rust-mode))
+                                   groovy-mode rust-mode nimrod-mode))
 (el-get 'sync packages-list)
 
 (require 'cl)
@@ -123,6 +123,7 @@
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.nim$" . nimrod-mode))
 ;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
 (require 'multi_desktop)
