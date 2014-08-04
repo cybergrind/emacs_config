@@ -164,7 +164,7 @@
  '(font-lock-function-name-face ((t (:foreground "brightblue"))))
  '(font-lock-keyword-face ((t (:foreground "DarkOliveGreen1"))))
  '(font-lock-preprocessor-face ((t (:foreground "#e5786d"))))
- '(font-lock-string-face ((t (:foreground "color-46"))))
+ '(font-lock-string-face ((t (:foreground "color-40"))))
  '(font-lock-type-face ((t (:foreground "color-47"))))
  '(font-lock-variable-name-face ((t (:foreground "color-51"))))
  '(highlight ((t (:background "darkseagreen4"))))
