@@ -85,7 +85,7 @@
 
 (setq erlang-root-dir "/usr/lib/erlang")
 (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-(setq erlang-indent-level 2)
+(setq erlang-indent-level 4)
 (require 'erlang-start)
 
 
