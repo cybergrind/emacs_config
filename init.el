@@ -175,6 +175,7 @@
  '(minibuffer-prompt ((t (:foreground "Yellow1"))))
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
+ '(org-agenda-structure ((t (:foreground "Blue"))))
  '(region ((t (:background "color-235"))))
  '(rst-level-1 ((t (:background "grey8"))))
  '(rst-level-1-face ((t (:background "grey10"))) t)
