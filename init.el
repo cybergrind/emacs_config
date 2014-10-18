@@ -13,7 +13,8 @@
                                    tramp auto-complete scala-mode2
                                    puppet-mode hexrgb fuzzy-match prolog-el
                                    js2-mode yaml-mode bookmark+
-                                   groovy-mode rust-mode nimrod-mode))
+                                   groovy-mode rust-mode nimrod-mode
+                                   dockerfile-mode))
 (el-get 'sync packages-list)
 
 (require 'cl)
