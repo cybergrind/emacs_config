@@ -140,7 +140,7 @@
  '(nil nil t)
  '(nrepl-host "192.168.42.129")
  '(nrepl-port 9999)
- '(org-agenda-files (quote ("~/Dropbox/gtd/logbook/14_09.org" "~/Dropbox/gtd/calendar.org_archive" "~/Dropbox/gtd/gtd.org" "~/Dropbox/gtd/calendar.org")))
+ '(org-agenda-files (quote ("~/Dropbox/gtd/gtd.org" "~/Dropbox/gtd/logbook/14_09.org" "~/Dropbox/gtd/calendar.org_archive" "~/Dropbox/gtd/calendar.org")))
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
@@ -214,6 +214,7 @@
 (add-hook 'python-mode-hook
           #'(lambda ()
               (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
+              (define-key python-mode-map (kbd "TAB") 'py-indent-line)
           ))
 
 (add-to-list 'auto-mode-alist '("\\.cljs$" . clj-mode))
