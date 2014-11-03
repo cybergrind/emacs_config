@@ -8,14 +8,18 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-(setq packages-list '(clojure-mode magit paredit anything smex
+(setq packages-list '(clojure-mode magit paredit anything smex cider
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
                                    puppet-mode hexrgb fuzzy-match prolog-el
                                    js2-mode yaml-mode bookmark+
-                                   groovy-mode rust-mode nimrod-mode
+                                   rust-mode nimrod-mode ;groovy-mode 
                                    dockerfile-mode))
 (el-get 'sync packages-list)
+
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (require 'cl)
 (defvar *emacs-load-start* (current-time))
