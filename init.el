@@ -31,7 +31,6 @@
                     (or (buffer-file-name) load-file-name)))
 
 (add-to-list 'load-path dotfiles-dir)
-;(add-to-list 'load-path (concat dotfiles-dir "/tramp/lisp"))
 
 
 (require 'anything-config)
@@ -226,7 +225,6 @@
 
 
 (package-initialize)
-(require 'key_chord_setup)
 
 ;; open archives
 (auto-compression-mode t)
