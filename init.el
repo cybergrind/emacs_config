@@ -230,3 +230,8 @@
 ;; open archives
 (auto-compression-mode t)
 (set-terminal-coding-system 'utf-8-unix)
+
+(require 'ace-jump-mode)
+(define-key global-map (kbd "M-n") 'ace-jump-mode)
+(define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
+(provide 'key_chord_setup)
