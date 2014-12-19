@@ -12,7 +12,7 @@
 (setq packages-list '(clojure-mode magit paredit anything smex cider
                                    python-mode slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
-                                   puppet-mode hexrgb fuzzy-match prolog-el
+                                   puppet-mode fuzzy prolog-el
                                    js2-mode yaml-mode bookmark+
                                    rust-mode nimrod-mode ;groovy-mode 
                                    dockerfile-mode))
