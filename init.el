@@ -10,7 +10,7 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
 (setq packages-list '(clojure-mode magit paredit anything smex cider
-                                   python-mode slim-mode slime ace-jump-mode
+                                   python slim-mode slime ace-jump-mode
                                    tramp auto-complete scala-mode2
                                    puppet-mode fuzzy prolog-el
                                    js2-mode yaml-mode bookmark+
@@ -96,7 +96,7 @@
 
 ;(autopair-global-mode t)
 ;;(auto-complete-mode 1)
-(add-to-list 'ac-modes 'python)
+(add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
 (show-paren-mode 1)
 
