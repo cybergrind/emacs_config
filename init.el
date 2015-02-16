@@ -14,7 +14,7 @@
                                    tramp auto-complete scala-mode2
                                    puppet-mode fuzzy prolog-el
                                    js2-mode yaml-mode bookmark+
-                                   rust-mode nimrod-mode ;groovy-mode 
+                                   rust-mode nim-mode ;groovy-mode 
                                    dockerfile-mode
                                    dockercontrol-mode))
 (el-get 'sync packages-list)
