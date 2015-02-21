@@ -1,0 +1,7 @@
+(:name dockercontrol-mode
+       :website "https://github.com/cybergrind/dockercontrol-mode.git"
+       :description "dockercontrol-mode"
+       :type github
+       :pkgname "cybergrind/dockercontrol-mode"
+       :load-path (".")
+       :features dockercontrol-mode)
