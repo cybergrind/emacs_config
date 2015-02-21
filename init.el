@@ -178,7 +178,7 @@
  '(diff-changed ((t (:underline t))))
  '(diff-context ((t nil)))
  '(diff-file-header ((t (:background "grey10" :weight bold))))
- '(diff-header ((t (:background "grey10"))))
+ '(diff-header ((t (:background "grey10" :foreground "white"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
  '(flymake-errline ((t (:background "color-83" :foreground "black"))))
  '(flymake-warnline ((t (:foreground "#6c6c6c" :underline (:color "#ff0087" :style wave)))))
@@ -234,8 +234,8 @@
 ;; python mode
 (add-hook 'python-mode-hook
           #'(lambda ()
-              (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
-              (define-key python-mode-map (kbd "TAB") 'py-indent-line)
+              ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
+              ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
           ))
 
 (add-to-list 'auto-mode-alist '("\\.cljs$" . clj-mode))
