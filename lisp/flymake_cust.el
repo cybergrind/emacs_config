@@ -74,4 +74,8 @@
 (setq flymake-log-level 3)
 (add-hook 'erlang-mode-hook '(lambda () (flymake-mode t)))
 
+(defadvice flymake-post-syntax-check (before flymake-force-check-was-interrupted)
+  (setq flymake-check-was-interrupted t))
+(ad-activate 'flymake-post-syntax-check)
+
 (provide 'flymake_cust)
