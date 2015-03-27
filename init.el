@@ -16,7 +16,8 @@
                                    js2-mode yaml-mode bookmark+
                                    rust-mode nim-mode ;groovy-mode 
                                    dockerfile-mode
-                                   dockercontrol-mode))
+                                   dockercontrol-mode
+                                   go-mode))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
