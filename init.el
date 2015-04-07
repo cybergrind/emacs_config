@@ -83,6 +83,8 @@
                                    (global-set-key [(shift meta x)] 'smex-major-mode-commands)
                                    (smex-major-mode-commands)))
 
+(global-set-key (kbd "C-x ;") 'eval-expression)
+
 (autoload 'icicle-mode "icicles" nil t)
 (global-set-key [(meta s) (i)] (lambda ()
 				 (interactive)
