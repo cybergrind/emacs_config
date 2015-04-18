@@ -158,7 +158,20 @@
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(safe-local-variable-values
    (quote
-    ((python-indent-offset . 4)
+    ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
+     (whitespace-line-column . 80)
+     (whitespace-style face tabs trailing lines-tail)
+     (python-indent-offset . 4)
      (erlang-mode . 1)
      (erlang-mode\;erlang-indent-level . 4)
      (erlang\;erlang-indent-level . 4)
@@ -196,6 +209,7 @@
  '(highlight ((t (:background "darkseagreen4"))))
  '(isearch-fail ((t (:background "Grey10"))))
  '(lazy-highlight ((t (:background "grey20"))))
+ '(magit-diff-add ((t (:inherit diff-added :foreground "darkgreen"))))
  '(match ((t (:background "pink" :foreground "darkblue"))))
  '(minibuffer-prompt ((t (:foreground "Yellow1"))))
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
@@ -255,3 +269,4 @@
 (define-key global-map (kbd "M-n") 'ace-jump-mode)
 (define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
 (provide 'key_chord_setup)
+(require 'yapf)
