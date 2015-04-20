@@ -17,7 +17,8 @@
                                    rust-mode nim-mode ;groovy-mode 
                                    dockerfile-mode
                                    dockercontrol-mode
-                                   go-mode))
+                                   go-mode
+                                   flx ))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -108,6 +109,15 @@
 (ido-mode 'both)
 (setq ido-save-directory-list-file "~/.emacs.d/var/ido")
 (setq ido-enable-flex-matching t)
+
+; flx customization
+(require 'flx-ido)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
 (setq confirm-kill-emacs nil)
 ;; remove <2> on doubled buffers
