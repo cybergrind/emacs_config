@@ -18,7 +18,8 @@
                                    dockerfile-mode
                                    dockercontrol-mode
                                    go-mode
-                                   flx ))
+                                   flx
+                                   ensime))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -280,3 +281,6 @@
 (define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
 (provide 'key_chord_setup)
 (require 'yapf)
+
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
