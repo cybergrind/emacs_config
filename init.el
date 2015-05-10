@@ -19,7 +19,8 @@
                                    dockercontrol-mode
                                    go-mode
                                    flx
-                                   ensime))
+                                   ensime
+                                   web-mode))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -285,5 +286,6 @@
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
 
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
-(autoload 'jsx-mode "jsx-mode" "JSX mode" t)
+(autoload 'web-mode "web-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
