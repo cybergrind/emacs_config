@@ -20,6 +20,7 @@
                                    go-mode
                                    flx
                                    ensime
+                                   coffee-mode
                                    web-mode))
 (el-get 'sync packages-list)
 
@@ -155,6 +156,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(coffee-tab-width 4)
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
@@ -238,6 +240,7 @@
  '(rst-level-3 ((t (:background "grey10"))))
  '(rst-level-3-face ((t nil)) t)
  '(secondary-selection ((t (:background "color-101" :foreground "black"))))
+ '(web-mode-html-tag-bracket-face ((t (:foreground "brightmagenta"))))
  '(whitespace-empty ((t nil)))
  '(whitespace-indentation ((t nil)))
  '(whitespace-space ((t nil)))
