@@ -302,3 +302,9 @@
 ;
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
+(require 'multiple-cursors)
+(global-set-key (kbd "M-N") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
+(global-set-key (kbd "M-A") 'mc/mark-all-like-this)
+(global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
+(define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)
