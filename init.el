@@ -21,7 +21,8 @@
                                    flx
                                    ensime
                                    coffee-mode
-                                   web-mode))
+                                   web-mode
+                                   multiple-cursors))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -291,4 +292,13 @@
 
 (autoload 'web-mode "web-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+
+;; defuns
+(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+(dolist (file (directory-files defuns-dir t "\\w+"))
+  (when (file-regular-p file)
+    (load file)))
+;
+(global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
