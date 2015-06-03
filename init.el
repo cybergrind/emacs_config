@@ -308,3 +308,8 @@
 (global-set-key (kbd "M-A") 'mc/mark-all-like-this)
 (global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
 (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)
+
+; macro
+(fset 'fix-indent
+      "\C-i\C-n\-m\C-x(")
+

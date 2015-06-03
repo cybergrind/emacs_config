@@ -78,4 +78,8 @@
   (setq flymake-check-was-interrupted t))
 (ad-activate 'flymake-post-syntax-check)
 
+(defun flymake-display-warning (warning)
+  "Display a warning to the user, using lwarn"
+    (lwarn 'flymake :warning warning))
+
 (provide 'flymake_cust)
