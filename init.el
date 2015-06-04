@@ -292,7 +292,8 @@
 
 (autoload 'web-mode "web-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(require 'web_snippets)
 
 ;; defuns
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
