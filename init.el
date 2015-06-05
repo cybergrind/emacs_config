@@ -161,6 +161,7 @@
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
+ '(js2-basic-offset 2)
  '(js2-strict-missing-semi-warning nil)
  '(nil nil t)
  '(nrepl-host "192.168.42.129")
@@ -313,4 +314,3 @@
 ; macro
 (fset 'fix-indent
       "\C-i\C-n\-m\C-x(")
-
