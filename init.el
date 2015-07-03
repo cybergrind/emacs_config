@@ -22,7 +22,8 @@
                                    ensime
                                    coffee-mode
                                    web-mode
-                                   multiple-cursors))
+                                   multiple-cursors
+                                   hydra))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
