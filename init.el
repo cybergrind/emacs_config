@@ -160,6 +160,7 @@
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(coffee-tab-width 4)
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
+ '(flymake-no-changes-timeout 5)
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
  '(js2-basic-offset 2)
