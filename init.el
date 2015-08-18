@@ -160,6 +160,7 @@
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(coffee-tab-width 4)
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
+ '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
@@ -209,7 +210,7 @@
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:underline t))))
  '(custom-state ((t (:foreground "color-43"))))
- '(diff-added ((t nil)))
+ '(diff-added ((t (:foreground "green"))))
  '(diff-changed ((t (:underline t))))
  '(diff-context ((t nil)))
  '(diff-file-header ((t (:background "grey10" :weight bold))))
