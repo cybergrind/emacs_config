@@ -3,9 +3,15 @@
 # key: rmount
 # binding: direct-keybinding
 # --
+getInitialState: function(){
+    return {};
+},
 componentDidMount: function(){
-        router.subscribe(routes.$1, this.${2:on_update});
-    },
-    componentWillUnmount: function(){
-        router.unsubscribe(routes.$1, this.$2);
-    },
+    router.subscribe(routes.$1, this.${2:on_update});
+},
+componentWillUnmount: function(){
+    router.unsubscribe(routes.$1, this.$2);
+},
+$2: function(route, msg){
+    this.setState(msg);
+},

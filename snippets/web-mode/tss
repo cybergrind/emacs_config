@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: tss
+# key: tss
+# binding: direct-keybinding
+# --
+this.setState($0);

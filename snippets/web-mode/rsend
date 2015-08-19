@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rsend
+# key: rsend
+# binding: direct-keybinding
+# --
+router.send(routes.$1, $2);

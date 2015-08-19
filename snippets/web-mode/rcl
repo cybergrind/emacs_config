@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rcl
+# key: rcl
+# binding: direct-keybinding
+# --
+var $1 = React.createClass({
+    render: function(){
+        return ($2);
+    }
+});
