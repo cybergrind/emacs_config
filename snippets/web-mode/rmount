@@ -1,0 +1,11 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rmount
+# key: rmount
+# binding: direct-keybinding
+# --
+componentDidMount: function(){
+        router.subscribe(routes.$1, this.${2:on_update});
+    },
+    componentWillUnmount: function(){
+        router.unsubscribe(routes.$1, this.$2);
+    },

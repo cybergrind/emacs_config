@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: runsub
+# key: runsub
+# binding: direct-keybinding
+# --
+router.unsubscribe(routes.$1, $2)

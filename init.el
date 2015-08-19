@@ -338,3 +338,5 @@
   ("P" mc/skip-to-previous-like-this)
   ("M-p" mc/unmark-previous-like-this)
   ("q" nil))
+
+(setq yas-global-mode t)

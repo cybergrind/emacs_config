@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: rsub
+# key: rsub
+# binding: direct-keybinding
+# --
+router.subscribe(routes.$1, $2)
