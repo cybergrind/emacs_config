@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: ico
+# key: ico
+# binding: direct-keybinding
+# --
+icon-icoomoon-${1:plus}

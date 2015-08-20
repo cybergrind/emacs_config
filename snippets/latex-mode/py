@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: py
+# key: py
+# binding: direct-keybinding
+# --
+\begin{figure}[H]
+  \inputminted[xleftmargin=4em]{python}{$1.py}
+  \caption{$2}
+\end{figure}
