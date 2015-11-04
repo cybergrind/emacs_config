@@ -106,6 +106,7 @@
 ;;(auto-complete-mode 1)
 (add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
+(setq ac-fuzzy-enable t)
 (show-paren-mode 1)
 
 ;(ido-mode t)
@@ -354,13 +355,23 @@
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
 
+;; bookmark jump
+(defun ido-bookmark-jump (bname)
+  "*Switch to bookmark interactively using `ido'."
+  (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+  (bookmark-jump bname))
+
+(defun ido-bookmark-jump-other-windows (bname)
+  "*Switch to bookmark interactively using `ido'."
+  (interactive (list (ido-completing-read "Bookmark: " (bookmark-all-names) nil t)))
+  (bookmark-jump-other-window bname))
+
 ;;; keyboard shortcuts
 
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
 (require 'ace-jump-mode)
-(define-key global-map (kbd "M-j") 'ace-jump-mode)
-(define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "M-SPC") 'ace-jump-mode)
 (define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
 
 
@@ -376,5 +387,8 @@
 (global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
 (global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
 (global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
+(global-set-key (kbd "C-t") 'bookmark-set)
+(global-set-key (kbd "M-j") 'ido-bookmark-jump)
+(global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)
 
 ;;; init.el ends here
