@@ -3,7 +3,7 @@
 # key: rcl
 # binding: direct-keybinding
 # --
-var $1 = React.createClass({
+let $1 = React.createClass({
     render: function(){
         return ($2);
     }

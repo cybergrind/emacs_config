@@ -1,3 +1,4 @@
+;;; Code:
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
@@ -9,21 +10,24 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-(setq packages-list '(clojure-mode magit paredit anything smex cider
-                                   python slim-mode slime ace-jump-mode
-                                   tramp auto-complete scala-mode2
-                                   puppet-mode fuzzy prolog-el
-                                   js2-mode yaml-mode bookmark+
-                                   rust-mode nim-mode ;groovy-mode 
-                                   dockerfile-mode
-                                   dockercontrol-mode
-                                   go-mode
-                                   flx
-                                   ensime
-                                   coffee-mode
-                                   web-mode
-                                   multiple-cursors
-                                   hydra))
+(setq packages-list '(clojure-mode
+                      flycheck
+                      magit paredit anything smex cider
+                      python slim-mode slime ace-jump-mode
+                      tramp auto-complete scala-mode2
+                      puppet-mode fuzzy prolog-el
+                      js2-mode yaml-mode
+                      bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac
+                      rust-mode nim-mode
+                      dockerfile-mode
+                      dockercontrol-mode
+                      go-mode
+                      flx
+                      ensime
+                      coffee-mode
+                      web-mode
+                      multiple-cursors
+                      hydra))
 (el-get 'sync packages-list)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -43,15 +47,8 @@
 
 
 (require 'anything-config)
-(require 'flymake_cust)
-(require 'auto-complete)
-
-(define-globalized-minor-mode real-global-auto-complete-mode
-  auto-complete-mode (lambda ()
-                       (if (not (minibufferp (current-buffer)))
-                         (auto-complete-mode 1))
-                       ))
-(real-global-auto-complete-mode t)
+; (require 'flymake_cust)
+(require 'flycheck_setup)
 
 ;(require 'tramp)
 ;(autoload 'auto-complete "auto-complete" nil t)
@@ -94,8 +91,8 @@
 
 (autoload 'icicle-mode "icicles" nil t)
 (global-set-key [(meta s) (i)] (lambda ()
-				 (interactive)
-				 (icicle-mode)))
+                 (interactive)
+                 (icicle-mode)))
 ;;(run-at-time "0.8 sec" nil 'icicles)
 
 (setq erlang-root-dir "/usr/lib/erlang")
@@ -127,7 +124,7 @@
 (setq confirm-kill-emacs nil)
 ;; remove <2> on doubled buffers
 (require 'uniquify)
-(setq 
+(setq
   uniquify-buffer-name-style 'forward
   uniquify-separator ":")
 ;; no tabs
@@ -138,8 +135,8 @@
   (flet ((process-list ())) ad-do-it))
 
 
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; (autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (autoload 'puppet-mode "puppet-mode" nil t)
@@ -157,9 +154,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(bmkp-last-as-first-bookmark-file
+   #("~/ssd/tipsi/tipsi_web/bookmarks" 2 6
+     (face flx-highlight-face)
+     6 9
+     (face flx-highlight-face)
+     11 12
+     (face flx-highlight-face)))
  '(coffee-tab-width 4)
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
+ '(flycheck-eslintrc "~/.eslintrc")
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
  '(icicle-buffers-ido-like-flag t)
@@ -177,7 +181,10 @@
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(safe-local-variable-values
    (quote
-    ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
+    ((content-type . "jsx")
+     (web-mode-content-type . "jsx")
+     (web-mode-content-type . jsx)
+     (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
            (add-hook
             (quote write-contents-functions)
             (lambda nil
@@ -241,6 +248,7 @@
  '(magit-section-highlight ((t (:background "grey15"))))
  '(match ((t (:background "pink" :foreground "darkblue"))))
  '(minibuffer-prompt ((t (:foreground "Yellow1"))))
+ '(moccur-face ((t (:background "grey15" :weight bold))))
  '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
  '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
  '(org-agenda-done ((t (:foreground "color-34"))))
@@ -296,8 +304,9 @@
 (set-terminal-coding-system 'utf-8-unix)
 
 (require 'ace-jump-mode)
-(define-key global-map (kbd "M-n") 'ace-jump-mode)
+(define-key global-map (kbd "M-j") 'ace-jump-mode)
 (define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
 (provide 'key_chord_setup)
 (require 'yapf)
 
@@ -349,6 +358,31 @@
   ("M-p" mc/unmark-previous-like-this)
   ("q" nil))
 
-(setq yas-global-mode t)
+
+;; (require 'auto-complete)
+
+;; (define-globalized-minor-mode real-global-auto-complete-mode
+;;   auto-complete-mode (lambda ()
+;;                        (if (not (minibufferp (current-buffer)))
+;;                          (auto-complete-mode 1))
+;;                        ))
+;; (real-global-auto-complete-mode t)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
+
+(require 'yasnippet)
+(yas-global-mode 1)
+
+
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
+;;; init.el ends here
+(put 'dired-find-alternate-file 'disabled nil)
+
+(require 'bookmark+)
+(global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file)
+(global-set-key (kbd "M-n") 'bmkp-previous-bookmark-this-file)
+(global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)

@@ -1,6 +1,6 @@
 
 (require 'flymake-cursor)
-
+;;; Code:
 (defun get_linter ()
   (if (file-exists-p "/usr/bin/flake8-python2")
       "/usr/bin/flake8-python2"
