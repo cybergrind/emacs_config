@@ -95,10 +95,11 @@
                  (icicle-mode)))
 ;;(run-at-time "0.8 sec" nil 'icicles)
 
-(setq erlang-root-dir "/usr/lib/erlang")
-(setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-(setq erlang-indent-level 4)
-(require 'erlang-start)
+(cond ((file-exists-p "/usr/lib/erlang")
+       (setq erlang-root-dir "/usr/lib/erlang")
+       (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+       (setq erlang-indent-level 4)
+       (require 'erlang-start)))
 
 
 ;(autopair-global-mode t)
@@ -154,13 +155,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file
-   #("~/ssd/tipsi/tipsi_web/bookmarks" 2 6
-     (face flx-highlight-face)
-     6 9
-     (face flx-highlight-face)
-     11 12
-     (face flx-highlight-face)))
+ '(bmkp-last-as-first-bookmark-file "~/ssd/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
  '(flycheck-eslintrc "~/.eslintrc")
@@ -303,11 +298,6 @@
 (auto-compression-mode t)
 (set-terminal-coding-system 'utf-8-unix)
 
-(require 'ace-jump-mode)
-(define-key global-map (kbd "M-j") 'ace-jump-mode)
-(define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
-(define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
-(provide 'key_chord_setup)
 (require 'yapf)
 
 (require 'ensime)
@@ -323,15 +313,6 @@
 (dolist (file (directory-files defuns-dir t "\\w+"))
   (when (file-regular-p file)
     (load file)))
-;
-(global-set-key (kbd "C-c C-e") 'eval-and-replace)
-
-(require 'multiple-cursors)
-(global-set-key (kbd "M-N") 'mc/mark-next-like-this)
-(global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
-(global-set-key (kbd "M-A") 'mc/mark-all-like-this)
-(global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
-(define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)
 
 ; macro
 (fset 'fix-indent
@@ -359,30 +340,41 @@
   ("q" nil))
 
 
-;; (require 'auto-complete)
-
-;; (define-globalized-minor-mode real-global-auto-complete-mode
-;;   auto-complete-mode (lambda ()
-;;                        (if (not (minibufferp (current-buffer)))
-;;                          (auto-complete-mode 1))
-;;                        ))
-;; (real-global-auto-complete-mode t)
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
-
 (require 'yasnippet)
 (yas-global-mode 1)
 
 
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
-;;; init.el ends here
 (put 'dired-find-alternate-file 'disabled nil)
 
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
+
+;;; keyboard shortcuts
+
+(global-set-key (kbd "C-c C-e") 'eval-and-replace)
+
+(require 'ace-jump-mode)
+(define-key global-map (kbd "M-j") 'ace-jump-mode)
+(define-key global-map (kbd "M-SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
+
+
+(require 'multiple-cursors)
+(global-set-key (kbd "M-N") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
+(global-set-key (kbd "M-A") 'mc/mark-all-like-this)
+(global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
+(define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)
+
+
 (require 'bookmark+)
-(global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file)
-(global-set-key (kbd "M-n") 'bmkp-previous-bookmark-this-file)
+(global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
+(global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
 (global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
+
+;;; init.el ends here
