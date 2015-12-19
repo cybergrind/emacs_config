@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: exp
+# key: exp
+# binding: direct-keybinding
+# --
+exports.$1 = $1;

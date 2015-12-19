@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: cons
+# key: cons
+# binding: direct-keybinding
+# --
+constructor(props){
+    super(props);
+}

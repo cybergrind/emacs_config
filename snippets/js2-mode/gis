@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: gis
+# key: gis
+# binding: direct-keybinding
+# --
+getInitialState: function(){
+  return {$0}
+},

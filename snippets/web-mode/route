@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: route
+# key: route
+# binding: direct-keybinding
+# --
+<Route path={page('$1')} component={$2}/>

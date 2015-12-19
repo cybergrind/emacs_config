@@ -10,29 +10,43 @@
     (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-(setq packages-list '(clojure-mode
-                      flycheck
-                      magit paredit anything smex cider
-                      python slim-mode slime ace-jump-mode
-                      tramp auto-complete scala-mode2
-                      puppet-mode fuzzy prolog-el
-                      js2-mode yaml-mode
-                      bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac
-                      rust-mode nim-mode
-                      dockerfile-mode
-                      dockercontrol-mode
-                      go-mode
-                      flx
-                      ensime
-                      coffee-mode
-                      web-mode
-                      multiple-cursors
-                      hydra))
+(setq packages-list '(dockercontrol-mode))
 (el-get 'sync packages-list)
+
+(setq package-selected-packages
+      '(clojure-mode
+        flycheck
+        magit paredit anything smex cider
+        python slim-mode slime
+        tramp
+        auto-complete
+        scala-mode2
+        puppet-mode fuzzy prolog-el
+        js2-mode yaml-mode
+        bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac
+        rust-mode nim-mode
+        dockerfile-mode
+        go-mode
+        flx flx-ido
+        ensime
+        coffee-mode
+        web-mode
+        multiple-cursors
+        hydra))
+(require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(dolist (package package-selected-packages)
+  (when (and (assq package package-archive-contents)
+             (not (package-installed-p package)))
+        (package-install package)))
+
 
 (require 'cl)
 (defvar *emacs-load-start* (current-time))
@@ -46,7 +60,7 @@
 (add-to-list 'load-path dotfiles-dir)
 
 
-(require 'anything-config)
+;(require 'anything-config)
 ; (require 'flymake_cust)
 (require 'flycheck_setup)
 
@@ -104,6 +118,7 @@
 
 ;(autopair-global-mode t)
 ;;(auto-complete-mode 1)
+(require 'auto-complete)
 (add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
 (setq ac-fuzzy-enable t)
@@ -212,7 +227,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:underline t))))
+ '(custom-group-tag ((t (:inherit variable-pitch :foreground "white" :weight bold :height 1.2))))
  '(custom-state ((t (:foreground "color-43"))))
+ '(custom-variable-tag ((t (:foreground "white" :weight bold))))
  '(diff-added ((t (:foreground "green"))))
  '(diff-changed ((t (:underline t))))
  '(diff-context ((t nil)))
@@ -309,6 +326,18 @@
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (require 'web_snippets)
 
+
+(require 'avy)
+(define-key global-map (kbd "M-SPC") 'avy-goto-word-or-subword-1)
+(define-key global-map (kbd "C-c c") 'avy-goto-char)
+(define-key global-map (kbd "C-c l") 'avy-goto-line)
+
+
+(require 'vimish-fold)
+(vimish-fold-global-mode 1)
+(global-set-key (kbd "C-c C-f") 'vimish-fold-avy)
+(global-set-key (kbd "C-c C-u") 'vimish-fold-toggle)
+
 ;; defuns
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
 (dolist (file (directory-files defuns-dir t "\\w+"))
@@ -370,11 +399,6 @@
 
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
-(require 'ace-jump-mode)
-(define-key global-map (kbd "M-SPC") 'ace-jump-mode)
-(define-key global-map (kbd "C-c l") 'ace-jump-line-mode)
-
-
 (require 'multiple-cursors)
 (global-set-key (kbd "M-N") 'mc/mark-next-like-this)
 (global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
@@ -392,3 +416,29 @@
 (global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)
 
 ;;; init.el ends here
+
+;; sample config
+(add-hook 'typescript-mode-hook
+          (lambda ()
+            (tide-setup)
+            (flycheck-mode +1)
+            (setq flycheck-check-syntax-automatically '(save mode-enabled))
+            (eldoc-mode +1)
+            ;; company is an optional dependency. You have to
+            ;; install it separately via package-install
+            (company-mode-on)))
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; Tide can be used along with web-mode to edit tsx files
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.ts$" . web-mode))
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "ts" (file-name-extension buffer-file-name))
+              (tide-setup)
+              (flycheck-mode +1)
+              (setq flycheck-check-syntax-automatically '(save mode-enabled))
+              (eldoc-mode +1)
+                            (company-mode-on))))

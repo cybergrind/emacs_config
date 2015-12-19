@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: action
+# key: action
+# binding: direct-keybinding
+# --
+export const $1 = '$1';
+export function ${1:$(downcase yas-text)}($2){
+  return {type: $1, $2}
+}

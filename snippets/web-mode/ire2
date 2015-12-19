@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: import just react
+# key: ire
+# binding: direct-keybinding
+# --
+import React from 'react';
+$0
