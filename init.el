@@ -69,6 +69,7 @@
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
 (autoload 'paredit "paredit" nil t)
+
 ;(autoload 'espresso-mode "espresso" nil t)
 (autoload 'smex-initialize "smex" "smex-initialize" t)
 ;(require 'magit)
@@ -121,6 +122,7 @@
 (require 'auto-complete)
 (add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
+(add-to-list 'ac-modes 'web-mode)
 (setq ac-fuzzy-enable t)
 (show-paren-mode 1)
 
