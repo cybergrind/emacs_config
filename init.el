@@ -238,6 +238,7 @@
  '(diff-file-header ((t (:background "grey10" :weight bold))))
  '(diff-header ((t (:background "grey10" :foreground "white"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
+ '(ensime-implicit-highlight ((t (:inherit nil :background "grey15"))))
  '(flymake-errline ((t (:background "color-83" :foreground "black"))))
  '(flymake-warnline ((t (:foreground "#6c6c6c" :underline (:color "#ff0087" :style wave)))))
  '(font-lock-builtin-face ((t (:foreground "color-208"))))
@@ -322,6 +323,21 @@
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(setq ensime-sem-high-faces
+      ;; NOTE: Inconsolata doesn't have italics
+      ;; FURTHER NOTE: these are overlays, not faces
+      '((var . (:foreground "color-208"))
+        (val . (:foreground "grey"))
+        (varField . (:foreground "color-208"))
+        (valField . (:foreground "grey"))
+        (functionCall . (:foreground "grey"))
+        (operator . (:foreground "grey"))
+        (param . (:foreground "grey"))
+        (class . (:foreground "color-47"))
+        (trait . (:foreground "#4e807d"))
+        (object . (:foreground "#6897bb"))
+        (package . (:foreground "#cc7832"))))
+
 
 (autoload 'web-mode "web-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
