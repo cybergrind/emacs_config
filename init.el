@@ -32,7 +32,9 @@
         coffee-mode
         web-mode
         multiple-cursors
-        hydra))
+        hydra
+        avy
+        vimish-fold))
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
