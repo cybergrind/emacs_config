@@ -34,7 +34,10 @@
         multiple-cursors
         hydra
         avy
-        vimish-fold))
+        vimish-fold
+        helm
+        helm-ag
+        zenburn))
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -49,7 +52,7 @@
              (not (package-installed-p package)))
         (package-install package)))
 
-
+(load-theme 'zenburn t)
 (require 'cl)
 (defvar *emacs-load-start* (current-time))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -177,10 +180,15 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/ssd/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
+ '(custom-safe-themes
+   (quote
+    ("708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
  '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
  '(flycheck-eslintrc "~/.eslintrc")
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
+ '(helm-ag-use-agignore t)
+ '(helm-mode-fuzzy-match t)
  '(icicle-buffers-ido-like-flag t)
  '(icicle-files-ido-like-flag t)
  '(js2-basic-offset 2)
@@ -225,68 +233,6 @@
      (test-case-name . twisted\.test\.test_reflect)
      (codiing . utf-8))))
  '(tab-width 4))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ac-completion-face ((t (:underline t))))
- '(custom-group-tag ((t (:inherit variable-pitch :foreground "white" :weight bold :height 1.2))))
- '(custom-state ((t (:foreground "color-43"))))
- '(custom-variable-tag ((t (:foreground "white" :weight bold))))
- '(diff-added ((t (:foreground "green"))))
- '(diff-changed ((t (:underline t))))
- '(diff-context ((t nil)))
- '(diff-file-header ((t (:background "grey10" :weight bold))))
- '(diff-header ((t (:background "grey10" :foreground "white"))))
- '(diff-removed ((t (:inherit diff-changed :foreground "red"))))
- '(ensime-implicit-highlight ((t (:inherit nil :background "grey15"))))
- '(flymake-errline ((t (:background "color-83" :foreground "black"))))
- '(flymake-warnline ((t (:foreground "#6c6c6c" :underline (:color "#ff0087" :style wave)))))
- '(font-lock-builtin-face ((t (:foreground "color-208"))))
- '(font-lock-function-name-face ((t (:foreground "brightblue"))))
- '(font-lock-keyword-face ((t (:foreground "DarkOliveGreen1"))))
- '(font-lock-preprocessor-face ((t (:foreground "#e5786d"))))
- '(font-lock-string-face ((t (:foreground "color-34"))))
- '(font-lock-type-face ((t (:foreground "color-47"))))
- '(font-lock-variable-name-face ((t (:foreground "color-51"))))
- '(highlight ((t (:background "darkseagreen4"))))
- '(isearch-fail ((t (:background "Grey10"))))
- '(lazy-highlight ((t (:background "grey20"))))
- '(magit-branch-local ((t (:foreground "#41A3C4"))))
- '(magit-diff-add ((t (:inherit diff-added :foreground "darkgreen"))))
- '(magit-diff-added ((t (:background "grey15" :foreground "#22aa22"))))
- '(magit-diff-added-highlight ((t (:background "grey10" :foreground "#22aa22"))))
- '(magit-diff-context ((t (:foreground "grey80"))))
- '(magit-diff-context-highlight ((t (:background "grey10" :foreground "grey85"))))
- '(magit-diff-hunk-heading ((t (:background "grey10" :foreground "grey80"))))
- '(magit-diff-hunk-heading-highlight ((t (:background "grey30" :foreground "grey75"))))
- '(magit-diff-removed ((t (:background "grey10" :foreground "#aa2222"))))
- '(magit-diff-removed-highlight ((t (:background "grey15" :foreground "#aa2222"))))
- '(magit-section-highlight ((t (:background "grey15"))))
- '(match ((t (:background "pink" :foreground "darkblue"))))
- '(minibuffer-prompt ((t (:foreground "Yellow1"))))
- '(moccur-face ((t (:background "grey15" :weight bold))))
- '(mode-line ((t (:background "grey10" :foreground "pink" :box (:line-width -1 :style released-button)))))
- '(mode-line-inactive ((t (:inherit mode-line :background "grey2" :foreground "pink3" :box (:line-width -1 :color "grey10") :weight light))))
- '(org-agenda-done ((t (:foreground "color-34"))))
- '(org-agenda-structure ((t (:foreground "Blue"))))
- '(org-scheduled ((t (:foreground "color-67"))))
- '(org-scheduled-today ((t (:foreground "color-51"))))
- '(region ((t (:background "color-235"))))
- '(rst-level-1 ((t (:background "grey8"))))
- '(rst-level-1-face ((t (:background "grey10"))) t)
- '(rst-level-2 ((t (:background "grey1"))))
- '(rst-level-2-face ((t nil)) t)
- '(rst-level-3 ((t (:background "grey10"))))
- '(rst-level-3-face ((t nil)) t)
- '(secondary-selection ((t (:background "color-101" :foreground "black"))))
- '(web-mode-html-tag-bracket-face ((t (:foreground "brightmagenta"))))
- '(whitespace-empty ((t nil)))
- '(whitespace-indentation ((t nil)))
- '(whitespace-space ((t nil)))
- '(whitespace-tab ((t nil))))
-
 
 ;(message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
 ;                           (- (+ lo ms) (+ (second *emacs-load-start*) (third *emacs-load-start*)))))

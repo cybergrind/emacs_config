@@ -1,4 +1,5 @@
 (eval-after-load 'python-mode
+
 (font-lock-add-keywords
  'python-mode
  '(("\\(lambda\\)" (0 (progn ()
