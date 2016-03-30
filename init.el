@@ -38,7 +38,7 @@
         vimish-fold
         helm
         helm-ag
-        zenburn))
+        zenburn-theme))
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
