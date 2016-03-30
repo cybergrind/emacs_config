@@ -32,6 +32,7 @@
         coffee-mode
         web-mode
         multiple-cursors
+        ido-ubiquitous
         hydra
         avy
         vimish-fold
@@ -52,7 +53,7 @@
              (not (package-installed-p package)))
         (package-install package)))
 
-(load-theme 'zenburn t)
+
 (require 'cl)
 (defvar *emacs-load-start* (current-time))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -141,9 +142,13 @@
 (ido-mode 1)
 (ido-everywhere 1)
 (flx-ido-mode 1)
+
 ;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
+
+(require 'ido-ubiquitous)
+(ido-ubiquitous-mode 1)
 
 (setq confirm-kill-emacs nil)
 ;; remove <2> on doubled buffers
@@ -242,9 +247,9 @@
 
 (setq inferior-lisp-program "/usr/bin/sbcl") ; your Lisp system
 (add-to-list 'load-path "/usr/lib/sbcl")
-(add-to-list 'load-path "~/.emacs.d/slime")  ; your SLIME directory
-(require 'slime)
-(slime-setup '(slime-repl))
+;(add-to-list 'load-path "~/.emacs.d/slime")  ; your SLIME directory
+;(require 'slime)
+;(slime-setup '(slime-repl))
 
 (add-hook 'slime-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
@@ -407,4 +412,11 @@
               (flycheck-mode +1)
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
               (eldoc-mode +1)
-                            (company-mode-on))))
+              (company-mode-on))))
+(load-theme 'zenburn)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
