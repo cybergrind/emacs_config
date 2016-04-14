@@ -38,6 +38,7 @@
         vimish-fold
         helm
         helm-ag
+        goto-chg
         zenburn-theme))
 (require 'package)
 
@@ -59,11 +60,6 @@
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
-
-(add-to-list 'load-path dotfiles-dir)
 
 
 ;(require 'anything-config)
@@ -303,6 +299,9 @@
 (define-key global-map (kbd "C-c c") 'avy-goto-char)
 (define-key global-map (kbd "C-c l") 'avy-goto-line)
 
+(require 'goto-chg)
+(define-key global-map (kbd "C-.") 'goto-last-change)
+(define-key global-map (kbd "C-,") 'goto-last-change-reverse)
 
 (require 'vimish-fold)
 (vimish-fold-global-mode 1)
