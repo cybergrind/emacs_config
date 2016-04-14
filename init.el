@@ -300,8 +300,8 @@
 (define-key global-map (kbd "C-c l") 'avy-goto-line)
 
 (require 'goto-chg)
-(define-key global-map (kbd "C-.") 'goto-last-change)
-(define-key global-map (kbd "C-,") 'goto-last-change-reverse)
+(define-key global-map (kbd "C-c .") 'goto-last-change)
+(define-key global-map (kbd "C-c ,") 'goto-last-change-reverse)
 
 (require 'vimish-fold)
 (vimish-fold-global-mode 1)
