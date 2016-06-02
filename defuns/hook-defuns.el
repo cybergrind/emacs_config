@@ -10,5 +10,4 @@
             (lambda ()
               (interactive)
               (whitespace-cleanup))))
-(print "HHHHHHHHOOOOK")
 ;;; hook-defuns.el ends here
