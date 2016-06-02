@@ -61,13 +61,9 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-
-;(require 'anything-config)
-; (require 'flymake_cust)
 (require 'flycheck_setup)
 
 ;(require 'tramp)
-;(autoload 'auto-complete "auto-complete" nil t)
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
 (autoload 'paredit "paredit" nil t)
@@ -174,67 +170,6 @@
 
 (require 'multi_desktop)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/ssd/tipsi/tipsi_web/bookmarks")
- '(coffee-tab-width 4)
- '(custom-safe-themes
-   (quote
-    ("708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
- '(edts-man-root "~/.emacs.d/edts/doc/R16B02")
- '(flycheck-eslintrc "~/.eslintrc")
- '(flymake-log-level -1)
- '(flymake-no-changes-timeout 5)
- '(helm-ag-use-agignore t)
- '(helm-mode-fuzzy-match t)
- '(icicle-buffers-ido-like-flag t)
- '(icicle-files-ido-like-flag t)
- '(js2-basic-offset 2)
- '(js2-strict-missing-semi-warning nil)
- '(nil nil t)
- '(nrepl-host "192.168.42.129")
- '(nrepl-port 9999)
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/gtd/tipsi.org" "~/Dropbox/gtd/gtd.org" "~/Dropbox/gtd/logbook/14_09.org" "~/Dropbox/gtd/calendar.org_archive" "~/Dropbox/gtd/calendar.org")))
- '(org-directory "~/Dropbox/gtd")
- '(org-mobile-directory "~/Dropbox/gtd")
- '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(safe-local-variable-values
-   (quote
-    ((content-type . "jsx")
-     (web-mode-content-type . "jsx")
-     (web-mode-content-type . jsx)
-     (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook
-            (quote write-contents-functions)
-            (lambda nil
-              (delete-trailing-whitespace)
-              nil))
-           (require
-            (quote whitespace))
-           "Sometimes the mode needs to be toggled off and on."
-           (whitespace-mode 0)
-           (whitespace-mode 1))
-     (whitespace-line-column . 80)
-     (whitespace-style face tabs trailing lines-tail)
-     (python-indent-offset . 4)
-     (erlang-mode . 1)
-     (erlang-mode\;erlang-indent-level . 4)
-     (erlang\;erlang-indent-level . 4)
-     (encoding . utf-8)
-     (test-case-name . twisted\.web\.test\.test_xmlrpc)
-     (test-case-name . test\.test_txpostgres)
-     (test-case-name . twisted\.test\.test_logfile)
-     (test-case-name . twisted\.test\.test_log)
-     (test-case-name . twisted\.test\.test_internet)
-     (test-case-name . twisted\.test\.test_reflect)
-     (codiing . utf-8))))
- '(tab-width 4))
-
 ;(message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
 ;                           (- (+ lo ms) (+ (second *emacs-load-start*) (third *emacs-load-start*)))))
 
@@ -311,7 +246,8 @@
 ;; defuns
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
 (dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (file-regular-p file)
+  (when (and (file-regular-p file)
+             (not (string-suffix-p "~" file)))
     (load file)))
 
 ; macro
@@ -412,11 +348,52 @@
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
               (eldoc-mode +1)
               (company-mode-on))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(coffee-tab-width 4)
+ '(custom-safe-themes
+   (quote
+    ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
+ '(flycheck-eslintrc "~/.eslintrc")
+ '(flymake-log-level -1)
+ '(flymake-no-changes-timeout 5)
+ '(helm-ag-use-agignore t)
+ '(helm-mode-fuzzy-match t)
+ '(js2-basic-offset 2)
+ '(js2-strict-missing-semi-warning nil)
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/gtd/tipsi.org" "~/Dropbox/gtd/gtd.org" "~/Dropbox/gtd/logbook/14_09.org" "~/Dropbox/gtd/calendar.org_archive" "~/Dropbox/gtd/calendar.org")))
+ '(org-directory "~/Dropbox/gtd")
+ '(org-mobile-directory "~/Dropbox/gtd")
+ '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
+ '(safe-local-variable-values
+   (quote
+    ((content-type . "jsx")
+     (web-mode-content-type . "jsx")
+     (web-mode-content-type . jsx)
+     (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
+     (whitespace-line-column . 80)
+     (whitespace-style face tabs trailing lines-tail)
+     (python-indent-offset . 4)
+     (erlang-mode . 1)
+     (erlang-mode\;erlang-indent-level . 4)
+     (erlang\;erlang-indent-level . 4)
+     (encoding . utf-8))))
+ '(tab-width 4))
 
 (load-theme 'zenburn t)
