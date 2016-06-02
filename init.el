@@ -15,6 +15,7 @@
 
 (setq package-selected-packages
       '(clojure-mode
+        erlang
         flycheck
         magit paredit anything smex cider
         python slim-mode slime
@@ -397,4 +398,3 @@
      (erlang\;erlang-indent-level . 4)
      (encoding . utf-8))))
  '(tab-width 4))
-
