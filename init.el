@@ -349,6 +349,7 @@
               (eldoc-mode +1)
               (company-mode-on))))
 
+(load-theme 'zenburn t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -365,6 +366,7 @@
  '(helm-mode-fuzzy-match t)
  '(js2-basic-offset 2)
  '(js2-strict-missing-semi-warning nil)
+ '(magit-pull-arguments nil)
  '(org-agenda-files
    (quote
     ("~/Dropbox/gtd/tipsi.org" "~/Dropbox/gtd/gtd.org" "~/Dropbox/gtd/logbook/14_09.org" "~/Dropbox/gtd/calendar.org_archive" "~/Dropbox/gtd/calendar.org")))
@@ -396,4 +398,3 @@
      (encoding . utf-8))))
  '(tab-width 4))
 
-(load-theme 'zenburn t)
