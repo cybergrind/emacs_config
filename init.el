@@ -1,4 +1,8 @@
+;;; init.el --- emacs config
+;;; Commentary:
+;;; make elisp linter happy
 ;;; Code:
+
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
@@ -14,33 +18,48 @@
 (el-get 'sync packages-list)
 
 (setq package-selected-packages
-      '(clojure-mode
-        erlang
-        flycheck
-        magit paredit anything smex cider
-        python slim-mode slime
-        tramp
+      '(
+        anything
         auto-complete
-        scala-mode2
-        puppet-mode fuzzy prolog-el
-        js2-mode yaml-mode
-        bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac
-        rust-mode nim-mode
-        dockerfile-mode
-        go-mode
-        flx flx-ido
-        ensime
-        coffee-mode
-        web-mode
-        multiple-cursors
-        ido-ubiquitous
-        hydra
         avy
-        vimish-fold
+        bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac
+        cider
+        clojure-mode
+        coffee-mode
+        dockerfile-mode
+        ensime
+        erlang
+        flx flx-ido
+        flycheck
+        fuzzy
+        go-mode
+        goto-chg
         helm
         helm-ag
-        goto-chg
-        zenburn-theme))
+        helm-projectile
+        hydra
+        ido-ubiquitous
+        js2-mode
+        magit
+        multiple-cursors
+        nim-mode
+        paredit
+        projectile
+        prolog-el
+        puppet-mode
+        python
+        rust-mode
+        scala-mode2
+        slim-mode
+        slime
+        smex
+        tramp
+        vimish-fold
+        web-mode
+        yaml-mode
+        zenburn-theme
+        ))
+
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -350,6 +369,8 @@
               (eldoc-mode +1)
               (company-mode-on))))
 
+(projectile-global-mode)
+
 (load-theme 'zenburn t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -374,9 +395,11 @@
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
+ '(projectile-enable-caching t)
  '(safe-local-variable-values
    (quote
-    ((content-type . "jsx")
+    ((some-variable . "test")
+     (content-type . "jsx")
      (web-mode-content-type . "jsx")
      (web-mode-content-type . jsx)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
@@ -398,3 +421,10 @@
      (erlang\;erlang-indent-level . 4)
      (encoding . utf-8))))
  '(tab-width 4))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
