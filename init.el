@@ -19,6 +19,7 @@
 
 (setq package-selected-packages
       '(
+        ag
         anything
         auto-complete
         avy
