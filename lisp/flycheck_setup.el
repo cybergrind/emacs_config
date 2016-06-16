@@ -2,13 +2,13 @@
 (require 'flycheck) ; noqa
 ;;; Code:
 
-; JSX checker
-(flycheck-define-checker jsxhint-checker
-  "A JSX syntax and style checker based on JSXHint."
-  :command ("jsxhint" source)
-  :error-patterns
-  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-  :modes (web-mode))
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint)))
+
+(setq-default flycheck-temp-prefix ".flycheck")
+(setq-default flycheck-eslintrc nil)
+
 
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 
