@@ -378,6 +378,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "~/ssd/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
  '(custom-safe-themes
    (quote
@@ -400,7 +401,9 @@
  '(projectile-tags-command "ctags -Re --python-kinds=cf -f \"%s\" %s")
  '(safe-local-variable-values
    (quote
-    ((some-variable . "test")
+    ((vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
+     (bookmark-default-file . "/ssd/kpi/tipsi/tipsi_web/bookmarks")
+     (some-variable . "test")
      (content-type . "jsx")
      (web-mode-content-type . "jsx")
      (web-mode-content-type . jsx)
