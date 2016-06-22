@@ -397,6 +397,7 @@
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(projectile-enable-caching t)
+ '(projectile-tags-command "ctags -Re --python-kinds=cf -f \"%s\" %s")
  '(safe-local-variable-values
    (quote
     ((some-variable . "test")
