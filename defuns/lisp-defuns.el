@@ -1,5 +1,7 @@
-
+;;; lisp-defuns.el --- lisp defuns
+;;; Commentary:
 ;; https://github.com/magnars/.emacs.d/blob/master/defuns/lisp-defuns.el
+;;; Code:
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."
   (interactive)
@@ -9,3 +11,4 @@
              (current-buffer))
     (error (message "Invalid expression")
                       (insert (current-kill 0)))))
+;;; lisp-defuns.el ends here

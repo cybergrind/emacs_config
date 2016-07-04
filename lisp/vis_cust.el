@@ -1,14 +1,20 @@
+;;; vis_cust.el -- customization
+;;; Commentary:
+;;; Code:
+
 (eval-after-load 'python-mode
 
-(font-lock-add-keywords
- 'python-mode
- '(("\\(lambda\\)" (0 (progn ()
-                            (compose-region (match-beginning 1)
-                                            (match-end 1)
-                                            ?λ)))))))
+  (font-lock-add-keywords
+   'python-mode
+   '(("\\(lambda\\)" (0 (progn ()
+                          (compose-region (match-beginning 1)
+                                          (match-end 1)
+                                          ?λ)))))))
 
 (add-hook 'emacs-lisp-mode-hook 'pretty-lambdas)
+
 (defun pretty-lambdas ()
+  "Draw pretty lambdas."
   (font-lock-add-keywords
    nil `(("(?\\(lambda\\>\\)"
           (0 (progn (compose-region (match-beginning 1) (match-end 1)
@@ -16,3 +22,4 @@
                     nil))))))
 
 (provide 'vis_cust)
+;;; vis_cust.el ends here

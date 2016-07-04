@@ -1,4 +1,6 @@
-
+;;; multi_desktop.el -- multi desktop implementation
+;;; Commentary:
+;;; Code:
 (require 'cl)
 
 (setq desktop-path (list default-directory))
@@ -15,7 +17,7 @@
                ;; windows-restore-save <= runs after next string
                (desktop-save-mode 1)
                (add-hook 'kill-emacs-hook 'force-save-desktop)))
-               
+
 (defun saved-session ()
   (file-exists-p (concat desktop-dirname "/" desktop-base-file-name)))
 
@@ -26,7 +28,7 @@
   (if (saved-session)
       (desktop-read)
     (message "No desktop found."))
-  
+
   )
 
 ;; use session-save to save the desktop manually
@@ -85,6 +87,6 @@
 
 (add-hook 'desktop-save-hook 'windows-restore-save)
 
-
-
 (provide 'multi_desktop)
+
+;;; multi_desktop.el ends here

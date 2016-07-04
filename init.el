@@ -49,6 +49,7 @@
         prolog-el
         puppet-mode
         python
+        py-yapf
         rust-mode
         scala-mode2
         slim-mode
@@ -123,11 +124,6 @@
 
 (global-set-key (kbd "C-x ;") 'eval-expression)
 
-(autoload 'icicle-mode "icicles" nil t)
-(global-set-key [(meta s) (i)] (lambda ()
-                 (interactive)
-                 (icicle-mode)))
-;;(run-at-time "0.8 sec" nil 'icicles)
 
 (cond ((file-exists-p "/usr/lib/erlang")
        (setq erlang-root-dir "/usr/lib/erlang")
@@ -223,8 +219,6 @@
 ;; open archives
 (auto-compression-mode t)
 (set-terminal-coding-system 'utf-8-unix)
-
-(require 'yapf)
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
@@ -398,7 +392,6 @@
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(projectile-enable-caching t)
- '(projectile-tags-command "ctags -Re --python-kinds=cf -f \"%s\" %s")
  '(safe-local-variable-values
    (quote
     ((vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
