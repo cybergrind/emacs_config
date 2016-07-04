@@ -124,6 +124,8 @@
 
 (global-set-key (kbd "C-x ;") 'eval-expression)
 
+(global-set-key (kbd "C-x g") 'magit-status)
+
 
 (cond ((file-exists-p "/usr/lib/erlang")
        (setq erlang-root-dir "/usr/lib/erlang")
