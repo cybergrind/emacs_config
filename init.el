@@ -85,27 +85,11 @@
 
 (require 'flycheck_setup)
 
-;(require 'tramp)
 (require 'vis_cust)
 (autoload 'autopair-global-mode "autopair" nil t)
 (autoload 'paredit "paredit" nil t)
 
-;(autoload 'espresso-mode "espresso" nil t)
 (autoload 'smex-initialize "smex" "smex-initialize" t)
-;(require 'magit)
-
-
-;; tramp configs
-;(tramp-set-completion-function "ssh"
-;'((tramp-parse-sconfig "/etc/ssh_config")
-;(tramp-parse-sconfig "~/.ssh/config")))
-;(setenv "SHELL" "/bin/sh") ;; workaround for zsh
-;(setq tramp-default-method "scp")
-;(setq tramp-default-method "ssh")
-;(setq tramp-debug-buffer t)
-;(setq tramp-verbose 10)
-;(require 'tramp-cmds)
-
 
 ;; smex delayed initialization
 (global-set-key [(meta x)] (lambda ()
@@ -134,8 +118,6 @@
        (require 'erlang-start)))
 
 
-;(autopair-global-mode t)
-;;(auto-complete-mode 1)
 (require 'auto-complete)
 (add-to-list 'ac-modes 'python-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
@@ -143,7 +125,7 @@
 (setq ac-fuzzy-enable t)
 (show-paren-mode 1)
 
-;(ido-mode t)
+
 (ido-mode 'both)
 (setq ido-save-directory-list-file "~/.emacs.d/var/ido")
 (setq ido-enable-flex-matching t)
@@ -175,9 +157,7 @@
   (flet ((process-list ())) ad-do-it))
 
 
-;; (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-
 (add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
@@ -185,12 +165,8 @@
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.nim$" . nimrod-mode))
-;;(add-to-list 'auto-mode-alist '("" . auto-complete-mode))
 
 (require 'multi_desktop)
-
-;(message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
-;                           (- (+ lo ms) (+ (second *emacs-load-start*) (third *emacs-load-start*)))))
 
 (message "%s" (current-time))
 (put 'set-goal-column 'disabled nil)
@@ -379,7 +355,7 @@
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
- '(flycheck-eslintrc "~/.eslintrc")
+ '(flycheck-eslintrc nil)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
  '(helm-ag-use-agignore t)
