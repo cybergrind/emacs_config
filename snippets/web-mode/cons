@@ -1,8 +1,5 @@
-# -*- mode: snippet; require-final-newline: nil -*-
+# -*- mode: snippet -*-
 # name: cons
 # key: cons
-# binding: direct-keybinding
 # --
-constructor(props){
-    super(props);
-}
+console.log($1); /* eslint no-console: off */

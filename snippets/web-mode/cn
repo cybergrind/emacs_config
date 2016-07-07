@@ -3,4 +3,4 @@
 # key: cn
 # binding: direct-keybinding
 # --
-className="$1"
+className="$1" $0
