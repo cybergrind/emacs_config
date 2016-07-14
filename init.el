@@ -358,6 +358,7 @@
  '(flycheck-eslintrc nil)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
+ '(helm-adaptive-mode t nil (helm-adaptive))
  '(helm-ag-use-agignore t)
  '(helm-mode-fuzzy-match t)
  '(js2-basic-offset 2)
@@ -369,7 +370,9 @@
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
+ '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
+ '(projectile-generic-command "ag -g \"\" -0")
  '(safe-local-variable-values
    (quote
     ((vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
