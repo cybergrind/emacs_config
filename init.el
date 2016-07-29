@@ -50,6 +50,7 @@
         puppet-mode
         python
         py-yapf
+        restclient
         rust-mode
         scala-mode2
         slim-mode
