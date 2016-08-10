@@ -42,6 +42,7 @@
         ido-ubiquitous
         js2-mode
         magit
+        markdown-mode
         multiple-cursors
         nim-mode
         paredit
