@@ -49,7 +49,6 @@
         projectile
         prolog-el
         puppet-mode
-        python
         py-yapf
         restclient
         rust-mode
@@ -158,9 +157,10 @@
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (flet ((process-list ())) ad-do-it))
 
+(autoload 'python-mode "python-mode.el" "Python mode." t)
+(setq auto-mode-alist (append '(("/.*\.py\'" . python-mode)) auto-mode-alist))
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
@@ -352,7 +352,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/ssd/tipsi/tipsi_web/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
  '(custom-safe-themes
    (quote
