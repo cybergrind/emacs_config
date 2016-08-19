@@ -6,17 +6,6 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-(setq packages-list '(dockercontrol-mode))
-(el-get 'sync packages-list)
-
 (setq package-selected-packages
       '(
         ag
@@ -27,6 +16,7 @@
         cider
         clojure-mode
         coffee-mode
+        docker
         dockerfile-mode
         ensime
         erlang
@@ -67,8 +57,9 @@
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
+
 (unless package-archive-contents
   (package-refresh-contents))
 

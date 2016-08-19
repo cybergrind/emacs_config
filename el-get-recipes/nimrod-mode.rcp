@@ -1,7 +1,0 @@
-(:name nimrod-mode
-       :website "https://github.com/lyro/nimrod-mode.git"
-       :description "nimrod-mode"
-       :type github
-       :pkgname "reactormonk/nimrod-mode"
-       :load-path (".")
-       :features nimrod-mode)
