@@ -152,6 +152,7 @@
 (autoload 'python-mode "python-mode.el" "Python mode." t)
 (setq auto-mode-alist (append '(("/.*\.py\'" . python-mode)) auto-mode-alist))
 
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
@@ -179,6 +180,7 @@
 ;; python mode
 (add-hook 'python-mode-hook
           #'(lambda ()
+              (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
           ))
