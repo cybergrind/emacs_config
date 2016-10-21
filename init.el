@@ -147,10 +147,7 @@
 
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
-  (flet ((process-list ())) ad-do-it))
-
-(autoload 'python-mode "python-mode.el" "Python mode." t)
-(setq auto-mode-alist (append '(("/.*\.py\'" . python-mode)) auto-mode-alist))
+  (cl-flet ((process-list ())) ad-do-it))
 
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
