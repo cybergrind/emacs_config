@@ -33,6 +33,7 @@
         ido-ubiquitous
         js2-mode
         json-mode
+        lua-mode
         magit
         markdown-mode
         multiple-cursors
