@@ -22,6 +22,7 @@
         erlang
         flx flx-ido
         flycheck
+        flycheck-nim
         fuzzy
         go-mode
         goto-chg
@@ -158,7 +159,11 @@
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
 (autoload 'yaml-mode "yaml-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.nim$" . nimrod-mode))
+(add-to-list 'auto-mode-alist '("\\.nim$" . nim-mode))
+
+; (seq nim-nimsuggest-path "/usr/bin/nimsuggest")
+(add-hook 'nim-mode-hook 'nimsuggest-mode)
+
 
 (require 'multi_desktop)
 
@@ -179,6 +184,8 @@
 ;; python mode
 (add-hook 'python-mode-hook
           #'(lambda ()
+              (setq python-shell-interpreter "ipython")
+              ;; (setq python-shell-interpreter-args "--pylab")
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
@@ -354,7 +361,6 @@
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
- '(flycheck-eslintrc nil t)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
  '(geiser-default-implementation (quote chicken))
@@ -372,10 +378,11 @@
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(package-selected-packages
    (quote
-    (chicken-scheme geiser ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg helm helm-ag helm-projectile hydra ido-ubiquitous js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
+    (flycheck-nim chicken-scheme geiser ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg helm helm-ag helm-projectile hydra ido-ubiquitous js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
+ '(projectile-tags-command "ctags -Re --python-kinds=cfm -f \"%s\" %s")
  '(safe-local-variable-values
    (quote
     ((geiser-scheme-implementation quote chicken)
