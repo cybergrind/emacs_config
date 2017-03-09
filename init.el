@@ -320,6 +320,9 @@
 (require 'geiser)
 (setq geiser-active-implementations '(chicken))
 
+
+(require 'x-clipboard)
+
 ;;; init.el ends here
 
 ;; sample config
@@ -363,7 +366,6 @@
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
- '(geiser-default-implementation (quote chicken))
  '(helm-adaptive-mode t nil (helm-adaptive))
  '(helm-ag-use-agignore t)
  '(helm-mode-fuzzy-match t)
@@ -385,8 +387,7 @@
  '(projectile-tags-command "ctags -Re --python-kinds=cfm -f \"%s\" %s")
  '(safe-local-variable-values
    (quote
-    ((geiser-scheme-implementation quote chicken)
-     (vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
+    ((vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
      (bookmark-default-file . "/ssd/kpi/tipsi/tipsi_web/bookmarks")
      (some-variable . "test")
      (content-type . "jsx")
@@ -410,7 +411,6 @@
      (erlang-mode\;erlang-indent-level . 4)
      (erlang\;erlang-indent-level . 4)
      (encoding . utf-8))))
- '(scheme-program-name "csi")
  '(tab-width 4))
 
 (custom-set-faces
