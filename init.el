@@ -18,7 +18,7 @@
         coffee-mode
         docker
         dockerfile-mode
-        ensime
+        ; ensime
         erlang
         flx flx-ido
         flycheck
@@ -54,6 +54,7 @@
         vimish-fold
         web-mode
         yaml-mode
+        use-package
         zenburn-theme
         ))
 
@@ -61,7 +62,8 @@
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")))
 (package-initialize)
 
 (unless package-archive-contents
@@ -70,7 +72,13 @@
 (dolist (package package-selected-packages)
   (when (and (assq package package-archive-contents)
              (not (package-installed-p package)))
-        (package-install package)))
+    (package-install package)))
+
+(require 'use-package)
+(use-package ensime
+             :ensure t
+             :pin melpa-stable)
+
 
 
 (require 'cl)
@@ -380,11 +388,25 @@
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(package-selected-packages
    (quote
-    (flycheck-nim chicken-scheme geiser ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg helm helm-ag helm-projectile hydra ido-ubiquitous js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
+    (alchemist flycheck-elixir flycheck-mix lua-mode company-flow flycheck-flow ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra ido-ubiquitous js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
  '(projectile-tags-command "ctags -Re --python-kinds=cfm -f \"%s\" %s")
+ '(ps-bottom-margin 5)
+ '(ps-footer-offset 5)
+ '(ps-header-font-size (quote (8 . 8)))
+ '(ps-header-lines 1)
+ '(ps-header-offset 0)
+ '(ps-header-title-font-size (quote (8 . 8)))
+ '(ps-inter-column 25)
+ '(ps-left-margin 25)
+ '(ps-paper-type (quote a4))
+ '(ps-print-header-frame nil)
+ '(ps-print-only-one-header t)
+ '(ps-right-margin 25)
+ '(ps-spool-duplex nil)
+ '(ps-top-margin 5)
  '(safe-local-variable-values
    (quote
     ((vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
