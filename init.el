@@ -257,6 +257,11 @@
 (fset 'fix-indent
       "\C-i\C-n\-m\C-x(")
 
+(fset 'mirror-buffer
+   "\C-xo\C-xb\C-r\C-r\C-m")
+
+(global-set-key (kbd "M-i") 'mirror-buffer)
+
 ; hydra
 
 (require 'hydra)
@@ -372,6 +377,7 @@
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
+ '(flycheck-eslintrc nil t)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
  '(helm-adaptive-mode t nil (helm-adaptive))
@@ -392,7 +398,6 @@
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
- '(projectile-tags-command "ctags -Re --python-kinds=cfm -f \"%s\" %s")
  '(ps-bottom-margin 5)
  '(ps-footer-offset 5)
  '(ps-header-font-size (quote (8 . 8)))
