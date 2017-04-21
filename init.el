@@ -243,8 +243,8 @@
 
 (require 'vimish-fold)
 (vimish-fold-global-mode 1)
-(global-set-key (kbd "C-c C-f") 'vimish-fold-avy)
-(global-set-key (kbd "C-c C-u") 'vimish-fold-toggle)
+(global-set-key (kbd "C-c f") 'vimish-fold-avy)
+(global-set-key (kbd "C-c u") 'vimish-fold-toggle)
 
 ;; defuns
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -286,6 +286,10 @@
 
 (require 'yasnippet)
 (yas-global-mode 1)
+
+(defun add-yasnippet-ac-sources ()
+  (add-to-list 'ac-sources 'ac-source-yasnippet))
+(add-hook 'python-mode-hook 'add-yasnippet-ac-sources)
 
 
 (put 'narrow-to-region 'disabled nil)
