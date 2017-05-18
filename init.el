@@ -210,6 +210,12 @@
 
 (require 'ensime)
 (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+(add-hook 'ensime-mode-hook
+          #'(lambda ()
+              (interactive)
+              (auto-complete-mode -1)))
+
 (setq ensime-sem-high-faces
       ;; NOTE: Inconsolata doesn't have italics
       ;; FURTHER NOTE: these are overlays, not faces
