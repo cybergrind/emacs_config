@@ -47,11 +47,13 @@
         prolog-el
         puppet-mode
         py-yapf
+        rainbow-delimiters
         restclient
         rust-mode
         scala-mode2
         slim-mode
         slime
+        smartparens
         smex
         tagedit
         tramp
@@ -87,6 +89,7 @@
 
 (require 'cl)
 
+(require 'setup-smartparens)
 (require 'js_setup)
 (require 'python_setup)
 (require 'flycheck_setup)

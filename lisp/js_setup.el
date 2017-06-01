@@ -26,9 +26,13 @@
 (defun custom-web-mode-hook ()
   "Hooks for Web mode. Adjust indents"
   ;;; http://web-mode.org/
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
+  (setq-default
+   standard-indent 2
+   tab-width 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-indent-style 2
+   setq web-mode-code-indent-offset 2))
 (add-hook 'web-mode-hook 'custom-web-mode-hook)
 
 ;; for better jsx syntax-highlighting in web-mode
