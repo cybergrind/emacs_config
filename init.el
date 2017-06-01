@@ -5,6 +5,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/vendor")
 
 (setq package-selected-packages
       '(
@@ -23,6 +24,7 @@
         flx flx-ido
         flycheck
         flycheck-nim
+        flycheck-flow
         fuzzy
         go-mode
         goto-chg
@@ -40,6 +42,7 @@
         multiple-cursors
         nim-mode
         paredit
+        prettier-js
         projectile
         prolog-el
         puppet-mode
@@ -50,6 +53,7 @@
         slim-mode
         slime
         smex
+        tagedit
         tramp
         vimish-fold
         web-mode
@@ -82,16 +86,11 @@
 
 
 (require 'cl)
-(defvar *emacs-load-start* (current-time))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
+(require 'js_setup)
+(require 'python_setup)
 (require 'flycheck_setup)
-
 (require 'vis_cust)
-(autoload 'autopair-global-mode "autopair" nil t)
-(autoload 'paredit "paredit" nil t)
 
 (autoload 'smex-initialize "smex" "smex-initialize" t)
 
@@ -161,7 +160,6 @@
   (cl-flet ((process-list ())) ad-do-it))
 
 
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
 (autoload 'puppet-mode "puppet-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 (add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
@@ -232,10 +230,6 @@
         (package . (:foreground "#cc7832"))))
 
 
-(autoload 'web-mode "web-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-(require 'web_snippets)
 
 
 (require 'avy)
@@ -346,6 +340,11 @@
 
 (require 'x-clipboard)
 
+
+(setq org-log-done 'time)
+(setq org-clock-idle-time 10)
+(setq org-agenda-include-diary t)
+
 ;;; init.el ends here
 
 ;; sample config
@@ -362,19 +361,8 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; Tide can be used along with web-mode to edit tsx files
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.ts$" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "ts" (file-name-extension buffer-file-name))
-              (tide-setup)
-              (flycheck-mode +1)
-              (setq flycheck-check-syntax-automatically '(save mode-enabled))
-              (eldoc-mode +1)
-              (company-mode-on))))
-
 (projectile-global-mode)
+
 
 (load-theme 'zenburn t)
 (custom-set-variables
@@ -408,6 +396,7 @@
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
+ '(projectile-mode t nil (projectile))
  '(ps-bottom-margin 5)
  '(ps-footer-offset 5)
  '(ps-header-font-size (quote (8 . 8)))
