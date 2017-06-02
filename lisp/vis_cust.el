@@ -33,6 +33,12 @@
 (autoload 'autopair-global-mode "autopair" nil t)
 (autoload 'paredit "paredit" nil t)
 
+(show-paren-mode 1)
+
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+(load-theme 'zenburn t)
 
 (provide 'vis_cust)
 ;;; vis_cust.el ends here
