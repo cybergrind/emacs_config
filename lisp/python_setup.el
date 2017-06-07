@@ -11,7 +11,6 @@
 (defvar py-test-name "")
 
 (defun run-py-test ()
-  (interactive)
   (cond ((and (boundp 'py-project-root)
               (boundp 'py-test-command)
               (string> py-test-name ""))
@@ -23,7 +22,6 @@
         (t (message "Please set py-project-root or chose test"))))
 
 (defun assign-py-test ()
-  (interactive)
   (cond ((boundp 'py-project-root)
          (let* ((curr_test (python-info-current-defun))
                 (curr_file (replace-regexp-in-string ".py$" "" (buffer-file-name)))
@@ -36,13 +34,17 @@
         (t (message "Please set py-project-root"))))
 
 
+(defun py-test-interactive (arg)
+  (interactive "P")
+  (if arg (assign-py-test))
+  (run-py-test))
+
 
 (add-hook 'python-mode-hook
           #'(lambda ()
               (setq python-shell-interpreter "ipython")
               ;; (setq python-shell-interpreter-args "--pylab")
-              (define-key python-mode-map (kbd "C-o") 'assign-py-test)
-              (define-key python-mode-map (kbd "C-i") 'run-py-test)
+              (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
