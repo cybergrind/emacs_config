@@ -1,5 +1,14 @@
 ;;; Code:
 
+;; defuns
+(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
+
+(dolist (file (directory-files defuns-dir t "\\w+"))
+  (when (and (file-regular-p file)
+             (not (string-suffix-p "~" file)))
+    (load file)))
+
+
 (autoload 'smex-initialize "smex" "smex-initialize" t)
 
 ;; smex delayed initialization
@@ -21,7 +30,6 @@
 (global-set-key (kbd "C-x ;") 'eval-expression)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-(require 'setup-smartparens)
 
 (require 'recentf)
 (recentf-mode 1)
@@ -83,13 +91,6 @@
 (vimish-fold-global-mode 1)
 (global-set-key (kbd "C-c f") 'vimish-fold-avy)
 (global-set-key (kbd "C-c u") 'vimish-fold-toggle)
-
-;; defuns
-(setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
-(dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (and (file-regular-p file)
-             (not (string-suffix-p "~" file)))
-    (load file)))
 
 ; macro
 (fset 'fix-indent

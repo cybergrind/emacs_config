@@ -7,6 +7,25 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
+(defconst basis/emacs-dir
+  (file-name-directory (file-chase-links (or load-file-name buffer-file-name)))
+  "This Emacs's configuration directory.")
+
+(defun basis/emacs-dir (name)
+  "Return directory NAME expanded in `basis/emacs-dir'.
+Create the directory if it does not exist and CREATE is non-nil."
+  (if (string-suffix-p "/" name)
+      (expand-file-name name basis/emacs-dir)
+    ;; This isn't actually necessary
+    (error "Directory name should end with a slash")))
+
+(defun basis/emacs-file (name)
+  "Return file NAME expanded in `basis/emacs-dir'."
+  (if (not (string-suffix-p "/" name))
+      (expand-file-name name basis/emacs-dir)
+    (error "File name should not end with a slash")))
+
+
 (setq package-selected-packages
       '(
         ag
@@ -18,6 +37,7 @@
         clojure-mode
         coffee-mode
         docker
+        docker-tramp
         dockerfile-mode
         ; ensime
         erlang
@@ -107,6 +127,7 @@
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
+ '(docker-tramp-use-names t)
  '(flycheck-eslintrc nil t)
  '(flycheck-javascript-flow-args nil)
  '(flymake-log-level -1)
