@@ -40,16 +40,6 @@
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
 
-;; python mode
-(add-hook 'python-mode-hook
-          #'(lambda ()
-              (setq python-shell-interpreter "ipython")
-              ;; (setq python-shell-interpreter-args "--pylab")
-              (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
-              ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
-              ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
-          ))
-
 (add-to-list 'auto-mode-alist '("\\.cljs$" . clj-mode))
 
 (require 'ensime)
