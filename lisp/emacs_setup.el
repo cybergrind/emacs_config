@@ -166,6 +166,7 @@
 (setq org-log-done 'time)
 (setq org-clock-idle-time 10)
 (setq org-agenda-include-diary t)
+(setq org-log-into-drawer t)
 
 (projectile-global-mode)
 

@@ -50,5 +50,4 @@
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
           ))
 
-
 (provide 'python_setup)

@@ -91,7 +91,8 @@
     geiser-repl-mode
     inferior-lisp-mode
     scheme-mode
-    slime-repl-mode)
+    slime-repl-mode
+    org-mode)
   "List of modes in which not to active `smartparens'.")
 
 (use-package smartparens
