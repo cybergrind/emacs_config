@@ -99,7 +99,7 @@
   :ensure t
   :config
   (progn
-    (smartparens-global-strict-mode)
+    (smartparens-global-strict-mode nil)
     (dolist (mode basis/sp-ignore-modes)
       (add-to-list 'sp-ignore-modes-list mode))
     (sp-use-paredit-bindings)
