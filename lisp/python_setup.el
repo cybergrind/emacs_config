@@ -6,19 +6,18 @@
             (flycheck-select-checker 'python-flake8)
             (flycheck-mode)))
 
-
-
 (defvar py-test-name "")
 
 (defun run-py-test ()
-  (cond ((and (boundp 'py-project-root)
-              (boundp 'py-test-command)
-              (string> py-test-name ""))
-         (message "ret is: %s"
-                  (shell-command-to-string
-                   (concat
-                    py-test-command
-                    py-test-name))))
+  (cond
+   ((and (boundp 'py-project-root)
+         (boundp 'py-test-command)
+         (string> py-test-name ""))
+    (message "ret is: %s"
+             (shell-command-to-string
+              (concat
+               py-test-command
+               py-test-name))))
         (t (message "Please set py-project-root or chose test"))))
 
 (defun assign-py-test ()
