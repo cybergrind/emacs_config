@@ -30,7 +30,7 @@
   (pcase arg
     ('(4) (kill-whole-line))
     ('(16) (sp-kill-sexp))
-    (arg (sp-kill-hybrid-sexp))))
+    (arg (sp-kill-hybrid-sexp arg))))
 
 
 ;;; lisp-defuns.el ends here
