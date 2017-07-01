@@ -30,7 +30,12 @@
 (defun get-path-pytest ()
   "In pytest format: path/to/file.py::function_name ."
   (let* ((curr_test (python-info-current-defun))
-         (test_path (concat (buffer-file-name) "::" curr_test)))
+         (test_path (cond
+                     (curr_test
+                      (concat (buffer-file-name) "::" curr_test))
+                     (t
+                      (buffer-file-name)))))
+    (message "Test path: %s" test_path)
     test_path))
 
 (defun get-path-django-runner ()
