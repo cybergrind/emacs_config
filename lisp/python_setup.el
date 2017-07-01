@@ -29,7 +29,7 @@
 
 (defun get-path-pytest ()
   "In pytest format: path/to/file.py::function_name ."
-  (let* ((curr_test (python-info-current-defun))
+  (let* ((curr_test (replace-regexp-in-string "\\." "::" (python-info-current-defun)))
          (test_path (cond
                      (curr_test
                       (concat (buffer-file-name) "::" curr_test))
