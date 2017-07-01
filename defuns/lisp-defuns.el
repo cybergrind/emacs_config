@@ -24,4 +24,13 @@
                    `(define-key ,keymap ,kbd ,def)))
                keydefs)))
 
+(defun charged-kill (arg)
+  (interactive "P")
+  (message "Arg: %s" arg)
+  (pcase arg
+    ('(4) (kill-whole-line))
+    ('(16) (sp-kill-sexp))
+    (arg (sp-kill-hybrid-sexp))))
+
+
 ;;; lisp-defuns.el ends here

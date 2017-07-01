@@ -45,7 +45,6 @@
     (local-set-key (kbd "RET") #'paredit-newline)))
 
 (use-package paredit
-  :ensure t
   :init (add-hook 'eval-expression-minibuffer-setup-hook #'paredit-mode)
   :config
   (progn
@@ -56,7 +55,8 @@
       ("M-a"             #'paredit-backward)
       ("M-k"             #'kill-sexp)
       ("C-w"             #'basis/paredit-kill-something)
-      ("M-DEL"           #'basis/paredit-kill-something))
+      ("M-DEL"           #'basis/paredit-kill-something)
+      ("C-k"             #'charged-kill))
     (add-to-list 'paredit-space-for-delimiter-predicates
                  #'basis/paredit-doublequote-space-p)
     (add-to-list 'paredit-space-for-delimiter-predicates
@@ -96,10 +96,9 @@
   "List of modes in which not to active `smartparens'.")
 
 (use-package smartparens
-  :ensure t
   :config
   (progn
-    (smartparens-global-strict-mode nil)
+    (smartparens-global-strict-mode)
     (dolist (mode basis/sp-ignore-modes)
       (add-to-list 'sp-ignore-modes-list mode))
     (sp-use-paredit-bindings)
@@ -117,15 +116,18 @@
                      (c++-mode  "{" "}" (:rem insert autoskip))
                      (java-mode "{" "}" (:rem insert autoskip))))
       (sp-local-pair mode open close :actions actions))
+    (message "init smartparens")
     (basis/define-keys sp-keymap
       ("M-DEL"           #'basis/sp-kill-something)
       ("C-DEL"           #'basis/sp-kill-something)
       ("<C-backspace>"   #'basis/sp-kill-something)
       ("C-w"             #'basis/sp-kill-something)
       ("M-k"             #'basis/sp-kill-sexp)
+      ("C-k" #'kill-line)
       ("M-e"             #'sp-forward-sexp)
       ("M-a"             #'sp-backward-sexp)
-      ("C-M-u"           #'basis/sp-backward-up))
+      ("C-M-u"           #'basis/sp-backward-up)
+      ("C-k"             #'charged-kill))
     (advice-add 'sp--cleanup-after-kill :before-until
                 #'basis/sp-cleanup-maybe-not)
     (advice-add 'sp--unwrap-sexp :filter-args #'basis/sp-unwrap-no-cleanup)
@@ -187,5 +189,7 @@
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
+
+(use-package idris-mode)
 
 (provide 'lang_setup)

@@ -59,7 +59,7 @@ Create the directory if it does not exist and CREATE is non-nil."
         lua-mode
         magit
         markdown-mode
-        multiple-cursors
+        ; multiple-cursors
         nim-mode
         paredit
         prettier-js
@@ -101,11 +101,14 @@ Create the directory if it does not exist and CREATE is non-nil."
              (not (package-installed-p package)))
     (package-install package)))
 
-(require 'use-package)
-(use-package ensime
-             :ensure t
-             :pin melpa-stable)
 
+(require 'use-package)
+
+(setq
+ use-package-always-ensure t)
+
+(use-package ensime
+             :pin melpa-stable)
 
 
 (require 'cl)
@@ -122,7 +125,7 @@ Create the directory if it does not exist and CREATE is non-nil."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_web/bookmarks")
+ '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_pos_sync/bookmarks")
  '(coffee-tab-width 4)
  '(custom-safe-themes
    (quote

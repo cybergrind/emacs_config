@@ -66,13 +66,11 @@
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (cl-flet ((process-list ())) ad-do-it))
 
-
 (require 'multi_desktop)
 
 (message "%s" (current-time))
 (put 'set-goal-column 'disabled nil)
 
-(package-initialize)
 
 ;; open archives
 (auto-compression-mode t)
@@ -143,21 +141,26 @@
 
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
-(require 'multiple-cursors)
-(global-set-key (kbd "M-N") 'mc/mark-next-like-this)
-(global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
-(global-set-key (kbd "M-A") 'mc/mark-all-like-this)
-(global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
-(define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)
+(use-package multiple-cursors
+  :config
+  (progn
+    (global-set-key (kbd "M-N") 'mc/mark-next-like-this)
+    (global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "M-A") 'mc/mark-all-like-this)
+    (global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
+    (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)))
 
 
-(require 'bookmark+)
-(global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
-(global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
-(global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
-(global-set-key (kbd "C-t") 'bookmark-set)
-(global-set-key (kbd "M-j") 'ido-bookmark-jump)
-(global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)
+(use-package bookmark+
+  ; :ensure bookmark+-lit :ensure bookmark+-1 :ensure bookmark+-mac
+  :config
+  (progn
+    (global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
+    (global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
+    (global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
+    (global-set-key (kbd "C-t") 'bookmark-set)
+    (global-set-key (kbd "M-j") 'ido-bookmark-jump)
+    (global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)))
 
 
 
@@ -169,7 +172,5 @@
 (setq org-log-into-drawer t)
 
 (projectile-global-mode)
-
-
 
 (provide 'emacs_setup)
