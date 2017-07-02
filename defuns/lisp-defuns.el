@@ -24,13 +24,15 @@
                    `(define-key ,keymap ,kbd ,def)))
                keydefs)))
 
+
+(defvar charged-kill-nil 'sp-kill-hybrid-sexp)
+(make-variable-buffer-local 'charged-kill-nil)
+
 (defun charged-kill (arg)
   (interactive "P")
-  (message "Arg: %s" arg)
   (pcase arg
     ('(4) (kill-whole-line))
     ('(16) (sp-kill-sexp))
-    (arg (sp-kill-hybrid-sexp arg))))
-
+    (arg (apply charged-kill-nil (list arg)))))
 
 ;;; lisp-defuns.el ends here

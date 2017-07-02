@@ -123,7 +123,6 @@
       ("<C-backspace>"   #'basis/sp-kill-something)
       ("C-w"             #'basis/sp-kill-something)
       ("M-k"             #'basis/sp-kill-sexp)
-      ("C-k" #'kill-line)
       ("M-e"             #'sp-forward-sexp)
       ("M-a"             #'sp-backward-sexp)
       ("C-M-u"           #'basis/sp-backward-up)
@@ -190,6 +189,14 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-(use-package idris-mode)
+(use-package idris-mode
+
+  :init
+  (add-hook 'idris-mode-hook
+            #'(lambda () (setq charged-kill-nil 'kill-line)))
+  :config
+  (progn
+    (smartparens-global-strict-mode nil)
+    (message "Idris init")))
 
 (provide 'lang_setup)
