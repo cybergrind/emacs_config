@@ -199,4 +199,6 @@
     (smartparens-global-strict-mode nil)
     (message "Idris init")))
 
+(use-package lua-mode)
+
 (provide 'lang_setup)
