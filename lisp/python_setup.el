@@ -19,17 +19,18 @@
    ((and (boundp 'py-project-root)
          (boundp 'py-test-command)
          (string> py-test-name ""))
-    (message "ret is: %s"
-             (shell-command-to-string
-              (concat
-               py-test-command
-               py-test-name))))
-        (t (message "Please set py-project-root or chose test"))))
+    (let* ((cmd (concat py-test-command py-test-name)))
+      (message "command: %s\n" cmd)
+      (message "ret is: %s"
+               (shell-command-to-string cmd)))
+    )
+   (t (message "Please set py-project-root or chose test"))))
 
 
 (defun get-path-pytest ()
   "In pytest format: path/to/file.py::function_name ."
-  (let* ((curr_test (replace-regexp-in-string "\\." "::" (python-info-current-defun)))
+  (let* ((curr_defun (python-info-current-defun))
+         (curr_test (cond (curr_defun (replace-regexp-in-string "\\." "::" curr_defun))))
          (test_path (cond
                      (curr_test
                       (concat (buffer-file-name) "::" curr_test))
@@ -68,7 +69,8 @@
 (defun py-test-interactive (arg)
   "Set and run python test.  ARG - if need to set test."
   (interactive "P")
-  (if arg (assign-py-test))
+  (pcase arg
+    ('(4) (assign-py-test)))
   (run-py-test))
 
 
