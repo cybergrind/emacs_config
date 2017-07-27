@@ -76,9 +76,13 @@
 
 (add-hook 'python-mode-hook
           #'(lambda ()
-              (setq python-shell-interpreter "ipython")
+              ; (setq python-shell-interpreter "ipython")
               (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
+              (cond ((string= python-shell-interpreter "python")
+                     (setq python-shell-interpreter "ipython")))
+
+              (setq python-shell-interpreter-args "--simple-prompt -i")
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
           ))
