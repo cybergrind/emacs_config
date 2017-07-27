@@ -8,6 +8,5 @@
   (interactive)
   (add-hook 'before-save-hook
             (lambda ()
-              (interactive)
               (whitespace-cleanup))))
 ;;; hook-defuns.el ends here

@@ -53,7 +53,7 @@ Create the directory if it does not exist and CREATE is non-nil."
         helm-ag
         helm-projectile
         hydra
-        ido-ubiquitous
+        ido-completing-read+
         js2-mode
         json-mode
         lua-mode
