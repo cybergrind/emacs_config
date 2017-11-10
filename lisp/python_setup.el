@@ -19,12 +19,12 @@
    ((and (boundp 'py-project-root)
          (boundp 'py-test-command)
          (string> py-test-name ""))
-    (let* ((cmd (concat py-test-command py-test-name)))
+    (let* ((cmd (concat py-test-command " " py-test-name)))
       (message "command: %s\n" cmd)
       (message "ret is: %s"
                (shell-command-to-string cmd)))
     )
-   (t (message "Please set py-project-root or chose test"))))
+   (t (message "Please set py-project-root or choose test"))))
 
 
 (defun get-path-pytest ()
@@ -73,19 +73,25 @@
     ('(4) (assign-py-test)))
   (run-py-test))
 
+(defun py-test-setup-default (dir)
+  "Setup default values. Use it (py-test-setup-default (file-truename \".\")) ."
+  (defvar py-test-runner 'pytest)
+  (defvar py-test-command (concat dir "/venv/bin/py.test -n0"))
+  (defvar py-project-root (concat dir "/")))
+
 
 (add-hook 'python-mode-hook
           #'(lambda ()
               ; (setq python-shell-interpreter "ipython")
               (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
-              (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
-              (cond ((string= python-shell-interpreter "python")
-                     (setq python-shell-interpreter "ipython")))
+              (define-key python-mode-map (kbd "C-c .") 'goto-last-change
+                cond ((string= python-shell-interpreter "python")
+                      (setq python-shell-interpreter "ipython")))
 
               (setq python-shell-interpreter-args "--simple-prompt -i")
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
-          ))
+              ))
 
 (provide 'python_setup)
 
