@@ -50,9 +50,6 @@
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
 
-(require 'ido-ubiquitous)
-(ido-ubiquitous-mode 1)
-
 (setq confirm-kill-emacs nil)
 ;; remove <2> on doubled buffers
 (require 'uniquify)

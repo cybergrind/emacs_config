@@ -130,12 +130,14 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
+ '(dired-dwim-target t)
  '(docker-tramp-use-names t)
  '(flycheck-eslintrc nil t)
  '(flycheck-javascript-flow-args nil)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
  '(helm-adaptive-mode t nil (helm-adaptive))
+ '(helm-ag-insert-at-point (quote word))
  '(helm-ag-use-agignore t)
  '(helm-mode-fuzzy-match t)
  '(js2-basic-offset 2)
@@ -149,7 +151,7 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(package-selected-packages
    (quote
-    (flow-minor-mode alchemist flycheck-elixir flycheck-mix lua-mode company-flow flycheck-flow ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
+    (pyimport flow-minor-mode alchemist flycheck-elixir flycheck-mix lua-mode company-flow flycheck-flow ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
