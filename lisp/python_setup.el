@@ -84,8 +84,8 @@
           #'(lambda ()
               ; (setq python-shell-interpreter "ipython")
               (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
-              (define-key python-mode-map (kbd "C-c .") 'goto-last-change
-                cond ((string= python-shell-interpreter "python")
+              (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
+              (cond ((string= python-shell-interpreter "python")
                       (setq python-shell-interpreter "ipython")))
 
               (setq python-shell-interpreter-args "--simple-prompt -i")
