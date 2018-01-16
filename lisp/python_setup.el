@@ -31,9 +31,10 @@
   "In pytest format: path/to/file.py::function_name ."
   (let* ((curr_defun (python-info-current-defun))
          (curr_test (cond (curr_defun (replace-regexp-in-string "\\." "::" curr_defun))))
+         (curr_base (cadr (split-string (buffer-file-name) py-project-root)))
          (test_path (cond
                      (curr_test
-                      (concat (buffer-file-name) "::" curr_test))
+                      (concat curr_base "::" curr_test))
                      (t
                       (buffer-file-name)))))
     (message "Test path: %s" test_path)
