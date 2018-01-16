@@ -92,7 +92,10 @@
       "\C-i\C-n\-m\C-x(")
 
 (fset 'mirror-buffer
-   "\C-xo\C-xb\C-r\C-r\C-m")
+      "\C-xo\C-xb\C-r\C-r\C-m")
+
+(fset 'magit/remove-branch
+      "bk\C-M\C-p")
 
 (global-set-key (kbd "M-i") 'mirror-buffer)
 
