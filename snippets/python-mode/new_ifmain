@@ -1,0 +1,10 @@
+# key: ifmain
+# name: if main
+# --
+
+def main():
+    $0pass
+
+
+if __name__ == '__main__':
+    main()

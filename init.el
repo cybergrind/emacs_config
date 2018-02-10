@@ -125,7 +125,8 @@ Create the directory if it does not exist and CREATE is non-nil."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_pos_sync/bookmarks")
+ '(after-save-hook nil)
+ '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
  '(custom-safe-themes
    (quote

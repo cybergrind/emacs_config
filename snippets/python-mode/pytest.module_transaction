@@ -1,0 +1,8 @@
+# key: mfix
+# name: pytest.module_transaction
+# --
+
+@pytest.fixture(scope='module')
+def ${fixture_name}(request, module_transaction):
+    with module_transaction(request.fixturename):
+        ${pass}
