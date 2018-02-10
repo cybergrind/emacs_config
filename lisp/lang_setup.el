@@ -173,6 +173,8 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
+(use-package yasnippet-snippets)
+
 (defun add-yasnippet-ac-sources ()
   (add-to-list 'ac-sources 'ac-source-yasnippet))
 (add-hook 'python-mode-hook 'add-yasnippet-ac-sources)
