@@ -98,7 +98,7 @@
 (use-package smartparens
   :config
   (progn
-    (smartparens-global-strict-mode)
+    ; (smartparens-global-strict-mode)
     (dolist (mode basis/sp-ignore-modes)
       (add-to-list 'sp-ignore-modes-list mode))
     (sp-use-paredit-bindings)

@@ -151,16 +151,17 @@
     (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)))
 
 
-(use-package bookmark+
-  ; :ensure bookmark+-lit :ensure bookmark+-1 :ensure bookmark+-mac
-  :config
-  (progn
-    (global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
-    (global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
-    (global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
-    (global-set-key (kbd "C-t") 'bookmark-set)
-    (global-set-key (kbd "M-j") 'ido-bookmark-jump)
-    (global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)))
+;; outdated
+;; (use-package bookmark+
+;;   ; :ensure bookmark+-lit :ensure bookmark+-1 :ensure bookmark+-mac
+;;   :config
+;;   (progn
+;;     (global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
+;;     (global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
+;;     (global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
+;;     (global-set-key (kbd "C-t") 'bookmark-set)
+;;     (global-set-key (kbd "M-j") 'ido-bookmark-jump)
+;;     (global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)))
 
 
 

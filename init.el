@@ -32,7 +32,6 @@ Create the directory if it does not exist and CREATE is non-nil."
         anything
         auto-complete
         avy
-        bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac
         cider
         clojure-mode
         coffee-mode
@@ -73,7 +72,7 @@ Create the directory if it does not exist and CREATE is non-nil."
         scala-mode2
         slim-mode
         slime
-        smartparens
+        ; smartparens
         smex
         tagedit
         tramp
@@ -141,7 +140,7 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(helm-ag-insert-at-point (quote word))
  '(helm-ag-use-agignore t)
  '(helm-mode-fuzzy-match t)
- '(js2-basic-offset 2)
+ '(js-indent-level 2 t)
  '(js2-strict-missing-semi-warning nil)
  '(magit-pull-arguments nil)
  '(org-agenda-files
@@ -150,9 +149,6 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(org-directory "~/Dropbox/gtd")
  '(org-mobile-directory "~/Dropbox/gtd")
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
- '(package-selected-packages
-   (quote
-    (pyimport flow-minor-mode alchemist flycheck-elixir flycheck-mix lua-mode company-flow flycheck-flow ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
