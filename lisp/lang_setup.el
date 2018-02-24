@@ -96,42 +96,14 @@
   "List of modes in which not to active `smartparens'.")
 
 (use-package smartparens
+  :ensure t
   :config
-  (progn
-    ; (smartparens-global-strict-mode)
-    (dolist (mode basis/sp-ignore-modes)
-      (add-to-list 'sp-ignore-modes-list mode))
-    (sp-use-paredit-bindings)
-    (setq sp-cancel-autoskip-on-backward-movement nil)
-    (setq sp-autoescape-string-quote nil)
-    (setq sp-use-subword t)
-    (setq-default sp-autoskip-closing-pair 'always)
-    (sp-pair "'" nil
-             :unless '(basis/sp-point-after-word-p)
-             :actions '(insert wrap autoskip))
-    (pcase-dolist (`(,mode ,open ,close ,actions)
-                   '((org-mode  "=" "=" (wrap))
-                     (rust-mode "'" nil (:rem insert autoskip))
-                     (c-mode    "{" "}" (:rem insert autoskip))
-                     (c++-mode  "{" "}" (:rem insert autoskip))
-                     (java-mode "{" "}" (:rem insert autoskip))))
-      (sp-local-pair mode open close :actions actions))
-    (message "init smartparens")
-    (basis/define-keys sp-keymap
-      ("M-DEL"           #'basis/sp-kill-something)
-      ("C-DEL"           #'basis/sp-kill-something)
-      ("<C-backspace>"   #'basis/sp-kill-something)
-      ("C-w"             #'basis/sp-kill-something)
-      ("M-k"             #'basis/sp-kill-sexp)
-      ("M-e"             #'sp-forward-sexp)
-      ("M-a"             #'sp-backward-sexp)
-      ("C-M-u"           #'basis/sp-backward-up)
-      ("C-k"             #'charged-kill))
-    (advice-add 'sp--cleanup-after-kill :before-until
-                #'basis/sp-cleanup-maybe-not)
-    (advice-add 'sp--unwrap-sexp :filter-args #'basis/sp-unwrap-no-cleanup)
-    (advice-add 'sp-backward-delete-char :filter-args
-                #'basis/sp-backward-delete-no-prefix)))
+  (require 'smartparens-config)
+  (smartparens-global-mode 1)
+  (smartparens-global-strict-mode -1)
+  (dolist (mode basis/sp-ignore-modes)
+    (add-to-list 'sp-ignore-modes-list mode)))
+
 
 
 
