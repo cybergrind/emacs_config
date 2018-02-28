@@ -12,6 +12,7 @@
             (flycheck-mode)))
 
 (defvar py-test-name "")
+(defvar py-chdir nil)
 
 (defun run-py-test ()
   "Execute test and print result."
@@ -19,7 +20,9 @@
    ((and (boundp 'py-project-root)
          (boundp 'py-test-command)
          (string> py-test-name ""))
-    (let* ((cmd (concat py-test-command " " py-test-name)))
+    (let* ((chdir (cond
+                   (py-chdir (concat "cd " py-chdir " && "))))
+           (cmd (concat chdir py-test-command " " py-test-name)))
       (message "command: %s\n" cmd)
       (message "ret is: %s"
                (shell-command-to-string cmd)))
@@ -74,11 +77,12 @@
     ('(4) (assign-py-test)))
   (run-py-test))
 
-(defun py-test-setup-default (dir)
+(cl-defun py-test-setup-default (dir &key chdir)
   "Setup default values. Use it (py-test-setup-default (file-truename \".\")) ."
   (defvar py-test-runner 'pytest)
   (defvar py-test-command (concat dir "/venv/bin/py.test -n0"))
-  (defvar py-project-root (concat dir "/")))
+  (defvar py-project-root (concat dir "/"))
+  (setq py-chdir chdir))
 
 
 (add-hook 'python-mode-hook
