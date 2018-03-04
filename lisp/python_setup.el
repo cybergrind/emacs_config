@@ -85,6 +85,20 @@
   (setq py-chdir chdir))
 
 
+(defun py/pprint-region (start end)
+  (interactive "r")
+  (shell-command-on-region start end
+                           "python -c 'import sys; from pprint import pprint as pp; pp(eval(sys.stdin.read()))'"
+                           '(4) '(4))
+  (indent-for-tab-command))
+
+(defun py/pprint ()
+  (interactive)
+  (set-mark-command nil)
+  (forward-list)
+  (py/pprint-region (region-beginning) (region-end)))
+
+
 (add-hook 'python-mode-hook
           #'(lambda ()
               ; (setq python-shell-interpreter "ipython")
