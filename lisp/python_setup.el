@@ -19,10 +19,11 @@
   (cond
    ((and (boundp 'py-project-root)
          (boundp 'py-test-command)
+         (boundp 'py-test-params)
          (string> py-test-name ""))
     (let* ((chdir (cond
                    (py-chdir (concat "cd " py-chdir " && "))))
-           (cmd (concat chdir py-test-command " " py-test-name)))
+           (cmd (concat chdir py-test-command " " py-test-params " " py-test-name)))
       (message "command: %s\n" cmd)
       (message "ret is: %s"
                (shell-command-to-string cmd)))
@@ -77,10 +78,11 @@
     ('(4) (assign-py-test)))
   (run-py-test))
 
-(cl-defun py-test-setup-default (dir &key chdir)
+(cl-defun py-test-setup-default (dir &key chdir py-test-params)
   "Setup default values. Use it (py-test-setup-default (file-truename \".\")) ."
   (defvar py-test-runner 'pytest)
   (defvar py-test-command (concat dir "/venv/bin/py.test -n0"))
+  (defvar py-test-params py-test-params)
   (defvar py-project-root (concat dir "/"))
   (setq py-chdir chdir))
 
@@ -97,6 +99,15 @@
   (set-mark-command nil)
   (forward-list)
   (py/pprint-region (region-beginning) (region-end)))
+
+
+(defun py/verbose-toogle ()
+  (interactive)
+  (cond
+   ((boundp 'py-test-params)
+    (pcase py-test-params
+      ("-vv" (setq py-test-params ""))
+      ("" "-vv" (setq py-test-params "-vv"))))))
 
 
 (add-hook 'python-mode-hook
