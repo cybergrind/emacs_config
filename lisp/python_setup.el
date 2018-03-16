@@ -78,7 +78,7 @@
     ('(4) (assign-py-test)))
   (run-py-test))
 
-(cl-defun py-test-setup-default (dir &key chdir py-test-params)
+(cl-defun py-test-setup-default (dir &key chdir (py-test-params ""))
   "Setup default values. Use it (py-test-setup-default (file-truename \".\")) ."
   (defvar py-test-runner 'pytest)
   (defvar py-test-command (concat dir "/venv/bin/py.test -n0"))
