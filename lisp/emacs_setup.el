@@ -151,6 +151,13 @@
     (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)))
 
 
+(use-package color-identifiers-mode
+  :config
+  (global-color-identifiers-mode 1)
+  :custom
+  (color-identifiers-coloring-method 'hash))
+
+
 ;; outdated
 ;; (use-package bookmark+
 ;;   ; :ensure bookmark+-lit :ensure bookmark+-1 :ensure bookmark+-mac
