@@ -127,11 +127,15 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(after-save-hook nil)
  '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
+ '(color-identifiers-coloring-method (quote hash))
  '(custom-safe-themes
    (quote
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
  '(dired-dwim-target t)
  '(docker-tramp-use-names t)
+ '(flycheck-disabled-checkers
+   (quote
+    (javascript-jshint json-python-json javascript-jshint javascript-gjslint javascript-jscs emacs-lisp-checkdoc)))
  '(flycheck-eslintrc nil t)
  '(flycheck-javascript-flow-args nil)
  '(flymake-log-level -1)
