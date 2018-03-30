@@ -1,9 +1,10 @@
-;;; python_setup.py --- python specific code
+;;; python_setup.py --- python specific code -*- lexical-bindings: true -*-
 ;;; Commentary:
 ;;; Code:
 
 (require 'flycheck)
 (require 'python)
+(require 'async)
 
 ; Python checker
 (add-hook 'python-mode-hook
@@ -13,22 +14,32 @@
 
 (defvar py-test-name "")
 (defvar py-chdir nil)
+(defvar py-is-running-test nil)
+
+
+(defun py-build-test-command ()
+  (let* ((chdir (cond (py-chdir (concat "cd " py-chdir " && "))))
+         (cmd (concat chdir py-test-command " " py-test-params " " py-test-name)))
+    cmd))
 
 (defun run-py-test ()
   "Execute test and print result."
   (cond
-   ((and (boundp 'py-project-root)
-         (boundp 'py-test-command)
-         (boundp 'py-test-params)
-         (string> py-test-name ""))
-    (let* ((chdir (cond
-                   (py-chdir (concat "cd " py-chdir " && "))))
-           (cmd (concat chdir py-test-command " " py-test-params " " py-test-name)))
-      (message "command: %s\n" cmd)
-      (message "ret is: %s"
-               (shell-command-to-string cmd)))
-    )
-   (t (message "Please set py-project-root or choose test"))))
+   ((equal py-is-running-test t) (message "there is test in progress"))
+   ((not (boundp 'py-project-root)) (message "there is no py-project-root"))
+   ((not (boundp 'py-test-command)) (message "there is no py-test-command"))
+   ((not (boundp 'py-test-params)) (message "there is no py-test-params"))
+   ((not (string> py-test-name "")) (message "please select test first"))
+   (t (let ((cmd (py-build-test-command)))
+        (message "command: %s\n" cmd)
+        (setq py-is-running-test t)
+        (async-start
+         `(lambda ()
+            ,(async-inject-variables "cmd")
+            (shell-command-to-string cmd))
+         (lambda (result)
+           (setq py-is-running-test nil)
+           (message "ret is: %s" result)))))))
 
 
 (defun get-path-pytest ()
