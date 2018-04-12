@@ -77,8 +77,7 @@
   (cond ((boundp 'py-project-root)
          (let ((test-path (get-py-test-path)))
            ; (message "!!TEST PATH: %s" test-path)
-           (setq py-test-name test-path)
-           (run-py-test)))
+           (setq py-test-name test-path)))
         (t (message "Please set py-project-root"))))
 
 
