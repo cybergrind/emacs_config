@@ -176,7 +176,8 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(ps-top-margin 5)
  '(safe-local-variable-values
    (quote
-    ((vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
+    ((lexical-bindings . true)
+     (vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
      (bookmark-default-file . "/ssd/kpi/tipsi/tipsi_web/bookmarks")
      (some-variable . "test")
      (content-type . "jsx")
