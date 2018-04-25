@@ -6,6 +6,11 @@
 (require 'python)
 (require 'async)
 
+(defun sjoin (strings)
+  "join strings with whitespace, skip nil"
+  (string-join (cl-remove-if 'null strings) " "))
+
+
 ; Python checker
 (add-hook 'python-mode-hook
           (lambda ()
@@ -18,8 +23,8 @@
 
 
 (defun py-build-test-command ()
-  (let* ((chdir (cond (py-chdir (concat "cd " py-chdir " && "))))
-         (cmd (concat chdir py-test-command " " py-test-params " " py-test-name)))
+  (let* ((chdir (cond (py-chdir (sjoin (list "cd" py-chdir "&&")))))
+         (cmd (sjoin (list chdir py-test-command py-test-params py-test-name))))
     cmd))
 
 (defun run-py-test ()
