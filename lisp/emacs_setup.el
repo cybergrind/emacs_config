@@ -30,6 +30,11 @@
 (global-set-key (kbd "C-x ;") 'eval-expression)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; C-t to save position. Go anywhere and then push M-, and return to last marked point
+(global-set-key (kbd "C-t") (lambda ()
+                              (interactive)
+                              (xref-push-marker-stack)))
+
 
 (require 'recentf)
 (recentf-mode 1)
@@ -180,5 +185,8 @@
 (setq org-log-into-drawer t)
 
 (projectile-global-mode)
+
+(defmacro rel-path (path)
+  `(file-truename (concat (file-name-directory (or load-file-name buffer-file-name)) ,path)))
 
 (provide 'emacs_setup)
