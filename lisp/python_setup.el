@@ -125,15 +125,28 @@
       ("" "-vv" (setq py-test-params "-vv"))))))
 
 
+(defun py/get-ipython ()
+  (file-truename (concat (projectile-project-root) "venv/bin/ipython")))
+
+(cl-defun py/set-ipython (&optional (ipython-path "ipython"))
+  (setq python-shell-interpreter ipython-path)
+  (setq python-shell-interpreter-args "--simple-prompt -i"))
+
+(defun py/setup-interpreter ()
+  (cond
+   ((and (projectile-project-p)
+         (file-exists-p (py/get-ipython)))
+    (py/set-ipython (py/get-ipython)))
+
+   ((string= python-shell-interpreter "python")
+    (py/set-ipython))))
+
 (add-hook 'python-mode-hook
           #'(lambda ()
               ; (setq python-shell-interpreter "ipython")
               (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
-              (cond ((string= python-shell-interpreter "python")
-                      (setq python-shell-interpreter "ipython")))
-
-              (setq python-shell-interpreter-args "--simple-prompt -i")
+              (py/setup-interpreter)
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
               ))
