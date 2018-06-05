@@ -156,7 +156,10 @@
     (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)))
 
 
+(use-package diminish)
+
 (use-package color-identifiers-mode
+  :diminish
   :config
   (global-color-identifiers-mode 1)
   :custom
@@ -188,5 +191,10 @@
 
 (defmacro rel-path (path)
   `(file-truename (concat (file-name-directory (or load-file-name buffer-file-name)) ,path)))
+
+(use-package which-key
+  :diminish
+  :config
+  (which-key-mode))
 
 (provide 'emacs_setup)

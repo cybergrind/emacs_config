@@ -20,11 +20,13 @@
        (require 'erlang-start)))
 
 
-(require 'auto-complete)
-(add-to-list 'ac-modes 'python-mode)
-(add-to-list 'ac-modes 'emacs-lisp-mode)
-(add-to-list 'ac-modes 'web-mode)
-(setq ac-fuzzy-enable t)
+(use-package auto-complete
+  :diminish
+  :config
+  (add-to-list 'ac-modes 'python-mode)
+  (add-to-list 'ac-modes 'emacs-lisp-mode)
+  (add-to-list 'ac-modes 'web-mode)
+  (setq ac-fuzzy-enable t))
 
 ; (seq nim-nimsuggest-path "/usr/bin/nimsuggest")
 (add-hook 'nim-mode-hook 'nimsuggest-mode)
@@ -98,9 +100,8 @@
 (use-package smartparens
   :ensure t
   :config
-  (require 'smartparens-config)
-  (smartparens-global-mode 1)
-  (smartparens-global-strict-mode -1)
+  (turn-off-smartparens-strict-mode)
+  (smartparens-global-mode)
   (dolist (mode basis/sp-ignore-modes)
     (add-to-list 'sp-ignore-modes-list mode)))
 
@@ -109,7 +110,7 @@
 
 ;(add-to-list 'load-path "~/.emacs.d/slime")  ; your SLIME directory
 ;(require 'slime)
-                                        ;(slime-setup '(slime-repl))
+;(slime-setup '(slime-repl))
 
 (add-hook 'slime-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
@@ -142,8 +143,11 @@
         (package . (:foreground "#cc7832"))))
 
 
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :config
+  (yas-global-mode 1))
+
 
 (use-package yasnippet-snippets)
 
@@ -170,7 +174,6 @@
             #'(lambda () (setq charged-kill-nil 'kill-line)))
   :config
   (progn
-    (smartparens-global-strict-mode nil)
     (message "Idris init")))
 
 (use-package lua-mode)
