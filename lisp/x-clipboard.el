@@ -1,7 +1,7 @@
 (defun x-paste ()
   "insert text on X11's clipboard to current buffer."
   (interactive)
-  (insert-string (shell-command-to-string "xsel -b")))
+  (insert (shell-command-to-string "xsel -b")))
 
 (defun x-copy ()
   "copy text on local kill-ring to X11's clipboard."
