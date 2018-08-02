@@ -1,0 +1,6 @@
+# key: fix
+# name: pytest fixture (fix)
+# --
+@pytest.fixture
+def ${name}(${}):
+    yield $0
