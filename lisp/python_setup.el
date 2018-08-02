@@ -151,6 +151,66 @@
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
               ))
 
+
+;;; this is pretty common case, should already be in some library
+
+(cl-defun py/call-bin (command input-buffer output-buffer error-buffer &key call-args '())
+  "Call command on input-buffer
+
+Send INPUT-BUFFER content to the process stdin.  Saving the
+output to OUTPUT-BUFFER.  Saving process stderr to ERROR-BUFFER.
+Return command process the exit code."
+  (with-current-buffer input-buffer
+    (let ((process (make-process :name "py/call-bin"
+                                 :command `(,command ,@call-args)
+                                 :buffer output-buffer
+                                 :stderr error-buffer
+                                 :noquery t
+                                 :sentinel (lambda (process event)))))
+      (set-process-query-on-exit-flag (get-buffer-process error-buffer) nil)
+      (set-process-sentinel (get-buffer-process error-buffer) (lambda (process event)))
+      (save-restriction
+        (widen)
+        (process-send-region process (point-min) (point-max)))
+      (process-send-eof process)
+      (accept-process-output process nil nil t)
+      (while (process-live-p process)
+        (accept-process-output process nil nil t))
+      (process-exit-status process))))
+
+(cl-defun py/process-buffer (command &key (display 't) (call-args '("-")))
+  "Show output, if COMMAND exit abnormally and DISPLAY is t."
+  (interactive (list t))
+  (let* ((original-buffer (current-buffer))
+         (original-point (point))
+         (original-window-pos (window-start))
+         (tmpbuf (get-buffer-create "*py/process*"))
+         (errbuf (get-buffer-create "*py/process-error*")))
+    ;; This buffer can be left after previous black invocation.  It
+    ;; can contain error message of the previous run.
+    (dolist (buf (list tmpbuf errbuf))
+      (with-current-buffer buf
+        (erase-buffer)))
+    (condition-case err
+        (if (not (zerop (py/call-bin command original-buffer tmpbuf errbuf :call-args call-args)))
+            (error "Black failed, see %s buffer for details" (buffer-name errbuf))
+          (unless (eq (compare-buffer-substrings tmpbuf nil nil original-buffer nil nil) 0)
+            (with-current-buffer tmpbuf
+              (copy-to-buffer original-buffer (point-min) (point-max))))
+          (mapc 'kill-buffer (list tmpbuf errbuf))
+          (goto-char original-point)
+          (set-window-start (selected-window) original-window-pos))
+      (error (message "%s" (error-message-string err))
+             (when display
+               (pop-to-buffer errbuf))))))
+
+
+(defun py/codestyle ()
+  (interactive)
+  (when (string-equal "python-mode" major-mode)
+    (py/process-buffer "isort")
+    (py/process-buffer "black")))
+
 (provide 'python_setup)
 
 ;;; python_setup.el ends here
