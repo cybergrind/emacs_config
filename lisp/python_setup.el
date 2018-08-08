@@ -170,15 +170,8 @@
   (print (format "Drop pypath: %s" drop-pypath))
   (cond
    (drop-pypath
-    (let ((result nil)
-          (old-env process-environment)
-          (tmp-env (setq process-environment (seq-filter 'not_pythonpath process-environment))))
-      (make-local-variable 'process-environment)
-      (setq process-environment tmp-env)
-      (print process-environment)
-      (setq result (eval cmd))
-      (setq process-environment old-env)
-      result))
+    (let ((process-environment (seq-filter 'not_pythonpath process-environment)))
+      (eval cmd)))
    (t (eval cmd))))
 
 
