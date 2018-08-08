@@ -154,19 +154,42 @@
 
 ;;; this is pretty common case, should already be in some library
 
-(cl-defun py/call-bin (command input-buffer output-buffer error-buffer &key call-args '())
+
+
+(defun not_pythonpath (s)
+  (not (string-prefix-p "PYTHONPATH" s)))
+
+(cl-defun pop-pythonpath (cmd &key (drop-pypath t))
+  (print (format "Drop pypath: %s" drop-pypath))
+  (cond
+   (drop-pypath
+    (let ((result nil)
+          (old-env process-environment)
+          (tmp-env (setq process-environment (seq-filter 'not_pythonpath process-environment))))
+      (make-local-variable 'process-environment)
+      (setq process-environment tmp-env)
+      (print process-environment)
+      (setq result (eval cmd))
+      (setq process-environment old-env)
+      result))
+   (t (eval cmd))))
+
+
+(cl-defun py/call-bin (command input-buffer output-buffer error-buffer &key (call-args '()) (drop-pypath t))
   "Call command on input-buffer
 
 Send INPUT-BUFFER content to the process stdin.  Saving the
 output to OUTPUT-BUFFER.  Saving process stderr to ERROR-BUFFER.
 Return command process the exit code."
   (with-current-buffer input-buffer
-    (let ((process (make-process :name "py/call-bin"
-                                 :command `(,command ,@call-args)
-                                 :buffer output-buffer
-                                 :stderr error-buffer
-                                 :noquery t
-                                 :sentinel (lambda (process event)))))
+    (let ((process (pop-pythonpath '(make-process :name "py/call-bin"
+                                                  :command `(,command ,@call-args)
+                                                  :buffer output-buffer
+                                                  :stderr error-buffer
+                                                  :noquery t
+                                                  :sentinel (lambda (process event)))
+                                   :drop-pypath drop-pypath)))
+
       (set-process-query-on-exit-flag (get-buffer-process error-buffer) nil)
       (set-process-sentinel (get-buffer-process error-buffer) (lambda (process event)))
       (save-restriction
@@ -184,8 +207,8 @@ Return command process the exit code."
   (let* ((original-buffer (current-buffer))
          (original-point (point))
          (original-window-pos (window-start))
-         (tmpbuf (get-buffer-create "*py/process*"))
-         (errbuf (get-buffer-create "*py/process-error*")))
+         (tmpbuf (get-buffer-create (format "*py/process/%s*" command)))
+         (errbuf (get-buffer-create (format "*py/process-error/%s*" command))))
     ;; This buffer can be left after previous black invocation.  It
     ;; can contain error message of the previous run.
     (dolist (buf (list tmpbuf errbuf))
