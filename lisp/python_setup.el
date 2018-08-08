@@ -5,6 +5,13 @@
 (require 'flycheck)
 (require 'python)
 (require 'async)
+(require 'kpi_utils)
+
+(use-package company-jedi)
+(use-package virtualenvwrapper)
+
+(require 'virtualenvwrapper)
+
 
 (defun sjoin (strings)
   "join strings with whitespace, skip nil"

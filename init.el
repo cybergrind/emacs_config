@@ -112,6 +112,7 @@ Create the directory if it does not exist and CREATE is non-nil."
 
 (require 'cl)
 
+(require 'kpi_utils)
 (require 'emacs_setup)
 (require 'lang_setup)
 (require 'vis_cust)

@@ -187,10 +187,10 @@
 (setq org-agenda-include-diary t)
 (setq org-log-into-drawer t)
 
-(projectile-global-mode)
-
-(defmacro rel-path (path)
-  `(file-truename (concat (file-name-directory (or load-file-name buffer-file-name)) ,path)))
+(use-package projectile
+  :config
+  (projectile-global-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
 
 (use-package which-key
   :diminish
