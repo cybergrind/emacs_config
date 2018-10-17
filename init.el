@@ -145,7 +145,7 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(helm-ag-insert-at-point (quote word))
  '(helm-ag-use-agignore t)
  '(helm-mode-fuzzy-match t)
- '(js2-basic-offset 2)
+ '(js-indent-level 2)
  '(js2-strict-missing-semi-warning nil)
  '(magit-pull-arguments nil)
  '(org-agenda-files
