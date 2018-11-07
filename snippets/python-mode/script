@@ -12,10 +12,8 @@ log = logging.getLogger('${LOG_NAME}')
 
 
 def parse_args():
-    # yapf: disable
     parser = argparse.ArgumentParser(description='${DESCRIPTION}')
     $0# parser.add_argument('-l', '--ll', dest='ll', action='store_true', help='help')
-    # yapf: enable
     return parser.parse_args()
 
 
