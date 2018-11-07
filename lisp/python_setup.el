@@ -8,7 +8,8 @@
 (require 'kpi_utils)
 
 (use-package company-jedi)
-(use-package virtualenvwrapper)
+(use-package virtualenvwrapper
+  :ensure t)
 
 (require 'virtualenvwrapper)
 

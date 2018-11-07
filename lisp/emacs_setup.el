@@ -8,59 +8,70 @@
              (not (string-suffix-p "~" file)))
     (load file)))
 
-
-(autoload 'smex-initialize "smex" "smex-initialize" t)
-
-;; smex delayed initialization
-(global-set-key [(meta x)] (lambda ()
-                             (interactive)
-                             (or (boundp 'smex-cache)
-                                 (smex-initialize))
-                             (global-set-key [(meta x)] 'smex)
-                             (smex)))
-
-(global-set-key [(shift meta x)] (lambda ()
-                                   (interactive)
-                                   (or (boundp 'smex-cache)
-                                       (smex-initialize))
-                                   (global-set-key [(shift meta x)] 'smex-major-mode-commands)
-                                   (smex-major-mode-commands)))
-
+(use-package smex
+  :bind
+  (("M-x" . smex)
+   ("M-X" . smex-major-mode-commands))
+  :config
+  (smex-initialize))
 
 (global-set-key (kbd "C-x ;") 'eval-expression)
-(global-set-key (kbd "C-x g") 'magit-status)
+
+(use-package magit
+  :bind
+  (("C-x g" . magit-status))
+  :custom
+  (magit-pull-arguments nil))
 
 ;; C-t to save position. Go anywhere and then push M-, and return to last marked point
 (global-set-key (kbd "C-t") (lambda ()
                               (interactive)
                               (xref-push-marker-stack)))
 
+(use-package ag)
 
-(require 'recentf)
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(use-package helm
+  :custom
+  (helm-adaptive-mode t nil (helm-adaptive))
+  (helm-mode-fuzzy-match t))
+
+(use-package helm-ag :after (helm ag)
+  :custom
+  (helm-ag-insert-at-point (quote word))
+  (helm-ag-use-agignore t))
+
+(use-package helm-projectile :after (helm projectile))
+
+(use-package recentf
+  :bind (("C-x C-r" . recentf-open-files))
+  :config
+  (recentf-mode 1)
+  (setq recentf-max-menu-items 25))
+
+(use-package ido-completing-read+ :after (ido-mode))
 
 (ido-mode 'both)
 (setq ido-save-directory-list-file "~/.emacs.d/var/ido")
 (setq ido-enable-flex-matching t)
 
-; flx customization
-(require 'flx-ido)
-(ido-mode 1)
-(ido-everywhere 1)
-(flx-ido-mode 1)
+(use-package flx-ido
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil))
 
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
 
 (setq confirm-kill-emacs nil)
+
 ;; remove <2> on doubled buffers
 (require 'uniquify)
 (setq
-  uniquify-buffer-name-style 'forward
-  uniquify-separator ":")
+   uniquify-buffer-name-style 'forward
+   uniquify-separator ":")
+
 ;; no tabs
 (setq-default indent-tabs-mode nil)
 
@@ -78,19 +89,24 @@
 (auto-compression-mode t)
 (set-terminal-coding-system 'utf-8-unix)
 
-(require 'avy)
-(define-key global-map (kbd "M-SPC") 'avy-goto-word-or-subword-1)
-(define-key global-map (kbd "C-c c") 'avy-goto-char)
-(define-key global-map (kbd "C-c l") 'avy-goto-line)
+(use-package avy
+  :bind
+  (("M-SPC" . avy-goto-word-or-subword-1)
+   ("C-c c" . avy-goto-char)
+   ("C-c l" . avy-goto-line))
+  )
 
-(require 'goto-chg)
-(define-key global-map (kbd "C-c .") 'goto-last-change)
-(define-key global-map (kbd "C-c ,") 'goto-last-change-reverse)
+(use-package goto-chg
+  :bind
+  (("C-c ." . goto-last-change)
+   ("C-c ," . goto-last-change-reverse)))
 
-(require 'vimish-fold)
-(vimish-fold-global-mode 1)
-(global-set-key (kbd "C-c f") 'vimish-fold-avy)
-(global-set-key (kbd "C-c u") 'vimish-fold-toggle)
+(use-package vimish-fold
+  :bind
+  (("C-c f" . vimish-fold-avy)
+   ("C-c u" . vimish-fold-toggle))
+  :config
+  (vimish-fold-global-mode 1))
 
 ; macro
 (fset 'fix-indent
@@ -106,25 +122,28 @@
 
 ; hydra
 
-(require 'hydra)
-
-(defhydra cqql-multiple-cursors-hydra (:hint nil)
+(use-package hydra
+  :config
+  (defhydra multiple-cursors-hydra (:hint nil)
     "
-     ^Up^            ^Down^        ^Miscellaneous^
+     ^Up^            ^Down^        ^Other^
 ----------------------------------------------
 [_p_]   Next    [_n_]   Next    [_l_] Edit lines
 [_P_]   Skip    [_N_]   Skip    [_a_] Mark all
-[_M-p_] Unmark  [_M-n_] Unmark  [_q_] Quit"
-  ("l" mc/edit-lines :exit t)
-  ("a" mc/mark-all-like-this :exit t)
-  ("n" mc/mark-next-like-this)
-  ("N" mc/skip-to-next-like-this)
-  ("M-n" mc/unmark-next-like-this)
-  ("p" mc/mark-previous-like-this)
-  ("P" mc/skip-to-previous-like-this)
-  ("M-p" mc/unmark-previous-like-this)
-  ("q" nil))
-
+[_M-p_] Unmark  [_M-n_] Unmark  [_r_] Mark by regexp
+^ ^             ^ ^             [_q_] Quit
+"
+    ("l" mc/edit-lines :exit t)
+    ("a" mc/mark-all-like-this :exit t)
+    ("n" mc/mark-next-like-this)
+    ("N" mc/skip-to-next-like-this)
+    ("M-n" mc/unmark-next-like-this)
+    ("p" mc/mark-previous-like-this)
+    ("P" mc/skip-to-previous-like-this)
+    ("M-p" mc/unmark-previous-like-this)
+    ("r" mc/mark-all-in-region-regexp :exit t)
+    ("q" nil))
+  )
 
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
@@ -165,21 +184,6 @@
   :custom
   (color-identifiers-coloring-method 'hash))
 
-
-;; outdated
-;; (use-package bookmark+
-;;   ; :ensure bookmark+-lit :ensure bookmark+-1 :ensure bookmark+-mac
-;;   :config
-;;   (progn
-;;     (global-set-key (kbd "M-p") 'bmkp-previous-bookmark-this-file/buffer)
-;;     (global-set-key (kbd "M-n") 'bmkp-next-bookmark-this-file/buffer)
-;;     (global-set-key (kbd "M-t") 'bmkp-toggle-autonamed-bookmark-set/delete)
-;;     (global-set-key (kbd "C-t") 'bookmark-set)
-;;     (global-set-key (kbd "M-j") 'ido-bookmark-jump)
-;;     (global-set-key (kbd "M-J") 'ido-bookmark-jump-other-windows)))
-
-
-
 (require 'x-clipboard)
 
 (setq org-log-done 'time)
@@ -188,6 +192,12 @@
 (setq org-log-into-drawer t)
 
 (use-package projectile
+  :bind (("C-c p p" . projectile-switch-project))
+  :custom
+  (projectile-completion-system (quote ido))
+  (projectile-enable-caching t)
+  (projectile-generic-command "ag -g \"\" -0")
+  (projectile-mode t nil (projectile))
   :config
   (projectile-global-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))

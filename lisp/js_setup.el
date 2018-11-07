@@ -66,8 +66,12 @@
 (add-hook 'flycheck-mode-hook #'my/use-flow-from-node-modules)
 
 ;; Flycheck + Flowtype
-(require 'flycheck-flow)
-(flycheck-add-next-checker 'javascript-eslint 'javascript-flow)
+(use-package flycheck-flow
+  :after (flow)
+  :custom
+  (flycheck-javascript-flow-args nil)
+  :config
+  (flycheck-add-next-checker 'javascript-eslint 'javascript-flow))
 
 
 (add-hook 'js-mode-hook 'subword-mode)

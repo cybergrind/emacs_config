@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; make elisp linter happy
 ;;; Code:
-
 (add-to-list 'load-path "~/.emacs.d/elpa")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/vendor")
@@ -28,57 +27,25 @@ Create the directory if it does not exist and CREATE is non-nil."
 
 (setq package-selected-packages
       '(
-        ag
-        anything
-        auto-complete
-        avy
-        cider
-        clojure-mode
-        coffee-mode
         docker
         docker-tramp
         dockerfile-mode
-        ; ensime
         erlang
-        flx flx-ido
-        flycheck
-        flycheck-nim
-        flycheck-flow
         fuzzy
-        go-mode
-        goto-chg
-        geiser
-        helm
-        helm-ag
-        helm-projectile
-        hydra
-        ido-completing-read+
         js2-mode
         json-mode
         lua-mode
-        magit
         markdown-mode
-        ; multiple-cursors
-        nim-mode
-        paredit
         prettier-js
-        projectile
-        prolog-el
-        puppet-mode
-        py-yapf
         rainbow-delimiters
         restclient
         rust-mode
         scala-mode2
         slim-mode
         slime
-        ; smartparens
-        smex
         tagedit
         tramp
-        vimish-fold
         web-mode
-        yaml-mode
         use-package
         zenburn-theme
         ))
@@ -102,9 +69,7 @@ Create the directory if it does not exist and CREATE is non-nil."
 
 
 (require 'use-package)
-
-(setq
- use-package-always-ensure t)
+(setq use-package-always-ensure t)
 
 (use-package ensime
              :pin melpa-stable)
@@ -134,20 +99,10 @@ Create the directory if it does not exist and CREATE is non-nil."
     ("40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
  '(dired-dwim-target t)
  '(docker-tramp-use-names t)
- '(flycheck-disabled-checkers
-   (quote
-    (javascript-jshint json-python-json javascript-jshint javascript-gjslint javascript-jscs emacs-lisp-checkdoc)))
- '(flycheck-eslintrc nil t)
- '(flycheck-javascript-flow-args nil)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
- '(helm-adaptive-mode t nil (helm-adaptive))
- '(helm-ag-insert-at-point (quote word))
- '(helm-ag-use-agignore t)
- '(helm-mode-fuzzy-match t)
- '(js-indent-level 2)
+ '(js-indent-level 2 t)
  '(js2-strict-missing-semi-warning nil)
- '(magit-pull-arguments nil)
  '(org-agenda-files
    (quote
     ("~/Dropbox/gtd/tipsi.org" "~/Dropbox/gtd/gtd.org" "~/Dropbox/gtd/logbook/14_09.org" "~/Dropbox/gtd/calendar.org_archive" "~/Dropbox/gtd/calendar.org")))
@@ -156,11 +111,7 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(package-selected-packages
    (quote
-    (diminish pyimport flow-minor-mode alchemist flycheck-elixir flycheck-mix lua-mode company-flow flycheck-flow ag anything auto-complete avy bookmark+ bookmark+-lit bookmark+-1 bookmark+-mac cider clojure-mode coffee-mode docker dockerfile-mode ensime erlang flx flx-ido flycheck fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra js2-mode json-mode magit markdown-mode multiple-cursors nim-mode paredit projectile prolog-el puppet-mode py-yapf restclient rust-mode scala-mode2 slim-mode slime smex tramp vimish-fold web-mode yaml-mode zenburn-theme)))
- '(projectile-completion-system (quote ido))
- '(projectile-enable-caching t)
- '(projectile-generic-command "ag -g \"\" -0")
- '(projectile-mode t nil (projectile))
+    (smartparens-config ag anything auto-complete avy cider clojure-mode coffee-mode docker docker-tramp dockerfile-mode erlang flx flx-ido flycheck flycheck-nim flycheck-flow fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra ido-completing-read+ js2-mode json-mode lua-mode magit markdown-mode prettier-js projectile rainbow-delimiters restclient rust-mode scala-mode2 slim-mode slime tagedit tramp vimish-fold web-mode use-package zenburn-theme)))
  '(ps-bottom-margin 5)
  '(ps-footer-offset 5)
  '(ps-header-font-size (quote (8 . 8)))
@@ -177,7 +128,18 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(ps-top-margin 5)
  '(safe-local-variable-values
    (quote
-    ((lexical-bindings . true)
+    ((eval font-lock-add-keywords nil
+           (\`
+            (((\,
+               (concat "("
+                       (regexp-opt
+                        (quote
+                         ("sp-do-move-op" "sp-do-move-cl" "sp-do-put-op" "sp-do-put-cl" "sp-do-del-op" "sp-do-del-cl"))
+                        t)
+                       "\\_>"))
+              1
+              (quote font-lock-variable-name-face)))))
+     (lexical-bindings . true)
      (vimish-fold-dir . "/ssd/kpi/tipsi/tipsi_web/.emacs.d/vimish-fold")
      (bookmark-default-file . "/ssd/kpi/tipsi/tipsi_web/bookmarks")
      (some-variable . "test")
