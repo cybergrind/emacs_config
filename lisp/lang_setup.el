@@ -138,4 +138,6 @@
 
 (use-package lua-mode)
 
+(use-package hcl-mode  :mode ("\\.tf" . hcl-mode))
+
 (provide 'lang_setup)

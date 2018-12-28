@@ -149,11 +149,30 @@
    ((string= python-shell-interpreter "python")
     (py/set-ipython))))
 
+(defun py/send-defun (&optional arg msg)
+  "Send the current defun to inferior Python process.
+When argument ARG is non-nil do not include decorators.  When
+optional argument MSG is non-nil, forces display of a
+user-friendly message if there's no process running; defaults to
+t when called interactively."
+  (interactive (list current-prefix-arg t))
+  (cond
+   ((region-active-p) (python-shell-send-region))
+   (t (save-excursion
+        (progn
+          (python-mark-defun)
+          (python-shell-send-region (region-beginning) (region-end))
+          (deactivate-mark)
+          )
+        )))
+  )
+
 (add-hook 'python-mode-hook
           #'(lambda ()
               ; (setq python-shell-interpreter "ipython")
               (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
+              (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
               (py/setup-interpreter)
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
