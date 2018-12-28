@@ -201,7 +201,15 @@
   (projectile-tags-exclude-supports-globs t)
   :config
   (projectile-global-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+  (defun projectile-tags-exclude-patterns ()
+    "Return a string with exclude patterns for ctags. Add support for wildcards passthrough"
+    (mapconcat (lambda (pattern) (format "--exclude=\"%s\""
+                                    (directory-file-name pattern)))
+               (append (projectile-paths-to-ignore) projectile-globally-ignored-directories) " ")
+  )
+)
 
 (use-package which-key
   :diminish
