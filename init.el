@@ -112,6 +112,11 @@ Create the directory if it does not exist and CREATE is non-nil."
  '(package-selected-packages
    (quote
     (smartparens-config ag anything auto-complete avy cider clojure-mode coffee-mode docker docker-tramp dockerfile-mode erlang flx flx-ido flycheck flycheck-nim flycheck-flow fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra ido-completing-read+ js2-mode json-mode lua-mode magit markdown-mode prettier-js projectile rainbow-delimiters restclient rust-mode scala-mode2 slim-mode slime tagedit tramp vimish-fold web-mode use-package zenburn-theme)))
+ '(projectile-completion-system (quote ido))
+ '(projectile-enable-caching t)
+ '(projectile-generic-command "ag -g \"\" -0")
+ '(projectile-mode t nil (projectile))
+ '(projectile-tags-exclude-supports-globs t t)
  '(ps-bottom-margin 5)
  '(ps-footer-offset 5)
  '(ps-header-font-size (quote (8 . 8)))

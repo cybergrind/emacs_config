@@ -198,6 +198,7 @@
   (projectile-enable-caching t)
   (projectile-generic-command "ag -g \"\" -0")
   (projectile-mode t nil (projectile))
+  (projectile-tags-exclude-supports-globs t)
   :config
   (projectile-global-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
