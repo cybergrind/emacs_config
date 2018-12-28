@@ -97,9 +97,13 @@
 (defun py-test-interactive (arg)
   "Set and run python test.  ARG - if need to set test."
   (interactive "P")
-  (pcase arg
-    ('(4) (assign-py-test)))
-  (run-py-test))
+  (let ((run_test t))
+    (pcase (car arg)
+      (4 (assign-py-test))
+      (16 (x-copy-string (py-build-test-command))
+          (setq run_test nil)))
+    (if run_test (run-py-test))))
+
 
 (cl-defun py-test-setup-default (dir &key chdir (py-test-params ""))
   "Setup default values. Use it (py-test-setup-default (file-truename \".\")) ."
