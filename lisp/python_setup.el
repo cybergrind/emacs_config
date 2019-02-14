@@ -258,6 +258,22 @@ Return command process the exit code."
     (py/process-buffer "isort")
     (py/process-buffer "black")))
 
+(use-package
+  anaconda-mode
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook #'anaconda-mode)
+  (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
+
+(use-package
+  company-anaconda
+  :ensure t
+  :init
+  (add-to-list 'company-backends 'company-anaconda)
+  :bind
+  (:map anaconda-mode-map
+        ("M-TAB" . company-complete)))
+
 (provide 'python_setup)
 
 ;;; python_setup.el ends here

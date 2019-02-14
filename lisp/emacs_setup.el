@@ -23,6 +23,8 @@
   :custom
   (magit-pull-arguments nil))
 
+(setq enable-remote-dir-locals t)
+
 ;; C-t to save position. Go anywhere and then push M-, and return to last marked point
 (global-set-key (kbd "C-t") (lambda ()
                               (interactive)
