@@ -178,6 +178,7 @@ t when called interactively."
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
               (py/setup-interpreter)
+              (company-mode-on)
               ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
               ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
               ))
