@@ -28,6 +28,7 @@
 (defvar py-test-name "")
 (defvar py-chdir nil)
 (defvar py-is-running-test nil)
+(defvar py-disable-codestyle nil)
 
 
 (defun py-build-test-command ()
@@ -255,7 +256,7 @@ Return command process the exit code."
 
 (defun py/codestyle ()
   (interactive)
-  (when (string-equal "python-mode" major-mode)
+  (when (and (string-equal "python-mode" major-mode) (not py-disable-codestyle))
     (py/process-buffer "isort")
     (py/process-buffer "black")))
 
