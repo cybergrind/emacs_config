@@ -193,7 +193,11 @@
 (setq org-agenda-include-diary t)
 (setq org-log-into-drawer t)
 
+
+;; (add-to-list 'load-path "/home/kpi/devel/github/projectile")
 (use-package projectile
+  ;; :ensure nil
+  ;; :pin manual
   :bind (("C-c p p" . projectile-switch-project))
   :custom
   (projectile-completion-system (quote ido))
