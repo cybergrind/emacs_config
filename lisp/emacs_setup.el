@@ -218,4 +218,10 @@
   :config
   (which-key-mode))
 
+(use-package editorconfig
+  :diminish
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
 (provide 'emacs_setup)
