@@ -231,7 +231,6 @@ Return command process the exit code."
   "Show output, if COMMAND exit abnormally and DISPLAY is t."
   (interactive (list t))
   (let* ((original-buffer (current-buffer))
-         (original-point (point))
          (original-window-pos (window-start))
          (tmpbuf (get-buffer-create (format "*py/process/%s*" command)))
          (errbuf (get-buffer-create (format "*py/process-error/%s*" command))))
@@ -244,11 +243,9 @@ Return command process the exit code."
         (if (not (zerop (py/call-bin command original-buffer tmpbuf errbuf :call-args call-args)))
             (error "Black failed, see %s buffer for details" (buffer-name errbuf))
           (unless (eq (compare-buffer-substrings tmpbuf nil nil original-buffer nil nil) 0)
-            (with-current-buffer tmpbuf
-              (copy-to-buffer original-buffer (point-min) (point-max))))
-          (mapc 'kill-buffer (list tmpbuf errbuf))
-          (goto-char original-point)
-          (set-window-start (selected-window) original-window-pos))
+            (with-current-buffer original-buffer
+              (replace-buffer-contents tmpbuf)))
+          (mapc 'kill-buffer (list tmpbuf errbuf)))
       (error (message "%s" (error-message-string err))
              (when display
                (pop-to-buffer errbuf))))))
