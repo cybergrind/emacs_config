@@ -265,13 +265,25 @@ Return command process the exit code."
   (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
 (use-package
+  company
+  :ensure t
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.1)
+  :init
+  (global-company-mode 1))
+
+(use-package
   company-anaconda
+  :after (anaconda-mode company)
+  :commands company-anaconda
   :ensure t
   :init
-  (add-to-list 'company-backends 'company-anaconda)
+  (add-to-list 'company-backends '(company-anaconda :with company-capf))
   :bind
   (:map anaconda-mode-map
-        ("M-TAB" . company-complete)))
+        ("M-TAB" . company-complete)
+        ("M-/" . company-complete)))
 
 (provide 'python_setup)
 

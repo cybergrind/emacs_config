@@ -33,9 +33,10 @@
 
 
 (use-package auto-complete
+  :disabled
   :diminish
   :config
-  (add-to-list 'ac-modes 'python-mode)
+  ;; (add-to-list 'ac-modes 'python-mode)
   (add-to-list 'ac-modes 'emacs-lisp-mode)
   (add-to-list 'ac-modes 'web-mode)
   (setq ac-fuzzy-enable t)
@@ -119,9 +120,9 @@
 
 (use-package yasnippet-snippets)
 
-(defun add-yasnippet-ac-sources ()
-  (add-to-list 'ac-sources 'ac-source-yasnippet))
-(add-hook 'python-mode-hook 'add-yasnippet-ac-sources)
+;; (defun add-yasnippet-ac-sources ()
+;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
+;; (add-hook 'python-mode-hook 'add-yasnippet-ac-sources)
 
 
 (use-package geiser
