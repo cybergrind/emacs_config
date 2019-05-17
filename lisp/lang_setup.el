@@ -115,7 +115,8 @@
 (use-package yasnippet
   :diminish yas-minor-mode
   :config
-  (yas-global-mode 1))
+  (yas-global-mode 1)
+  (push 'company-yasnippet company-backends))
 
 
 (use-package yasnippet-snippets)
