@@ -316,8 +316,11 @@ Return command process the exit code."
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
         (print "setup regular")
-        (py-test-setup-default emacs_py_project :chdir emacs_py_project)
-        ))
+        (setq python-shell-interpreter
+              (cond
+               ((f-exists? (f-join emacs_py_env "./bin/ipython")) (f-join emacs_py_env "./bin/ipython"))
+               (t (f-join emacs_py_env "./bin/python"))))
+              (py-test-setup-default emacs_py_project :chdir emacs_py_project)))
       (print (format "py_project: %s" emacs_py_project))
       (print (format "emacs_py_env: %s" emacs_py_env)))))
 
