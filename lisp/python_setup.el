@@ -281,7 +281,7 @@ Return command process the exit code."
   :commands company-anaconda
   :ensure t
   :init
-  (add-to-list 'company-backends '(company-anaconda :with company-capf))
+  (add-to-list 'company-backends '(company-anaconda :with company-capf :with company-yasnippet))
   :bind
   (:map anaconda-mode-map
         ("M-TAB" . company-complete)
