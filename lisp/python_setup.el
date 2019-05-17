@@ -6,6 +6,8 @@
 (require 'python)
 (require 'async)
 (require 'kpi_utils)
+(require 'emacs_setup)
+(require 'f)
 
 (use-package company-jedi)
 (use-package virtualenvwrapper
@@ -284,6 +286,44 @@ Return command process the exit code."
   (:map anaconda-mode-map
         ("M-TAB" . company-complete)
         ("M-/" . company-complete)))
+
+(defun py/eval-string (string)
+  (eval (car (read-from-string (format "(progn %s)" string)))))
+
+
+(defvar py-env-dir-name "venv")
+
+(defun py/get_py_env (props py_project)
+  (cond
+   ((not py_project) nil)
+   ((gethash 'emacs_py_env props) (gethash 'emacs_py_env props))
+   ((f-exists? (f-join py_project py-env-dir-name))(f-join py_project py-env-dir-name))
+   (t (print (format "no matches %s" (f-join py_project py-env-dir-name))) nil)))
+
+
+;; for very basic setup just create .editorconfig in root with content:
+; [*.py]
+; emacs_py_project = (projectile-project-root)
+
+(defun py/editorhook (props)
+  (let* ((emacs_py_project (py/eval-string (gethash 'emacs_py_project props)))
+        (emacs_py_env (py/get_py_env props emacs_py_project))
+        (emacs_py_test_command (gethash 'emacs_py_test_command props))
+        (emacs_py_project_root (gethash 'emacs_py_project_root props))
+        (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
+        )
+    (when emacs_py_project
+      (cond
+       ((and (not emacs_py_test_command) emacs_py_env)
+        (print "setup regular")
+        (py-test-setup-default emacs_py_project :chdir emacs_py_project)
+        ))
+      (print (format "py_project: %s" emacs_py_project))
+      (print (format "emacs_py_env: %s" emacs_py_env)))))
+
+(add-hook 'editorconfig-after-apply-functions 'py/editorhook)
+(remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
+
 
 (provide 'python_setup)
 
