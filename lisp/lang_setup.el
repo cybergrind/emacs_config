@@ -116,7 +116,7 @@
   :diminish yas-minor-mode
   :config
   (yas-global-mode 1)
-  (push 'company-yasnippet company-backends))
+  (add-to-list 'company-backends 'company-yasnippet t))
 
 
 (use-package yasnippet-snippets)
