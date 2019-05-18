@@ -15,7 +15,6 @@
 
 (require 'virtualenvwrapper)
 
-
 (defun sjoin (strings)
   "join strings with whitespace, skip nil"
   (string-join (cl-remove-if 'null strings) " "))
@@ -60,6 +59,7 @@
 
 (defun get-path-pytest ()
   "In pytest format: path/to/file.py::function_name ."
+
   (let* ((curr_defun (python-info-current-defun))
          (curr_test (cond (curr_defun (replace-regexp-in-string "\\." "::" curr_defun))))
          (curr_base (cadr (split-string (file-truename (buffer-file-name)) py-project-root)))
@@ -67,7 +67,7 @@
                      (curr_test
                       (concat curr_base "::" curr_test))
                      (t
-                      (buffer-file-name)))))
+                      curr_base))))
     (message "Test path: %s" test_path)
     test_path))
 
@@ -311,21 +311,35 @@ Return command process the exit code."
         (emacs_py_test_command (gethash 'emacs_py_test_command props))
         (emacs_py_project_root (gethash 'emacs_py_project_root props))
         (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
+        (emacs_py_interactive (gethash 'emacs_py_interactive props))
         )
+    (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
+      (if emacs_py_env
+          (setq python-shell-interpreter
+              (cond
+               ((f-exists? (f-join emacs_py_env "./bin/ipython")) (f-join emacs_py_env "./bin/ipython"))
+               (t (f-join emacs_py_env "./bin/python")))))
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
         (print "setup regular")
-        (setq python-shell-interpreter
-              (cond
-               ((f-exists? (f-join emacs_py_env "./bin/ipython")) (f-join emacs_py_env "./bin/ipython"))
-               (t (f-join emacs_py_env "./bin/python"))))
-              (py-test-setup-default emacs_py_project :chdir emacs_py_project)))
-      (print (format "py_project: %s" emacs_py_project))
-      (print (format "emacs_py_env: %s" emacs_py_env)))))
+        (py-test-setup-default emacs_py_project :chdir emacs_py_project))
+       (emacs_py_test_command
+        (setq-local py-test-params nil)
+        (setq-local py-test-runner 'pytest)))
+
+      (if emacs_py_test_command
+          (setq-local py-test-command emacs_py_test_command))
+      (if emacs_py_project_root
+          (setq-local py-project-root emacs_py_project_root))
+      (if emacs_py_interactive
+          (add-hook 'inferior-python-mode-hook
+                      `(lambda ()
+                         (interactive)
+                         (py/eval-string ,emacs_py_interactive)))))))
 
 (add-hook 'editorconfig-after-apply-functions 'py/editorhook)
-(remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
+; (remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
 
 
 (provide 'python_setup)
