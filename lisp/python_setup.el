@@ -68,7 +68,7 @@
                       (concat curr_base "::" curr_test))
                      (t
                       curr_base))))
-    (message "Test path: %s" test_path)
+    (message "Test path: %s Base: %s TF: %s Defun: %s" test_path curr_base curr_test curr_defun)
     test_path))
 
 (defun get-path-django-runner ()
@@ -108,13 +108,24 @@
     (if run_test (run-py-test))))
 
 
+(defun ensure-trailing-slash (dir)
+  (cond
+   ((not dir) dir)
+   ((s-suffix? "/" dir) dir)
+   (t (s-join dir "/"))))
+
+
 (cl-defun py-test-setup-default (dir &key chdir (py-test-params ""))
   "Setup default values. Use it (py-test-setup-default (file-truename \".\")) ."
-  (defvar py-test-runner 'pytest)
-  (defvar py-test-command (concat dir "/venv/bin/py.test -n0"))
-  (defvar py-test-params py-test-params)
-  (defvar py-project-root (concat dir "/"))
-  (setq py-chdir chdir))
+  (let* ((dirpath (ensure-trailing-slash dir))
+         (chdirpath (cond
+                     ((not chdir) dirpath)
+                     (t (ensure-trailing-slash chdir)))))
+    (defvar py-test-runner 'pytest)
+    (defvar py-test-command (concat dirpath "venv/bin/py.test -n0"))
+    (defvar py-test-params py-test-params)
+    (defvar py-project-root dirpath)
+    (setq py-chdir chdirpath)))
 
 
 (defun py/pprint-region (start end)
@@ -316,6 +327,7 @@ Return command process the exit code."
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
       (if emacs_py_env
+          (print (format "setup in environment: %s" emacs_py_env))
           (setq python-shell-interpreter
               (cond
                ((f-exists? (f-join emacs_py_env "./bin/ipython")) (f-join emacs_py_env "./bin/ipython"))
@@ -323,7 +335,7 @@ Return command process the exit code."
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
         (print "setup regular")
-        (py-test-setup-default emacs_py_project :chdir emacs_py_project))
+        (py-test-setup-default emacs_py_project))
        (emacs_py_test_command
         (setq-local py-test-params nil)
         (setq-local py-test-runner 'pytest)))
