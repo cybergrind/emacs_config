@@ -112,7 +112,7 @@
   (cond
    ((not dir) dir)
    ((s-suffix? "/" dir) dir)
-   (t (s-join dir "/"))))
+   (t (concat dir "/"))))
 
 
 (cl-defun py-test-setup-default (dir &key chdir (py-test-params ""))
@@ -334,7 +334,7 @@ Return command process the exit code."
                (t (f-join emacs_py_env "./bin/python")))))
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
-        (print "setup regular")
+        (print (format "setup regular => %s" emacs_py_project))
         (py-test-setup-default emacs_py_project))
        (emacs_py_test_command
         (setq-local py-test-params nil)
