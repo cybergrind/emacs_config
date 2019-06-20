@@ -323,15 +323,21 @@ Return command process the exit code."
         (emacs_py_project_root (gethash 'emacs_py_project_root props))
         (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
         (emacs_py_interactive (gethash 'emacs_py_interactive props))
+        (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
         )
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
       (if emacs_py_env
-          (print (format "setup in environment: %s" emacs_py_env))
-          (setq python-shell-interpreter
-              (cond
-               ((f-exists? (f-join emacs_py_env "./bin/ipython")) (f-join emacs_py_env "./bin/ipython"))
-               (t (f-join emacs_py_env "./bin/python")))))
+          (progn
+            (print (format "setup in environment!!: %s %s" emacs_py_env (f-join emacs_py_env "./bin/ipython")))
+            (setq python-shell-interpreter
+                  (let ((ipython (f-join emacs_py_env "./bin/ipython"))
+                        (regular-python (f-join emacs_py_env "./bin/python")))
+                    (print (format "IPY: %s PY: %s" ipython regular-python))
+                    (cond
+                     ((f-exists? ipython) ipython)
+                     (t regular-python))))
+            (print (format "Shell interpr: %s" python-shell-interpreter))))
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
         (print (format "setup regular => %s" emacs_py_project))
@@ -348,7 +354,19 @@ Return command process the exit code."
           (add-hook 'inferior-python-mode-hook
                       `(lambda ()
                          (interactive)
-                         (py/eval-string ,emacs_py_interactive)))))))
+                         (py/eval-string ,emacs_py_interactive)))))
+    (if emacs_py_save_touch
+        (setq-local after_save_touch (py/eval-string emacs_py_save_touch)))))
+
+
+(defun touch-on-save ()
+  (interactive)
+  (if (boundp 'after_save_touch)
+      (progn (print (format "touch %s" after_save_touch))
+             (start-process "touch" nil "touch" after_save_touch))))
+
+(add-hook 'after-init-hook
+          '(lambda () (add-hook 'after-save-hook 'touch-on-save)))
 
 (add-hook 'editorconfig-after-apply-functions 'py/editorhook)
 ; (remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
