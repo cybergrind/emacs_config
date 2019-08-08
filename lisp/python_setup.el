@@ -28,6 +28,7 @@
             (flycheck-select-checker 'python-flake8)
             (flycheck-mode)))
 
+(defvar py/lsp t)
 (defvar py-test-name "")
 (defvar py-chdir nil)
 (defvar py-is-running-test nil)
@@ -272,12 +273,6 @@ Return command process the exit code."
     (py/process-buffer "isort")
     (py/process-buffer "black")))
 
-(use-package
-  anaconda-mode
-  :ensure t
-  :init
-  (add-hook 'python-mode-hook #'anaconda-mode)
-  (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
 (use-package
   company
@@ -288,32 +283,52 @@ Return command process the exit code."
   :init
   (global-company-mode 1))
 
-(use-package jedi-core
-  :ensure t)
-(use-package pythonic
-  :ensure t)
 (use-package python-environment
   :ensure t)
 
-(use-package
-  company-anaconda
-  :after (anaconda-mode company)
-  :commands company-anaconda
-  :ensure t
-  :init
-  (add-to-list 'company-backends '(company-anaconda :with company-capf :with company-yasnippet))
-  :bind
-  (:map anaconda-mode-map
-        ("M-TAB" . company-complete)
-        ("M-/" . company-complete)))
+(if py/lsp
+    (progn
+      (use-package lsp-python-ms
+        :ensure t
+        :hook (python-mode . (lambda () (require 'lsp-python-ms))))
+      (use-package company-lsp
+        :init
+        (add-to-list 'company-backends '(company-lsp :with company-capf :with company-yasnippet)))
+      (use-package lsp-ui
+        :ensure t
+        :bind
+        (("M-?" . lsp-ui-peek-find-references)
+         ("M-." . lsp-ui-peek-find-definitions)
+         ("M-/" . company-complete)
+         ("M-TAB" . company-complete)
+         )
+        :custom
+        (lsp-ui-flycheck-enable t)
+        (lsp-ui-sideline-show-hover nil)))
+  (progn
+    (use-package jedi-core
+      :ensure t)
+    (use-package pythonic
+      :ensure t)
+    (use-package
+      anaconda-mode
+      :ensure t
+      :init
+      (add-hook 'python-mode-hook #'anaconda-mode)
+      (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
 
 
-
-;; (use-package lsp-python-ms
-;;   :ensure t
-;;   :hook (python-mode . (lambda ()
-;;                          (require 'lsp-python-ms)
-;;                         )))
+    (use-package
+      company-anaconda
+      :after (anaconda-mode company)
+      :commands company-anaconda
+      :ensure t
+      :init
+      (add-to-list 'company-backends '(company-anaconda :with company-capf :with company-yasnippet))
+      :bind
+      (:map anaconda-mode-map
+            ("M-TAB" . company-complete)
+            ("M-/" . company-complete)))))
 
 (defun py/eval-string (string)
   (eval (car (read-from-string (format "(progn %s)" string)))))
@@ -333,27 +348,15 @@ Return command process the exit code."
 ; [*.py]
 ; emacs_py_project = (projectile-project-root)
 
-;; (use-package lsp-ui
-;;   :ensure t
-;;   :bind
-;;   (("M-?" . lsp-ui-peek-find-references)
-;;    ("M-." . lsp-ui-peek-find-definitions))
-;;   :custom
-;;   (lsp-ui-flycheck-enable t)
-;;   (lsp-ui-sideline-show-hover nil)
-;;   )
-;; 
-;; (use-package company-lsp
-;;   :init
-;;   (add-to-list 'company-backends '(company-lsp :with company-capf :with company-yasnippet)))
-;; 
-;; (defun py/runlsp (root venv)
-;;   (setq-local lsp-python-executable-cmd (f-join venv "./bin/python"))
-;;   (lsp--suggest-project-root)
-;;   (lsp-workspace-root root)
-;;   (lsp)
-;;   (lsp-ui-mode)
-;;   )
+
+
+(defun py/runlsp (root venv)
+  (setq-local lsp-python-executable-cmd (f-join venv "./bin/python"))
+  (lsp--suggest-project-root)
+  (lsp-workspace-root root)
+  (lsp)
+  (lsp-ui-mode)
+  )
 
 (defun py/editorhook (props)
   (let* ((emacs_py_project (py/eval-string (gethash 'emacs_py_project props)))
@@ -377,7 +380,9 @@ Return command process the exit code."
                      ((f-exists? ipython) ipython)
                      (t regular-python))))
             (print (format "Shell interpr: %s" python-shell-interpreter))
-            ;; (py/runlsp emacs_py_project emacs_py_env)
+            (if py/lsp
+                (py/runlsp emacs_py_project emacs_py_env))
+
             ))
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
