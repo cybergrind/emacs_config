@@ -1,4 +1,3 @@
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -8,6 +7,8 @@
  '(bmkp-last-as-first-bookmark-file "~/devel/tipsi/tipsi_web/bookmarks")
  '(coffee-tab-width 4)
  '(color-identifiers-coloring-method (quote hash))
+ '(company-idle-delay 0.5)
+ '(company-minimum-prefix-length 1)
  '(custom-safe-themes
    (quote
     ("5a68850c66edcf32eb859345c331c9b20a50ddfcb577b70e0a69ad5d939d10d9" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default)))
@@ -26,6 +27,9 @@
  '(helm-mode-fuzzy-match t t)
  '(js-indent-level 2 t)
  '(js2-strict-missing-semi-warning nil)
+ '(lsp-ui-flycheck-enable t t)
+ '(lsp-ui-sideline-delay 0.2)
+ '(lsp-ui-sideline-show-hover nil t)
  '(magit-pull-arguments nil t)
  '(org-agenda-files
    (quote
@@ -35,7 +39,7 @@
  '(org-mobile-inbox-for-pull "~/Dropbox/gtd/mobileorg.org")
  '(package-selected-packages
    (quote
-    (smartparens-config ag anything auto-complete avy cider clojure-mode coffee-mode docker docker-tramp dockerfile-mode erlang flx flx-ido flycheck flycheck-nim flycheck-flow fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra ido-completing-read+ js2-mode json-mode lua-mode magit markdown-mode prettier-js projectile rainbow-delimiters restclient rust-mode scala-mode2 slim-mode slime tagedit tramp vimish-fold web-mode use-package zenburn-theme)))
+    (jedi-core lsp-ui lsp-python-ms elm-mode rvm robe smartparens-config ag anything auto-complete avy cider clojure-mode coffee-mode docker docker-tramp dockerfile-mode erlang flx flx-ido flycheck flycheck-nim flycheck-flow fuzzy go-mode goto-chg geiser helm helm-ag helm-projectile hydra ido-completing-read+ js2-mode json-mode lua-mode magit markdown-mode prettier-js projectile rainbow-delimiters restclient rust-mode scala-mode2 slim-mode slime tagedit tramp vimish-fold web-mode use-package zenburn-theme)))
  '(projectile-completion-system (quote ido))
  '(projectile-enable-caching t)
  '(projectile-generic-command "ag -g \"\" -0")
@@ -57,7 +61,13 @@
  '(ps-top-margin 5)
  '(safe-local-variable-values
    (quote
-    ((eval font-lock-add-keywords nil
+    ((python-shell-extra-pythonpaths ".")
+     (python-shell-interpreter . "~/extra/devel/tipsi/osx_ci/venv/bin/python")
+     (python-shell-extra-pythonpaths "/home/kpi/devel/tipsi/tipsi_web/integration/venv/bin/python")
+     (python-shell-interpreter . "/home/kpi/devel/tipsi/tipsi_web/integration/venv/bin/python")
+     (python-shell-extra-pythonpaths "/home/kpi/devel/tipsi/tipsi_web/tipsi_web/")
+     (python-shell-interpreter . "/home/kpi/devel/tipsi/tipsi_web/tipsi_web/venv/bin/ipython")
+     (eval font-lock-add-keywords nil
            (\`
             (((\,
                (concat "("
@@ -100,4 +110,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(lsp-ui-sideline-global ((t (:background "color-17"))))
+ '(lsp-ui-sideline-symbol-info ((t (:background "color-16" :height 0.99)))))

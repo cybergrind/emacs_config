@@ -3,7 +3,9 @@
 ;;; Code:
 
 (require 'flycheck)
+
 (require 'python)
+
 (require 'async)
 (require 'kpi_utils)
 (require 'emacs_setup)
@@ -286,6 +288,13 @@ Return command process the exit code."
   :init
   (global-company-mode 1))
 
+(use-package jedi-core
+  :ensure t)
+(use-package pythonic
+  :ensure t)
+(use-package python-environment
+  :ensure t)
+
 (use-package
   company-anaconda
   :after (anaconda-mode company)
@@ -297,6 +306,14 @@ Return command process the exit code."
   (:map anaconda-mode-map
         ("M-TAB" . company-complete)
         ("M-/" . company-complete)))
+
+
+
+;; (use-package lsp-python-ms
+;;   :ensure t
+;;   :hook (python-mode . (lambda ()
+;;                          (require 'lsp-python-ms)
+;;                         )))
 
 (defun py/eval-string (string)
   (eval (car (read-from-string (format "(progn %s)" string)))))
@@ -315,6 +332,28 @@ Return command process the exit code."
 ;; for very basic setup just create .editorconfig in root with content:
 ; [*.py]
 ; emacs_py_project = (projectile-project-root)
+
+;; (use-package lsp-ui
+;;   :ensure t
+;;   :bind
+;;   (("M-?" . lsp-ui-peek-find-references)
+;;    ("M-." . lsp-ui-peek-find-definitions))
+;;   :custom
+;;   (lsp-ui-flycheck-enable t)
+;;   (lsp-ui-sideline-show-hover nil)
+;;   )
+;; 
+;; (use-package company-lsp
+;;   :init
+;;   (add-to-list 'company-backends '(company-lsp :with company-capf :with company-yasnippet)))
+;; 
+;; (defun py/runlsp (root venv)
+;;   (setq-local lsp-python-executable-cmd (f-join venv "./bin/python"))
+;;   (lsp--suggest-project-root)
+;;   (lsp-workspace-root root)
+;;   (lsp)
+;;   (lsp-ui-mode)
+;;   )
 
 (defun py/editorhook (props)
   (let* ((emacs_py_project (py/eval-string (gethash 'emacs_py_project props)))
@@ -337,7 +376,9 @@ Return command process the exit code."
                     (cond
                      ((f-exists? ipython) ipython)
                      (t regular-python))))
-            (print (format "Shell interpr: %s" python-shell-interpreter))))
+            (print (format "Shell interpr: %s" python-shell-interpreter))
+            ;; (py/runlsp emacs_py_project emacs_py_env)
+            ))
       (cond
        ((and (not emacs_py_test_command) emacs_py_env)
         (print (format "setup regular => %s" emacs_py_project))
