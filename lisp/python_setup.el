@@ -286,6 +286,30 @@ Return command process the exit code."
 (use-package python-environment
   :ensure t)
 
+
+(defvar anaconda-ready-p nil)
+
+(defun init-all-anaconda ()
+  (use-package jedi-core
+    :ensure t)
+  (use-package pythonic
+    :ensure t)
+  (use-package
+    anaconda-mode
+    :ensure t)
+  (use-package
+    company-anaconda
+    :after (anaconda-mode company)
+    :commands company-anaconda
+    :ensure t
+    :init
+    (add-to-list 'company-backends '(company-anaconda :with company-capf :with company-yasnippet))
+    :bind
+    (:map anaconda-mode-map
+          ("M-TAB" . company-complete)
+          ("M-/" . company-complete)))
+  (setq anaconda-ready-p t))
+
 (if py/lsp
     (progn
       (use-package lsp-python-ms
@@ -305,30 +329,7 @@ Return command process the exit code."
         :custom
         (lsp-ui-flycheck-enable t)
         (lsp-ui-sideline-show-hover nil)))
-  (progn
-    (use-package jedi-core
-      :ensure t)
-    (use-package pythonic
-      :ensure t)
-    (use-package
-      anaconda-mode
-      :ensure t
-      :init
-      (add-hook 'python-mode-hook #'anaconda-mode)
-      (add-hook 'python-mode-hook #'anaconda-eldoc-mode))
-
-
-    (use-package
-      company-anaconda
-      :after (anaconda-mode company)
-      :commands company-anaconda
-      :ensure t
-      :init
-      (add-to-list 'company-backends '(company-anaconda :with company-capf :with company-yasnippet))
-      :bind
-      (:map anaconda-mode-map
-            ("M-TAB" . company-complete)
-            ("M-/" . company-complete)))))
+  (init-all-anaconda))
 
 (defun py/eval-string (string)
   (eval (car (read-from-string (format "(progn %s)" string)))))
@@ -366,6 +367,7 @@ Return command process the exit code."
         (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
         (emacs_py_interactive (gethash 'emacs_py_interactive props))
         (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
+        (emacs_disable_lsp (gethash 'emacs_disable_lsp props))
         )
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
@@ -380,8 +382,13 @@ Return command process the exit code."
                      ((f-exists? ipython) ipython)
                      (t regular-python))))
             (print (format "Shell interpr: %s" python-shell-interpreter))
-            (if py/lsp
-                (py/runlsp emacs_py_project emacs_py_env))
+            (if (and py/lsp (not emacs_disable_lsp))
+                (py/runlsp emacs_py_project emacs_py_env)
+              (progn
+                (if (not anaconda-ready-p) (init-all-anaconda))
+                (anaconda-mode)
+                (anaconda-eldoc-mode)
+                ))
 
             ))
       (cond
