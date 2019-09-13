@@ -8,13 +8,6 @@
              (not (string-suffix-p "~" file)))
     (load file)))
 
-(use-package smex
-  :bind
-  (("M-x" . smex)
-   ("M-X" . smex-major-mode-commands))
-  :config
-  (smex-initialize))
-
 (global-set-key (kbd "C-x ;") 'eval-expression)
 
 (use-package magit
@@ -228,4 +221,6 @@
   :config
   (editorconfig-mode 1))
 
+
+(require 'init-ivy)
 (provide 'emacs_setup)
