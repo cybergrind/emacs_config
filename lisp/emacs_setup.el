@@ -169,6 +169,9 @@
     (global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
     (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)))
 
+(use-package expand-region
+  :bind ("C-\\" . er/expand-region))
+
 
 (use-package diminish)
 
