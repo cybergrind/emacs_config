@@ -279,7 +279,7 @@ Return command process the exit code."
   :ensure t
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.5)
+  (company-idle-delay 0.3)
   :init
   (global-company-mode 1))
 
