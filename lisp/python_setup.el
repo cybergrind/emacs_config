@@ -352,7 +352,7 @@ Return command process the exit code."
 
 
 (defun py/runlsp (root venv)
-  (setq-local lsp-python-executable-cmd (f-join venv "./bin/python"))
+  (setq-local lsp-python-ms-python-executable-cmd (f-join venv "./bin/python"))
   (lsp--suggest-project-root)
   (lsp-workspace-root root)
   (lsp)
