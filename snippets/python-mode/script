@@ -13,6 +13,7 @@ log = logging.getLogger('${LOG_NAME}')
 
 def parse_args():
     parser = argparse.ArgumentParser(description='${DESCRIPTION}')
+    # parser.add_argument('-m', '--mode', default='auto', choices=['auto', 'manual'])
     $0# parser.add_argument('-l', '--ll', dest='ll', action='store_true', help='help')
     return parser.parse_args()
 
