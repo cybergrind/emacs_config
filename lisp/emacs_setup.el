@@ -107,8 +107,12 @@
 (fset 'fix-indent
       "\C-i\C-n\-m\C-x(")
 
-(fset 'mirror-buffer
+;; remove me
+(fset 'mirror-buffer-old
       "\C-xo\C-xb\C-r\C-r\C-m")
+
+(fset 'mirror-buffer
+      "\C-xo\C-xb\C-p\C-m")
 
 (fset 'magit/remove-branch
       "bk\C-M\C-p")
