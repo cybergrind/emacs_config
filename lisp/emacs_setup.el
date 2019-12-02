@@ -108,10 +108,10 @@
       "\C-i\C-n\-m\C-x(")
 
 ;; remove me
-(fset 'mirror-buffer-old
+(fset 'mirror-buffer
       "\C-xo\C-xb\C-r\C-r\C-m")
 
-(fset 'mirror-buffer
+(fset 'mirror-buffer-new
       "\C-xo\C-xb\C-p\C-m")
 
 (fset 'magit/remove-branch
