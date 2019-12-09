@@ -125,7 +125,7 @@
                      ((not chdir) dirpath)
                      (t (ensure-trailing-slash chdir)))))
     (defvar py-test-runner 'pytest)
-    (defvar py-test-command (concat dirpath "venv/bin/py.test -n0"))
+    (defvar py-test-command (concat dirpath "venv/bin/py.test"))
     (defvar py-test-params py-test-params)
     (defvar py-project-root dirpath)
     (setq py-chdir chdirpath)))
