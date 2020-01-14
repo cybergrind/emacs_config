@@ -29,9 +29,10 @@
         )
   )
 
+(use-package smex)
 
 (use-package counsel
-  :after (ivy)
+  :after (ivy smex)
   :diminish
   :bind
   (("M-x" . counsel-M-x))
