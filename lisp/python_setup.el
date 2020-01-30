@@ -321,7 +321,8 @@ Return command process the exit code."
       (use-package lsp-ui
         :ensure t
         :bind
-        (("M-?" . lsp-ui-peek-find-references)
+        (:map python-mode-map
+         ("M-?" . lsp-ui-peek-find-references)
          ("M-." . lsp-ui-peek-find-definitions)
          ("M-/" . company-complete)
          ("M-TAB" . company-complete)
