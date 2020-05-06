@@ -212,7 +212,7 @@
   (defun projectile-tags-exclude-patterns ()
     "Return a string with exclude patterns for ctags. Add support for wildcards passthrough"
     (mapconcat (lambda (pattern) (format "--exclude=\"%s\""
-                                    (directory-file-name pattern)))
+                                    (directory-file-name (f-join (projectile-project-root) pattern))))
                (append (projectile-paths-to-ignore) projectile-globally-ignored-directories) " ")
   )
 )
