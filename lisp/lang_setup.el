@@ -142,4 +142,11 @@
 
 (use-package hcl-mode  :mode ("\\.tf" . hcl-mode))
 
+(use-package irony
+  :config
+  (add-hook 'c++-mode-hook 'irony-mode))
+
+(use-package company-irony
+  :required irony)
+
 (provide 'lang_setup)

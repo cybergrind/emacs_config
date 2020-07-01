@@ -61,7 +61,8 @@
  '(ps-top-margin 5)
  '(safe-local-variable-values
    (quote
-    ((python-shell-extra-pythonpaths ".")
+    ((logstash-indent . 2)
+     (python-shell-extra-pythonpaths ".")
      (python-shell-interpreter . "~/extra/devel/tipsi/osx_ci/venv/bin/python")
      (python-shell-extra-pythonpaths "/home/kpi/devel/tipsi/tipsi_web/integration/venv/bin/python")
      (python-shell-interpreter . "/home/kpi/devel/tipsi/tipsi_web/integration/venv/bin/python")
