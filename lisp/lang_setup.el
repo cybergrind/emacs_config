@@ -147,6 +147,6 @@
   (add-hook 'c++-mode-hook 'irony-mode))
 
 (use-package company-irony
-  :required irony)
+  :requires irony)
 
 (provide 'lang_setup)
