@@ -30,9 +30,11 @@
 
 (defvar py/lsp t)
 (defvar py-test-name "")
+(defvar py-test-full-path nil)
 (defvar py-chdir nil)
 (defvar py-is-running-test nil)
 (defvar py-disable-codestyle nil)
+
 
 
 (defun py-build-test-command ()
@@ -62,10 +64,12 @@
 
 (defun get-path-pytest ()
   "In pytest format: path/to/file.py::function_name ."
-
   (let* ((curr_defun (python-info-current-defun))
          (curr_test (cond (curr_defun (replace-regexp-in-string "\\." "::" curr_defun))))
-         (curr_base (cadr (split-string (file-truename (buffer-file-name)) py-project-root)))
+         ;; need to split when run in docker because full path will be different
+         (curr_base (cond
+                     (py-test-full-path (file-truename (buffer-file-name)))
+                     (t (cadr (split-string (file-truename (buffer-file-name)) py-project-root)))))
          (test_path (cond
                      (curr_test
                       (concat curr_base "::" curr_test))
@@ -364,6 +368,7 @@ Return command process the exit code."
   (let* ((emacs_py_project (py/eval-string (gethash 'emacs_py_project props)))
         (emacs_py_env (py/get_py_env props emacs_py_project))
         (emacs_py_test_command (gethash 'emacs_py_test_command props))
+        (emacs_py_test_full_path (gethash 'emacs_py_test_full_path props))
         (emacs_py_project_root (gethash 'emacs_py_project_root props))
         (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
         (emacs_py_interactive (gethash 'emacs_py_interactive props))
@@ -402,6 +407,8 @@ Return command process the exit code."
 
       (if emacs_py_test_command
           (setq-local py-test-command emacs_py_test_command))
+      (if emacs_py_test_full_path
+          (setq-local py-test-full-path t))
       (if emacs_py_project_root
           (setq-local py-project-root emacs_py_project_root))
       (if emacs_py_interactive
