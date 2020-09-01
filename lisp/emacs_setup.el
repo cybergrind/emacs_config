@@ -23,7 +23,9 @@
                               (interactive)
                               (xref-push-marker-stack)))
 
-(use-package ag)
+(use-package ag
+  :custom
+  (ag-arguments (list "--smart-case" "--stats" "--hidden")))
 
 (use-package helm
   :custom
