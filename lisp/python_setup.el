@@ -345,7 +345,7 @@ Return command process the exit code."
 (defun py/get_py_env (props py_project)
   (cond
    ((not py_project) nil)
-   ((gethash 'emacs_py_env props) (gethash 'emacs_py_env props))
+   ((gethash 'emacs_py_env props) (f-join py_project (gethash 'emacs_py_env props)))
    ((f-exists? (f-join py_project py-env-dir-name))(f-join py_project py-env-dir-name))
    (t (print (format "no matches %s" (f-join py_project py-env-dir-name))) nil)))
 
