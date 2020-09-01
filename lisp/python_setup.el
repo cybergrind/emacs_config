@@ -406,7 +406,10 @@ Return command process the exit code."
         (setq-local py-test-runner 'pytest)))
 
       (if emacs_py_test_command
-          (setq-local py-test-command emacs_py_test_command))
+          (setq-local py-test-command emacs_py_test_command)
+          (if emacs_py_env
+              (setq-local py-test-command (f-join emacs_py_env "./bin/py.test"))))
+
       (if emacs_py_test_full_path
           (setq-local py-test-full-path t))
       (if emacs_py_project_root
