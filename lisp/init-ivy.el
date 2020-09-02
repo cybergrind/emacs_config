@@ -2,6 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
+(use-package flx-ido
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1)
+  ;; disable ido faces to see flx highlights.
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-faces nil))
+
+(use-package wgrep)
 
 (use-package ivy
   :after (flx)
@@ -9,17 +19,18 @@
   :config
   (ivy-mode)
   (setq-default ivy-use-virtual-buffers t
-                  ivy-virtual-abbreviate 'fullpath
-                  ivy-count-format ""
-                  projectile-completion-system 'ivy
-                  ivy-magic-tilde nil
-                  ivy-dynamic-exhibit-delay-ms 150
-                  ivy-use-selectable-prompt t
-                  ivy-initial-inputs-alist
-                  '((Man-completion-table . "^")
-                    (woman . "^")))
+                ivy-virtual-abbreviate 'fullpath
+                ivy-count-format ""
+                ivy-use-selectable-prompt t
+                projectile-completion-system 'ivy
+                ivy-magic-tilde nil
+                ivy-dynamic-exhibit-delay-ms 150
+                ivy-display-style 'fancy
+                ivy-initial-inputs-alist
+                '((Man-completion-table . "^")
+                  (woman . "^")))
   (setq-default ivy-re-builders-alist
-                  '((t . ivy--regex-fuzzy)))
+                '((t . ivy--regex-fuzzy)))
   :bind
   (:map ivy-minibuffer-map
         ("RET" . ivy-alt-done)
