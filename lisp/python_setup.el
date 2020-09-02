@@ -314,27 +314,25 @@ Return command process the exit code."
           ("M-/" . company-complete)))
   (setq anaconda-ready-p t))
 
+
+;; :init (add-to-list 'company-backend '(company-caps :with company-yasnippet)))
 (if py/lsp
     (progn
-      (use-package lsp-python-ms
-        :ensure t
-        :hook (python-mode . (lambda () (require 'lsp-python-ms))))
-      (use-package company-lsp
-        :init
-        (add-to-list 'company-backends '(company-lsp :with company-capf :with company-yasnippet)))
-      (use-package lsp-ui
-        :ensure t
-        :bind
-        (:map python-mode-map
-         ("M-?" . lsp-ui-peek-find-references)
-         ("M-." . lsp-ui-peek-find-definitions)
-         ("M-/" . company-complete)
-         ("M-TAB" . company-complete)
-         )
-        :custom
-        (lsp-ui-flycheck-enable t)
-        (lsp-ui-sideline-show-hover nil)))
-  (init-all-anaconda))
+      (use-package lsp-pyright
+        :ensure t)
+       (use-package lsp-ui
+         :ensure t
+         :bind
+         (:map python-mode-map
+          ("M-?" . lsp-ui-peek-find-references)
+          ("M-." . lsp-ui-peek-find-definitions)
+          ("M-/" . company-complete)
+          ("M-TAB" . company-complete)
+          )
+         :custom
+         ;; (lsp-ui-flycheck-enable t)
+         (lsp-ui-sideline-show-hover nil))
+       ))
 
 (defun py/eval-string (string)
   (eval (car (read-from-string (format "(progn %s)" string)))))
@@ -357,11 +355,11 @@ Return command process the exit code."
 
 
 (defun py/runlsp (root venv)
-  (setq-local lsp-python-ms-python-executable-cmd (f-join venv "./bin/python"))
+  (require 'lsp-pyright)
   (lsp--suggest-project-root)
   (lsp-workspace-root root)
-  (lsp)
   (lsp-ui-mode)
+  (lsp)
   )
 
 (defun py/editorhook (props)
