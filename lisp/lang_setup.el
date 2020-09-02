@@ -51,8 +51,7 @@
 
 
 (defvar basis/sp-ignore-modes
-  '(magit-key-mode
-    lisp-mode
+  '(lisp-mode
     emacs-lisp-mode
     inferior-emacs-lisp-mode
     lisp-interaction-mode
@@ -63,9 +62,11 @@
     geiser-repl-mode
     inferior-lisp-mode
     scheme-mode
-    slime-repl-mode
-    org-mode)
+    slime-repl-mode)
   "List of modes in which not to active `smartparens'.")
+
+(use-package lispy
+  :hook (emacs-lisp-mode . lispy-mode))
 
 (use-package smartparens
   :ensure t
@@ -74,7 +75,7 @@
   (smartparens-global-mode)
   (global-set-key (kbd "M-d") 'sp-kill-sexp)
   (require 'smartparens-config)
-  ; (dolist (mode basis/sp-ignore-modes)(add-to-list 'sp-ignore-modes-list mode))
+  (dolist (mode basis/sp-ignore-modes)(add-to-list 'sp-ignore-modes-list mode))
   )
 
 
