@@ -131,8 +131,6 @@
   :config
   (setq geiser-active-implementations '(chicken)))
 
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
 
 (use-package idris-mode
   :hook (idris-mode-hook . (lambda () (setq charged-kill-nil 'kill-line)))
@@ -149,5 +147,9 @@
 
 (use-package company-irony
   :requires irony)
+
+(use-package flycheck-irony
+  :config
+  (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
 
 (provide 'lang_setup)

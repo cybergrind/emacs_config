@@ -278,12 +278,14 @@ Return command process the exit code."
     (py/process-buffer "black")))
 
 
-(use-package
-  company
+(use-package company
   :ensure t
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.3)
+  ;; aligns annotation to the right hand side
+  (company-tooltip-align-annotations t)
+  (company-dabbrev-downcase nil)
   :init
   (global-company-mode 1))
 
