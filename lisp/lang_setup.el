@@ -66,7 +66,10 @@
   "List of modes in which not to active `smartparens'.")
 
 (use-package lispy
-  :hook (emacs-lisp-mode . lispy-mode))
+  :hook (emacs-lisp-mode . lispy-mode)
+  :bind
+  (:map lispy-mode-map
+        ("M-i" . mirror-buffer)))
 
 (use-package smartparens
   :ensure t
