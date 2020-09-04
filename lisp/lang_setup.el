@@ -69,7 +69,9 @@
   :hook (emacs-lisp-mode . lispy-mode)
   :bind
   (:map lispy-mode-map
-        ("M-i" . mirror-buffer)))
+        ("M-i" . mirror-buffer)
+        ("C-y" . yank)
+        ("M-d" . sp-kill-sexp)))
 
 (use-package smartparens
   :ensure t

@@ -36,9 +36,7 @@
         ("RET" . ivy-alt-done)
         ("C-j" . ivy-immeidate-done)
         ("C-RET" . ivy-immeidate-done)
-        ("C-c C-q" . ivy-wgrep-change-to-wgrep-mode)
-        )
-  )
+        ("C-c C-q" . ivy-wgrep-change-to-wgrep-mode)))
 
 (use-package smex)
 
@@ -46,7 +44,10 @@
   :after (ivy smex)
   :diminish
   :bind
-  (("M-x" . counsel-M-x))
+  (("M-x" . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("C-r" . counsel-grep-or-swiper)
+   ("C-s" . swiper))
   :config
   (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
 
