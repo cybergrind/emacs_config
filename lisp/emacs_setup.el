@@ -136,6 +136,15 @@
     ("q" nil))
   )
 
+(use-package auto-yasnippet
+  :after hydra
+  :config
+  (defhydra aya (global-map "C-c a")
+    "aya"
+    ("c" aya-create)
+    ("e" aya-expand))
+  )
+
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
