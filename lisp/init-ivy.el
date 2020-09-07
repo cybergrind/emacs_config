@@ -29,8 +29,8 @@
                 ivy-initial-inputs-alist
                 '((Man-completion-table . "^")
                   (woman . "^")))
-  (setq-default ivy-re-builders-alist
-                '((t . ivy--regex-fuzzy)))
+  ;; (setq-default ivy-re-builders-alist
+  ;;               '((t . ivy--regex-fuzzy)))
   :bind
   (:map ivy-minibuffer-map
         ("RET" . ivy-alt-done)
