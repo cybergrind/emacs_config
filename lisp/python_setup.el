@@ -345,7 +345,7 @@ Return command process the exit code."
 (defun py/get_py_env (props py_project)
   (cond
    ((not py_project) nil)
-   ((gethash 'emacs_py_env props) (f-join py_project (gethash 'emacs_py_env props)))
+   ((gethash 'emacs_py_env props) (f-join (projectile-project-root) (gethash 'emacs_py_env props)))
    ((f-exists? (f-join py_project py-env-dir-name))(f-join py_project py-env-dir-name))
    (t (print (format "no matches %s" (f-join py_project py-env-dir-name))) nil)))
 
@@ -365,7 +365,7 @@ Return command process the exit code."
   )
 
 (defun py/editorhook (props)
-  (let* ((emacs_py_project (py/eval-string (gethash 'emacs_py_project props)))
+  (let* ((emacs_py_project (f-join (projectile-project-root) (gethash 'emacs_py_project props)))
         (emacs_py_env (py/get_py_env props emacs_py_project))
         (emacs_py_test_command (gethash 'emacs_py_test_command props))
         (emacs_py_test_full_path (gethash 'emacs_py_test_full_path props))
