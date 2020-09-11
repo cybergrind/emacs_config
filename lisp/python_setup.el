@@ -345,7 +345,7 @@ Return command process the exit code."
 (defun py/get_py_env (props py_project)
   (cond
    ((not py_project) nil)
-   ((gethash 'emacs_py_env props) (f-join (projectile-project-root) (gethash 'emacs_py_env props)))
+   ((gethash 'emacs_py_env props) (f-join (projectile-project-root) (gethash 'emacs_py_env props "")))
    ((f-exists? (f-join py_project py-env-dir-name))(f-join py_project py-env-dir-name))
    (t (print (format "no matches %s" (f-join py_project py-env-dir-name))) nil)))
 
@@ -364,7 +364,7 @@ Return command process the exit code."
   (lsp)
   )
 
-(defun py/editorhook (props)
+(defun py/editorhook-wrapped (props)
   (let* ((emacs_py_project (f-join (projectile-project-root) (gethash 'emacs_py_project props "")))
         (emacs_py_env (py/get_py_env props emacs_py_project))
         (emacs_py_test_command (gethash 'emacs_py_test_command props))
@@ -431,6 +431,15 @@ Return command process the exit code."
 (add-hook 'after-init-hook
           '(lambda () (add-hook 'after-save-hook 'touch-on-save)))
 
+
+(defun py/editorhook (props)
+  (when (and (eq major-mode 'python-mode)
+             (projectile-project-root)
+             ;; (getash 'emacs_py_project props)
+             )
+    (py/editorhook-wrapped props)))
+
+;; (debug-on-entry 'py/editorhook-wrapped)
 (add-hook 'editorconfig-after-apply-functions 'py/editorhook)
 ; (remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
 
