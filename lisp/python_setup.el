@@ -365,7 +365,7 @@ Return command process the exit code."
   )
 
 (defun py/editorhook (props)
-  (let* ((emacs_py_project (f-join (projectile-project-root) (gethash 'emacs_py_project props)))
+  (let* ((emacs_py_project (f-join (projectile-project-root) (gethash 'emacs_py_project props "")))
         (emacs_py_env (py/get_py_env props emacs_py_project))
         (emacs_py_test_command (gethash 'emacs_py_test_command props))
         (emacs_py_test_full_path (gethash 'emacs_py_test_full_path props))
@@ -373,8 +373,7 @@ Return command process the exit code."
         (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
         (emacs_py_interactive (gethash 'emacs_py_interactive props))
         (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
-        (emacs_disable_lsp (gethash 'emacs_disable_lsp props))
-        )
+        (emacs_disable_lsp (gethash 'emacs_disable_lsp props)))
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
       (if emacs_py_env
