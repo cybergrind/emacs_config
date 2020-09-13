@@ -29,8 +29,8 @@
                 ivy-initial-inputs-alist
                 '((Man-completion-table . "^")
                   (woman . "^")))
-  ;; (setq-default ivy-re-builders-alist
-  ;;               '((t . ivy--regex-fuzzy)))
+  (setq-default ivy-re-builders-alist
+                '((t . ivy--regex-fuzzy)))
   :bind
   (:map ivy-minibuffer-map
         ("RET" . ivy-alt-done)
@@ -44,10 +44,12 @@
   :after (ivy smex)
   :diminish
   :bind
-  (("M-x" . counsel-M-x)
+  (
+   ;; ("M-x" . counsel-M-x)
    ("C-x C-f" . counsel-find-file)
-   ("C-r" . counsel-grep-or-swiper)
-   ("C-s" . swiper))
+   ;; ("C-r" . counsel-grep-or-swiper)
+   ;; ("C-s" . swiper)
+   )
   :config
   (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
 

@@ -37,6 +37,10 @@
   (helm-ag-insert-at-point (quote word))
   (helm-ag-use-agignore t))
 
+(use-package helm-swoop
+  :bind
+  (("C-s" . helm-swoop)))
+
 (use-package helm-projectile :after (helm projectile))
 
 (use-package recentf
