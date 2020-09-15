@@ -39,7 +39,9 @@
 
 (use-package helm-swoop
   :bind
-  (("C-s" . helm-swoop)))
+  (("C-s" . helm-swoop)
+   :map helm-swoop-map
+   ("M-k" . backward-kill-sentence)))
 
 (use-package helm-projectile :after (helm projectile))
 
