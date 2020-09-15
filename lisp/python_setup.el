@@ -35,6 +35,7 @@
 (defvar py-is-running-test nil)
 (defvar py-disable-codestyle nil)
 
+(defvar py-current-test nil)
 
 
 (defun py-build-test-command ()
@@ -46,11 +47,8 @@
   "Execute test and print result."
   (cond
    ((equal py-is-running-test t) (message "there is test in progress"))
-   ((not (boundp 'py-project-root)) (message "there is no py-project-root"))
-   ((not (boundp 'py-test-command)) (message "there is no py-test-command"))
-   ((not (boundp 'py-test-params)) (message "there is no py-test-params"))
-   ((not (string> py-test-name "")) (message "please select test first"))
-   (t (let ((cmd (py-build-test-command)))
+   ((not py-current-test) (message "please select test first"))
+   (t (let ((cmd py-current-test))
         (message "command: %s\n" cmd)
         (setq py-is-running-test t)
         (async-start
@@ -98,9 +96,14 @@
 (defun assign-py-test ()
   "Assign test."
   (cond ((boundp 'py-project-root)
-         (let ((test-path (get-py-test-path)))
-           ; (message "!!TEST PATH: %s" test-path)
-           (setq py-test-name test-path)))
+         (cond
+          ((equal py-is-running-test t) (message "there is test in progress"))
+          ((not (boundp 'py-project-root)) (message "there is no py-project-root"))
+          ((not (boundp 'py-test-command)) (message "there is no py-test-command"))
+          ((not (boundp 'py-test-params)) (message "there is no py-test-params"))
+          (t (let ((test-path (get-py-test-path)))
+               (setq py-test-name test-path)
+               (setq py-current-test (py-build-test-command))))))
         (t (message "Please set py-project-root"))))
 
 
@@ -379,7 +382,7 @@ Return command process the exit code."
       (if emacs_py_env
           (progn
             (print (format "setup in environment!!: %s %s" emacs_py_env (f-join emacs_py_env "./bin/ipython")))
-            (setq python-shell-interpreter
+            (setq-local python-shell-interpreter
                   (let ((ipython (f-join emacs_py_env "./bin/ipython"))
                         (regular-python (f-join emacs_py_env "./bin/python")))
                     (print (format "IPY: %s PY: %s" ipython regular-python))
