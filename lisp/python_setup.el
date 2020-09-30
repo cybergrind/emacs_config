@@ -321,23 +321,26 @@ Return command process the exit code."
 
 
 ;; :init (add-to-list 'company-backend '(company-caps :with company-yasnippet)))
+
 (if py/lsp
     (progn
       (use-package lsp-pyright
-        :ensure t)
-       (use-package lsp-ui
-         :ensure t
-         :bind
-         (:map python-mode-map
-          ("M-?" . lsp-ui-peek-find-references)
-          ("M-." . lsp-ui-peek-find-definitions)
-          ("M-/" . company-complete)
-          ("M-TAB" . company-complete)
-          )
-         :custom
-         ;; (lsp-ui-flycheck-enable t)
-         (lsp-ui-sideline-show-hover nil))
-       ))
+        :ensure t
+        :config
+        (print "AFTER LOAD PYRIGHT")
+        (lsp-dependency 'pyright
+                        '(:system "pylance-language-server")))
+      (use-package lsp-ui
+        :ensure t
+        :bind
+        (:map python-mode-map
+              ("M-?" . lsp-ui-peek-find-references)
+              ("M-." . lsp-ui-peek-find-definitions)
+              ("M-/" . company-complete)
+              ("M-TAB" . company-complete)
+              )
+        :config
+        (lsp-ui-sideline-show-hover nil))))
 
 (defun py/eval-string (string)
   (eval (car (read-from-string (format "(progn %s)" string)))))
@@ -360,7 +363,7 @@ Return command process the exit code."
 
 
 (defun py/runlsp (root venv)
-  (require 'lsp-pyright)
+  ;; (require 'lsp-pyright)
   (lsp--suggest-project-root)
   (lsp-workspace-root root)
   (lsp-ui-mode)
