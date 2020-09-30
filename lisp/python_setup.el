@@ -327,7 +327,6 @@ Return command process the exit code."
       (use-package lsp-pyright
         :ensure t
         :config
-        (print "AFTER LOAD PYRIGHT")
         (lsp-dependency 'pyright
                         '(:system "pylance-language-server")))
       (use-package lsp-ui
@@ -339,7 +338,7 @@ Return command process the exit code."
               ("M-/" . company-complete)
               ("M-TAB" . company-complete)
               )
-        :config
+        :custom
         (lsp-ui-sideline-show-hover nil))))
 
 (defun py/eval-string (string)
