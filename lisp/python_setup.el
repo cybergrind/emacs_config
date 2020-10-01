@@ -197,14 +197,14 @@ t when called interactively."
 
 (add-hook 'python-mode-hook
           #'(lambda ()
-              ; (setq python-shell-interpreter "ipython")
-              (define-key python-mode-map (kbd "C-o") 'py-test-interactive)
+              ;; (setq python-shell-interpreter "ipython")
+              (global-set-key (kbd "C-o") 'py-test-interactive)
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
               (py/setup-interpreter)
               (company-mode-on)
-              ;(define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
-              ;(define-key python-mode-map (kbd "TAB") 'py-indent-line)
+              ;; (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
+              ;; (define-key python-mode-map (kbd "TAB") 'py-indent-line)
               ))
 
 
