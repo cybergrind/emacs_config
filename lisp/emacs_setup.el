@@ -49,9 +49,12 @@
 
 (use-package recentf
   :bind (("C-x C-r" . recentf-open-files))
+  :custom
+  (recentf-max-menu-items 60)
+  (recentf-max-saved-items 60)
   :config
   (recentf-mode 1)
-  (setq recentf-max-menu-items 25))
+  (run-at-time nil (* 5 60) 'recentf-save-list))
 
 (use-package ido-completing-read+ :after (ido-mode))
 
