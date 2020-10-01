@@ -326,6 +326,8 @@ Return command process the exit code."
     (progn
       (use-package lsp-pyright
         :ensure t
+        :custom
+        (lsp-enable-file-watchers nil)
         :config
         (lsp-dependency 'pyright
                         '(:system "pylance-language-server")))
