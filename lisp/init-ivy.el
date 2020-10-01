@@ -34,6 +34,7 @@
   :bind
   (:map ivy-minibuffer-map
         ("RET" . ivy-alt-done)
+        ("M-d" . backward-kill-word)
         ("C-j" . ivy-immeidate-done)
         ("C-RET" . ivy-immeidate-done)
         ("C-c C-q" . ivy-wgrep-change-to-wgrep-mode)))
