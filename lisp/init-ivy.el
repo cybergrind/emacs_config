@@ -48,6 +48,7 @@
    ("M-x" . counsel-M-x)
    ("C-x C-f" . counsel-find-file)
    ("C-x b" . counsel-switch-buffer)
+   ("C-x C-r" . counsel-buffer-or-recentf)
    ;; cousel-buffer-or-recentf
    ;; ("C-r" . counsel-grep-or-swiper)
    ;; ("C-s" . swiper)
