@@ -162,10 +162,11 @@
 (use-package auto-yasnippet
   :after hydra
   :config
-  (defhydra aya (global-map "C-c a")
+  (defhydra actions (global-map "C-c a")
     "aya"
     ("c" aya-create)
-    ("e" aya-expand))
+    ("e" aya-expand)
+    ("a" lsp-execute-code-action))
   )
 
 (put 'narrow-to-region 'disabled nil)
