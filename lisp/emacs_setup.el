@@ -122,8 +122,20 @@
 
 (global-set-key (kbd "M-i") 'mirror-buffer)
 
-; hydra
+(defun switch_to_results ()
+  (interactive)
+  (when (not (string= (buffer-name) "*Messages*"))
+    (setq unread-command-events
+          (listify-key-sequence "\C-xo\C-xbmessag\C-m")))
+  (setq unread-command-events
+        (nconc
+         (listify-key-sequence "\C-x]\C-rtest session starts\C-m")
+         unread-command-events)))
 
+(global-set-key (kbd "M-c") 'switch_to_results)
+
+
+;; hydra
 (use-package hydra
   :config
   (defhydra multiple-cursors-hydra (:hint nil)
