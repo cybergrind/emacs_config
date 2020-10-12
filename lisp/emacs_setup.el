@@ -124,13 +124,16 @@
 
 (defun switch_to_results ()
   (interactive)
-  (when (not (string= (buffer-name) "*Messages*"))
+  (let*
+      ((prefix (if (not (string= (buffer-name) "*Messages*"))
+                   "\C-xo\C-xbmessag\C-m"
+                 ""))
+       (full-cmd (s-concat prefix "\C-x]\C-rtest session starts\C-m")))
+    ;; (message "Full-CMD: %s" full-cmd)
     (setq unread-command-events
-          (listify-key-sequence "\C-xo\C-xbmessag\C-m")))
-  (setq unread-command-events
-        (nconc
-         (listify-key-sequence "\C-x]\C-rtest session starts\C-m")
-         unread-command-events)))
+          (nconc
+           (listify-key-sequence full-cmd)
+           unread-command-events))))
 
 (global-set-key (kbd "M-c") 'switch_to_results)
 
