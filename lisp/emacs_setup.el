@@ -257,5 +257,10 @@
   (editorconfig-mode 1))
 
 
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode))
+
+
 (require 'init-ivy)
 (provide 'emacs_setup)
