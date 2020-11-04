@@ -169,7 +169,8 @@
     "aya"
     ("c" aya-create)
     ("e" aya-expand)
-    ("a" lsp-execute-code-action))
+    ("a" lsp-execute-code-action)
+    ("p" py/codestyle))
   )
 
 (put 'narrow-to-region 'disabled nil)
