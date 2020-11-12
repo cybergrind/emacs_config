@@ -293,7 +293,8 @@ Return command process the exit code."
   (global-company-mode 1))
 
 (use-package python-environment
-  :ensure t)
+  :ensure t
+  :chords ((" p" . py/codestyle)))
 
 
 (defvar anaconda-ready-p nil)

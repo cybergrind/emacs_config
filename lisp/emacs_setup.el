@@ -193,6 +193,10 @@
 
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
+(use-package use-package-chords
+  :ensure t
+  :config (key-chord-mode 1))
+
 (use-package multiple-cursors
   :config
   (progn
