@@ -193,17 +193,12 @@
 
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
-(defun chord/paste ()
-  (interactive)
-  (let ((input-method-function nil)
-        (str (shell-command-to-string "xsel -o")))
-    (insert str)))
-
 (use-package use-package-chords
   :ensure t
   :config (key-chord-mode 1)
-  (key-chord-define-global " v" 'chord/paste)
+  (key-chord-define-global " v" 'x-paste)
   (key-chord-define-global " c" 'x-copy))
+
 
 (use-package multiple-cursors
   :config

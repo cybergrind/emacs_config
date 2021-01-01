@@ -1,7 +1,9 @@
 (defun x-paste ()
   "insert text on X11's clipboard to current buffer."
   (interactive)
-  (insert (shell-command-to-string "xsel -b")))
+  (let ((input-method-function nil)
+        (str (shell-command-to-string "xsel -o")))
+    (insert str)))
 
 (defun x-copy ()
   "copy text on local kill-ring to X11's clipboard."
