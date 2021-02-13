@@ -329,9 +329,10 @@ Return command process the exit code."
         :ensure t
         :custom
         (lsp-enable-file-watchers nil)
-        :config
-        (lsp-dependency 'pyright
-                        '(:system "pylance-language-server")))
+        ;; :config
+        ;; (lsp-dependency 'pyright
+        ;;                 '(:system "pylance-language-server"))
+        )
       (use-package lsp-ui
         :ensure t
         :bind
