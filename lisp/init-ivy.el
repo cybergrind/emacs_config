@@ -55,6 +55,7 @@
    ;; ("C-s" . swiper)
    )
   :config
+  (push (cons 'counsel-M-x #'ivy--regex-ignore-order) ivy-re-builders-alist)
   (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
 
 (use-package swiper
