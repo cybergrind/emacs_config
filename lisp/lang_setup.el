@@ -75,6 +75,8 @@
 
 (use-package smartparens
   :ensure t
+  :custom
+  (sp-python-insert-colon-in-function-definitions nil)
   :config
   (turn-off-smartparens-strict-mode)
   (smartparens-global-mode)
