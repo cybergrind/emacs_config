@@ -428,7 +428,7 @@ Return command process the exit code."
                          (interactive)
                          (py/eval-string ,emacs_py_interactive)))))
     (if emacs_py_save_touch
-        (setq-local after_save_touch (py/eval-string emacs_py_save_touch)))))
+        (setq-local after_save_touch (f-join (projectile-project-root) emacs_py_save_touch)))))
 
 
 (defun touch-on-save ()
