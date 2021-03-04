@@ -1,0 +1,4 @@
+# key: p
+# name: print
+# --
+print(f'$0')
