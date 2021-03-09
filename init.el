@@ -57,6 +57,9 @@ Create the directory if it does not exist and CREATE is non-nil."
                          ("melpa" . "https://melpa.org/packages/")
                          ("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")))
+
+;; workaround TLS but with melpa in some emacs versions
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (package-initialize)
 
 (unless package-archive-contents
