@@ -30,17 +30,12 @@ Create the directory if it does not exist and CREATE is non-nil."
         docker
         docker-tramp
         dockerfile-mode
-        erlang
         fuzzy
         js2-mode
         json-mode
-        lua-mode
         markdown-mode
         prettier-js
         rainbow-delimiters
-        restclient
-        rust-mode
-        scala-mode2
         slim-mode
         slime
         tagedit
