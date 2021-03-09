@@ -97,29 +97,6 @@
 (add-hook 'not-working-mode-hook
            #'(lambda () (setq autopair-dont-activate t)))
 
-(use-package ensime
-  :hook (scala-mode-hook . ensime-scala-mode-hook)
-  :config
-  (progn
-    (add-hook 'ensime-mode-hook
-              #'(lambda ()
-                  (interactive)
-                  (auto-complete-mode -1)))
-    (setq ensime-sem-high-faces
-      ;; NOTE: Inconsolata doesn't have italics
-      ;; FURTHER NOTE: these are overlays, not faces
-      '((var . (:foreground "color-208"))
-        (val . (:foreground "grey"))
-        (varField . (:foreground "color-208"))
-        (valField . (:foreground "grey"))
-        (functionCall . (:foreground "grey"))
-        (operator . (:foreground "grey"))
-        (param . (:foreground "grey"))
-        (class . (:foreground "color-47"))
-        (trait . (:foreground "#4e807d"))
-        (object . (:foreground "#6897bb"))
-        (package . (:foreground "#cc7832"))))))
-
 (use-package yasnippet
   :diminish yas-minor-mode
   :config

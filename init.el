@@ -74,9 +74,6 @@ Create the directory if it does not exist and CREATE is non-nil."
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(use-package ensime
-             :pin melpa-stable)
-
 
 (require 'cl)
 
