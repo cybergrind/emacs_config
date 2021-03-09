@@ -1,15 +1,6 @@
 ;;; Code:
 
-(use-package puppet-mode :mode "\\.pp")
-(use-package prolog :mode ("\\.pl" . prolog-mode))
 (use-package yaml-mode :mode "\\.yaml")
-(use-package clojure-mode :mode ("\\.clj" . clj-mode)) ;; maybe add cider here later
-
-(use-package flycheck-nim :after (nim-mode flycheck))
-(use-package nim-mode
-  :hook (nim-mode-hook . nimsuggest-mode)
-  :mode "\\.nim")
-(use-package go-mode :mode "\\.go")
 
 (use-package flycheck
   :custom
@@ -25,13 +16,6 @@
 (require 'js_setup)
 (require 'python_setup)
 
-(cond ((file-exists-p "/usr/lib/erlang")
-       (setq erlang-root-dir "/usr/lib/erlang")
-       (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-       (setq erlang-indent-level 4)
-       (require 'erlang-start)))
-
-
 (use-package auto-complete
   :disabled
   :diminish
@@ -45,9 +29,6 @@
   (ac-config-default)
   (ac-set-trigger-key "TAB")
   (ac-set-trigger-key "<tab>"))
-
-(setq inferior-lisp-program "/usr/bin/sbcl") ; your Lisp system
-(add-to-list 'load-path "/usr/lib/sbcl")
 
 
 (defvar basis/sp-ignore-modes
@@ -86,17 +67,6 @@
   )
 
 
-
-
-;(add-to-list 'load-path "~/.emacs.d/slime")  ; your SLIME directory
-;(require 'slime)
-;(slime-setup '(slime-repl))
-
-(add-hook 'slime-mode-hook
-           #'(lambda () (setq autopair-dont-activate t)))
-(add-hook 'not-working-mode-hook
-           #'(lambda () (setq autopair-dont-activate t)))
-
 (use-package yasnippet
   :diminish yas-minor-mode
   :config
@@ -106,34 +76,7 @@
 
 (use-package yasnippet-snippets)
 
-;; (defun add-yasnippet-ac-sources ()
-;;   (add-to-list 'ac-sources 'ac-source-yasnippet))
-;; (add-hook 'python-mode-hook 'add-yasnippet-ac-sources)
-
-
-(use-package geiser
-  :config
-  (setq geiser-active-implementations '(chicken)))
-
-
-(use-package idris-mode
-  :hook (idris-mode-hook . (lambda () (setq charged-kill-nil 'kill-line)))
-  :config
-  (message "Idris init"))
-
-(use-package lua-mode)
-
-(use-package hcl-mode  :mode ("\\.tf" . hcl-mode))
-
-(use-package irony
-  :config
-  (add-hook 'c++-mode-hook 'irony-mode))
-
-(use-package company-irony
-  :requires irony)
-
-(use-package flycheck-irony
-  :config
-  (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
+(if (getenv "EMACS_EXTRA_LANGS")
+    (require 'extra_langs))
 
 (provide 'lang_setup)
