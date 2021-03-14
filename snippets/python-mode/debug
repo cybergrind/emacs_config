@@ -3,4 +3,4 @@
 # key: debug
 # --
 import pydevd_pycharm
-pydevd_pycharm.settrace('localhost', port=44691, stdoutToServer=True, stderrToServer=True)
+pydevd_pycharm.settrace('192.168.88.34', port=44691, stdoutToServer=True, stderrToServer=True)
