@@ -50,6 +50,7 @@
   :hook (emacs-lisp-mode . lispy-mode)
   :bind
   (:map lispy-mode-map
+        ("M-m" . back-to-indentation)
         ("M-i" . mirror-buffer)
         ("C-y" . yank)
         ("M-d" . sp-kill-sexp)))

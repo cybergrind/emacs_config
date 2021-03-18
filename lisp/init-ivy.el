@@ -16,21 +16,23 @@
 (use-package ivy
   :after (flx)
   :diminish
+  :custom
+  (ivy-use-virtual-buffers t)
+  (ivy-virtual-abbreviate 'fullpath)
+  (ivy-count-format "")
+  (ivy-use-selectable-prompt t)
+  (projectile-completion-system 'ivy)
+  (ivy-magic-tilde nil)
+  (ivy-dynamic-exhibit-delay-ms 150)
+  (ivy-display-style 'fancy)
+  (ivy-initial-inputs-alist
+   '((Man-completion-table . "^")
+     (woman . "^")))
   :config
   (ivy-mode)
-  (setq-default ivy-use-virtual-buffers t
-                ivy-virtual-abbreviate 'fullpath
-                ivy-count-format ""
-                ivy-use-selectable-prompt t
-                projectile-completion-system 'ivy
-                ivy-magic-tilde nil
-                ivy-dynamic-exhibit-delay-ms 150
-                ivy-display-style 'fancy
-                ivy-initial-inputs-alist
-                '((Man-completion-table . "^")
-                  (woman . "^")))
-  (setq-default ivy-re-builders-alist
-                '((t . ivy--regex-fuzzy)))
+  (add-to-list 'ivy-height-alist (cons 'counsel-ag 20))
+  (add-to-list 'ivy-re-builders-alist
+               '(t . ivy--regex-ignore-order))
   :bind
   (:map ivy-minibuffer-map
         ("RET" . ivy-alt-done)
@@ -53,10 +55,7 @@
    ;; cousel-buffer-or-recentf
    ;; ("C-r" . counsel-grep-or-swiper)
    ;; ("C-s" . swiper)
-   )
-  :config
-  (push (cons 'counsel-M-x #'ivy--regex-ignore-order) ivy-re-builders-alist)
-  (add-to-list 'ivy-height-alist (cons 'counsel-ag 20)))
+   ))
 
 (use-package swiper
   :after (ivy)
