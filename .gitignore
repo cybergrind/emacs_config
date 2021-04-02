@@ -17,3 +17,10 @@ el-get
 *~
 /recentf
 /projectile.cache
+.mc-lists.el
+.lsp-session-v1
+helm-adaptive-history
+network-security.data
+projectile-bookmarks.eld
+/eshell
+/transient
