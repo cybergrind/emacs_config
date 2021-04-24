@@ -421,7 +421,10 @@ Return command process the exit code."
       (if emacs_py_test_full_path
           (setq-local py-test-full-path t))
       (if emacs_py_project_root
-          (setq-local py-project-root emacs_py_project_root))
+          (let ((abs_root (f-join (projectile-project-root) emacs_py_project_root "./")))
+            (print (format "py-project-root => %s" abs_root))
+            (setq-local py-project-root abs_root))
+        (setq-local py-project-root (f-join emacs_py_project "./")))
       (if emacs_py_interactive
           (add-hook 'inferior-python-mode-hook
                       `(lambda ()
