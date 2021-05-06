@@ -109,11 +109,11 @@
 (defun my/prettier-before-save ()
   (add-hook 'before-save-hook 'prettier-before-save))
 
-(add-hook 'js-mode-hook (lambda ()
-                          (my/use-prettier-from-node-modules)
-                          (my/prettier-before-save)))
-(add-hook 'js2-mode-hook 'my/prettier-before-save)
-(add-hook 'web-mode-hook 'my/prettier-before-save)
+;; (add-hook 'js-mode-hook (lambda ()
+;;                           (my/use-prettier-from-node-modules)
+;;                           (my/prettier-before-save)))
+;; (add-hook 'js2-mode-hook 'my/prettier-before-save)
+;; (add-hook 'web-mode-hook 'my/prettier-before-save)
 
 
 (add-hook 'typescript-mode-hook
