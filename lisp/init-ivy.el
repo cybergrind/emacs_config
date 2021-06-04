@@ -57,6 +57,10 @@
    ;; ("C-s" . swiper)
    ))
 
+(use-package counsel-projectile
+  :config
+  (counsel-projectile-mode))
+
 (use-package swiper
   :after (ivy)
   :config
