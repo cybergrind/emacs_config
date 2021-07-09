@@ -373,28 +373,55 @@ Return command process the exit code."
   (lsp)
   )
 
+
+;; [abv_api/**.py]
+;; emacs_py_project = (f-join (projectile-project-root) "abv_api")
+;; emacs_py_test_command = docker exec -i abvtest_web_1 pytest -n0
+;; emacs_py_project_root = tipsi_web/abv_api/
+
+
+;; [tipsi_web/**.py]
+;; emacs_py_project = (f-join (projectile-project-root) "tipsi_web")
+;; emacs_py_test_command = docker exec -i cluster_web_1 pytest -n0
+;; emacs_py_project_root = tipsi_web/tipsi_web/
+;; emacs_py_interactive = (python-shell-send-string (format "%%run %s/shutil_dev/emacs_interactive.py" (f-join (projectile-project-root) "tipsi_web")))
+;; emacs_py_save_touch = (f-join (projectile-project-root) "tipsi_web" "uwsgi.ini")
+
+;; [order_management/**.py]
+;; emacs_py_project = (f-join (projectile-project-root) "order_management")
+;; emacs_py_test_command = docker exec -i cluster_ordermanagement_1 pytest -n0
+;; emacs_py_project_root = tipsi_web/order_management/
+;; emacs_py_save_touch = (f-join (projectile-project-root) "order_management" "uwsgi.ini")
+
+;; [integration/**.py]
+;; emacs_py_project = (f-join (projectile-project-root) "integration")
+;; emacs_py_test_command = docker exec -i cluster_integration_1 pytest -n0
+;; emacs_py_project_root = integration/
+
+
+
 (defun py/editorhook-wrapped (props)
   (let* ((emacs_py_project (f-join (projectile-project-root) (gethash 'emacs_py_project props "")))
-        (emacs_py_env (py/get_py_env props emacs_py_project))
-        (emacs_py_test_command (gethash 'emacs_py_test_command props))
-        (emacs_py_test_full_path (gethash 'emacs_py_test_full_path props))
-        (emacs_py_project_root (gethash 'emacs_py_project_root props))
-        (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
-        (emacs_py_interactive (gethash 'emacs_py_interactive props))
-        (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
-        (emacs_disable_lsp (gethash 'emacs_disable_lsp props)))
+         (emacs_py_env (py/get_py_env props emacs_py_project))
+         (emacs_py_test_command (gethash 'emacs_py_test_command props))
+         (emacs_py_test_full_path (gethash 'emacs_py_test_full_path props))
+         (emacs_py_project_root (gethash 'emacs_py_project_root props))
+         (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
+         (emacs_py_interactive (gethash 'emacs_py_interactive props))
+         (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
+         (emacs_disable_lsp (gethash 'emacs_disable_lsp props)))
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
       (if emacs_py_env
           (progn
             (print (format "setup in environment!!: %s %s" emacs_py_env (f-join emacs_py_env "./bin/ipython")))
             (setq-local python-shell-interpreter
-                  (let ((ipython (f-join emacs_py_env "./bin/ipython"))
-                        (regular-python (f-join emacs_py_env "./bin/python")))
-                    (print (format "IPY: %s PY: %s" ipython regular-python))
-                    (cond
-                     ((f-exists? ipython) ipython)
-                     (t regular-python))))
+                        (let ((ipython (f-join emacs_py_env "./bin/ipython"))
+                              (regular-python (f-join emacs_py_env "./bin/python")))
+                          (print (format "IPY: %s PY: %s" ipython regular-python))
+                          (cond
+                           ((f-exists? ipython) ipython)
+                           (t regular-python))))
             (print (format "Shell interpr: %s" python-shell-interpreter))
             (if (and py/lsp (not emacs_disable_lsp))
                 (py/runlsp emacs_py_project emacs_py_env)
@@ -415,8 +442,8 @@ Return command process the exit code."
 
       (if emacs_py_test_command
           (setq-local py-test-command emacs_py_test_command)
-          (if emacs_py_env
-              (setq-local py-test-command (f-join emacs_py_env "./bin/py.test"))))
+        (if emacs_py_env
+            (setq-local py-test-command (f-join emacs_py_env "./bin/py.test"))))
 
       (if emacs_py_test_full_path
           (setq-local py-test-full-path t))
@@ -427,9 +454,9 @@ Return command process the exit code."
         (setq-local py-project-root (f-join emacs_py_project "./")))
       (if emacs_py_interactive
           (add-hook 'inferior-python-mode-hook
-                      `(lambda ()
-                         (interactive)
-                         (py/eval-string ,emacs_py_interactive)))))
+                    `(lambda ()
+                       (interactive)
+                       (py/eval-string ,emacs_py_interactive)))))
     (if emacs_py_save_touch
         (setq-local after_save_touch (f-join (projectile-project-root) emacs_py_save_touch)))))
 
