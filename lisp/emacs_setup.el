@@ -37,9 +37,19 @@
   (helm-ag-insert-at-point (quote word))
   (helm-ag-use-agignore t))
 
+(defun swoop-query ()
+  (interactive)
+  (print current-prefix-arg)
+  (pcase
+      current-prefix-arg
+    ('(4)
+     (let ((current-prefix-arg 1))
+       (helm-swoop)))
+    (t (helm-swoop :query ""))))
+
 (use-package helm-swoop
   :bind
-  (("C-s" . helm-swoop)
+  (("C-s" . swoop-query)
    :map helm-swoop-map
    ("M-k" . backward-kill-sentence)
    ("C-s" . helm-swoop-next-line)
