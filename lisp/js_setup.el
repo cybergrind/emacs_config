@@ -126,4 +126,6 @@
             ;; install it separately via package-install
             (company-mode-on)))
 
+(use-package vue-mode :mode "\\.vue")
+
 (provide 'js_setup)
