@@ -205,6 +205,9 @@
 
 (use-package use-package-chords
   :ensure t
+  :custom
+  (key-chord-two-keys delay 0.02)
+  (key-chord-in-macros nil)
   :config (key-chord-mode 1)
   (key-chord-define-global " v" 'x-paste)
   (key-chord-define-global " c" 'x-copy))
