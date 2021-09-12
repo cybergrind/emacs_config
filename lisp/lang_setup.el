@@ -4,7 +4,7 @@
 
 (use-package flycheck
   :custom
-  (flycheck-flake8rc "~/.config/flake8")
+  (flycheck-flake8rc ".flake8")
   (flycheck-disabled-checkers
    (quote
     (javascript-jshint json-python-json javascript-jshint javascript-gjslint javascript-jscs emacs-lisp-checkdoc)))
