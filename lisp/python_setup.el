@@ -25,8 +25,9 @@
 ; Python checker
 (add-hook 'python-mode-hook
           (lambda ()
-            (flycheck-select-checker 'python-flake8)
-            (flycheck-mode)))
+            (if (not py/lsp)
+                (progn (flycheck-select-checker 'python-flake8)
+                       (flycheck-mode)))))
 
 (defvar py/lsp t)
 (defvar py-test-name "")
@@ -364,14 +365,26 @@ Return command process the exit code."
 ; emacs_py_project = (projectile-project-root)
 
 
+(defun ensure-lsp-checker ()
+  (let*
+      ((all-checkers (cons flycheck-checker (flycheck-get-next-checkers flycheck-checker)))
+       (has-lsp (member 'lsp all-checkers))
+       (has-flake8 (member 'python-flake8 all-checkers)))
+    (cond
+     ((and (not has-lsp) has-flake8) (flycheck-add-next-checker 'lsp 'python-flake8))
+     ((and has-lsp (not has-flake8)) (flycheck-add-next-checker 'lsp 'python-flake8)))))
+
+(add-hook 'flycheck-mode-hook
+          (lambda ()
+            (if py/lsp
+                (ensure-lsp-checker))))
 
 (defun py/runlsp (root venv)
   ;; (require 'lsp-pyright)
   (lsp--suggest-project-root)
   (lsp-workspace-root root)
   (lsp-ui-mode)
-  (lsp)
-  )
+  (lsp))
 
 
 ;; [abv_api/**.py]
