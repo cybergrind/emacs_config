@@ -283,5 +283,14 @@
   (global-undo-tree-mode))
 
 
+(setq emacs-backup-dir "~/.cache/emacs")
+(make-directory emacs-backup-dir)
+
+(setq backup-directory-alist
+      `((".*" . ,emacs-backup-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-backup-dir t)))
+
+
 (require 'init-ivy)
 (provide 'emacs_setup)
