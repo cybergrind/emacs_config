@@ -284,7 +284,9 @@
 
 
 (setq emacs-backup-dir "~/.cache/emacs")
-(make-directory emacs-backup-dir)
+(if (not (file-directory-p emacs-backup-dir))
+    (make-directory emacs-backup-dir))
+
 
 (setq backup-directory-alist
       `((".*" . ,emacs-backup-dir)))
