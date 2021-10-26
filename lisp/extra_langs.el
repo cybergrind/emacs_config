@@ -51,10 +51,10 @@
   (add-hook 'flycheck-mode-hook 'flycheck-irony-setup))
 
 
-(cond ((file-exists-p "/usr/lib/erlang")
-       (setq erlang-root-dir "/usr/lib/erlang")
-       (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
-       (setq erlang-indent-level 4)
-       (require 'erlang-start)))
+;; (cond ((file-exists-p "/usr/lib/erlang")
+;;        (setq erlang-root-dir "/usr/lib/erlang")
+;;        (setq exec-path (cons "/usr/lib/erlang/bin" exec-path))
+;;        (setq erlang-indent-level 4)
+;;        (require 'erlang-start)))
 
 (provide 'extra_langs)
