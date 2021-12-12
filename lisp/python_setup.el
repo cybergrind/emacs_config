@@ -196,12 +196,19 @@ t when called interactively."
         )))
   )
 
+(defun py/run-python ()
+  (interactive)
+  (if (boundp 'py-project-root)
+      (cd py-project-root))
+  (run-python))
+
 (add-hook 'python-mode-hook
           #'(lambda ()
               ;; (setq python-shell-interpreter "ipython")
               (global-set-key (kbd "C-o") 'py-test-interactive)
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
+              (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
               (py/setup-interpreter)
               (company-mode-on)
               ;; (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
