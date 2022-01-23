@@ -128,4 +128,6 @@
 
 (use-package vue-mode :mode "\\.vue")
 
+(use-package typescript-mode :mode "\\.ts")
+
 (provide 'js_setup)
