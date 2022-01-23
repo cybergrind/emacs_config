@@ -82,8 +82,6 @@
 (add-hook 'web-mode-hook 'smartparens-mode)
 (add-hook 'json-mode-hook 'smartparens-mode)
 (add-hook 'html-mode-hook 'subword-mode)
-
-(setq js-indent-level 2)
 (eval-after-load "sgml-mode"
   '(progn
      (require 'tagedit)
