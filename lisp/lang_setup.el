@@ -80,4 +80,10 @@
 (if (getenv "EMACS_EXTRA_LANGS")
     (require 'extra_langs))
 
+(use-package dart-mode
+  :mode "\\.dart"
+  :bind
+  (:map dart-mode-map
+        ("C-o" . lsp-dart-dap-flutter-hot-reload)))
+
 (provide 'lang_setup)
