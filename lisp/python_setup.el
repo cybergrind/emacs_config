@@ -173,10 +173,7 @@
   (cond
    ((and (projectile-project-p)
          (file-exists-p (py/get-ipython)))
-    (py/set-ipython (py/get-ipython)))
-
-   ((string= python-shell-interpreter "python")
-    (py/set-ipython))))
+    (py/set-ipython (py/get-ipython)))))
 
 (defun py/send-defun (&optional arg msg)
   "Send the current defun to inferior Python process.
