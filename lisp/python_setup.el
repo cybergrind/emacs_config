@@ -206,6 +206,7 @@ t when called interactively."
               (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
               (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
               (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
+              (define-key python-mode-map (kbd "M-p") 'py/codestyle)
               (py/setup-interpreter)
               (company-mode-on)
               ;; (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)

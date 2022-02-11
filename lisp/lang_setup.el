@@ -97,6 +97,7 @@
   (:map dart-mode-map
         ("C-o" . dart-test-interactive)
         ("M-o" . lsp-dart-dap-flutter-hot-reload)
+        ("M-p" . lsp-format-buffer)
         ("M-l a" . lsp-execute-code-action))
   :hook (dart-mode . run-lsp))
 
