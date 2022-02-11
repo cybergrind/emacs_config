@@ -80,10 +80,24 @@
 (if (getenv "EMACS_EXTRA_LANGS")
     (require 'extra_langs))
 
+(defun run-lsp ()
+  (lsp))
+
+(defun dart-test-interactive (arg)
+  (interactive "P")
+  (pcase (car arg)
+    (4 (lsp-dart-run-test-at-point))
+    (0 (lsp-dart-run-last-test))))
+
 (use-package dart-mode
   :mode "\\.dart"
+  :custom
+  (lsp-dart-line-length 100)
   :bind
   (:map dart-mode-map
-        ("C-o" . lsp-dart-dap-flutter-hot-reload)))
+        ("C-o" . dart-test-interactive)
+        ("M-o" . lsp-dart-dap-flutter-hot-reload)
+        ("M-l a" . lsp-execute-code-action))
+  :hook (dart-mode . run-lsp))
 
 (provide 'lang_setup)
