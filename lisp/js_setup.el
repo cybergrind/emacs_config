@@ -23,17 +23,17 @@
 (setq-default flycheck-temp-prefix ".flycheck")
 
 ;; adjust indents for web-mode to 2 spaces
-(defun custom-web-mode-hook ()
-  "Hooks for Web mode. Adjust indents"
-  ;;; http://web-mode.org/
-  (setq-default
-   standard-indent 2
-   tab-width 2
-   web-mode-markup-indent-offset 2
-   web-mode-css-indent-offset 2
-   web-mode-indent-style 2
-   setq web-mode-code-indent-offset 2))
-(add-hook 'web-mode-hook 'custom-web-mode-hook)
+;; (defun custom-web-mode-hook ()
+;;   "Hooks for Web mode. Adjust indents"
+;;   ;;; http://web-mode.org/
+;;   (setq-default
+;;    standard-indent 2
+;;    tab-width 2
+;;    web-mode-markup-indent-offset 2
+;;    web-mode-css-indent-offset 2
+;;    web-mode-indent-style 2
+;;    setq web-mode-code-indent-offset 2))
+;; (add-hook 'web-mode-hook 'custom-web-mode-hook)
 
 ;; for better jsx syntax-highlighting in web-mode
 (defadvice web-mode-highlight-part (around tweak-jsx activate)
