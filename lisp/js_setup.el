@@ -73,8 +73,13 @@
   :config
   (flycheck-add-next-checker 'javascript-eslint 'javascript-flow))
 
+(defun myjs/eslint-fix ()
+  (interactive)
+  (call-process "eslint" nil "npx" "eslint" "--fix" buffer-file-name)
+  (revert-buffer :ignore-auto :noconfirm))
+
 (defun setup-prettify ()
-  (key-chord-define-local " p" 'prettier-prettify))
+  (key-chord-define-local " p" 'myjs/eslint-fix))
 
 (add-hook 'js-mode-hook 'subword-mode)
 (add-hook 'js-mode-hook 'smartparens-mode)
