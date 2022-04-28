@@ -258,13 +258,31 @@
   (projectile-global-mode)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
+  (defun projectile-regenerate-tags ()
+    (interactive)
+    (let* ((project-root (projectile-acquire-root))
+           (tags-exclude (projectile-tags-exclude-patterns))
+           (default-directory project-root)
+           (tags-file (expand-file-name projectile-tags-file-name))
+           (command (format "ctags -f \"%s\" -e $(echo $(ag -l -0)) %s"
+                            (or (file-remote-p tags-file 'localname) tags-file)
+                            tags-exclude))
+           shell-output exit-code)
+      (with-temp-buffer
+        (setq exit-code
+              (process-file-shell-command command nil (current-buffer))
+              shell-output (string-trim
+                            (buffer-substring (point-min) (point-max)))))
+      (unless (zerop exit-code)
+        (error shell-output))
+      (visit-tags-table tags-file)
+      (message "Regenerated %s" tags-file)))
+
   (defun projectile-tags-exclude-patterns ()
     "Return a string with exclude patterns for ctags. Add support for wildcards passthrough"
     (mapconcat (lambda (pattern) (format "--exclude=\"%s\""
                                     (directory-file-name (f-join (projectile-project-root) pattern))))
-               (append (projectile-paths-to-ignore) projectile-globally-ignored-directories) " ")
-  )
-)
+               (append (projectile-paths-to-ignore) projectile-globally-ignored-directories) " ")))
 
 (use-package which-key
   :diminish
