@@ -93,6 +93,7 @@
   :mode "\\.dart"
   :custom
   (lsp-dart-line-length 100)
+  :chords ((" p" . lsp-format-buffer))
   :bind
   (:map dart-mode-map
         ("C-o" . dart-test-interactive)
