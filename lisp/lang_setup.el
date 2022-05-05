@@ -93,6 +93,8 @@
   :mode "\\.dart"
   :custom
   (lsp-dart-line-length 100)
+  (lsp-dart-main-code-lens nil)
+  (lsp-dart-test-code-lens nil)
   :chords ((" p" . lsp-format-buffer))
   :bind
   (:map dart-mode-map
