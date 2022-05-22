@@ -51,7 +51,7 @@
   :bind
   (:map lispy-mode-map
         ("M-m" . back-to-indentation)
-        ("M-i" . mirror-buffer)
+        ("M-i" . mirror-buffer-function)
         ("C-y" . yank)
         ("M-d" . sp-kill-sexp)))
 

@@ -28,7 +28,8 @@
   (ag-arguments (list "--smart-case" "--stats" "--hidden")))
 
 (use-package helm
-  :bind (("M-y" . helm-show-kill-ring))
+  :bind (("M-y" . helm-show-kill-ring)
+         ("C-x b" . helm-mini))
   :custom
   (helm-adaptive-mode t nil (helm-adaptive))
   (helm-mode-fuzzy-match t))
@@ -121,17 +122,17 @@
 (fset 'fix-indent
       "\C-i\C-n\-m\C-x(")
 
-;; remove me
-(fset 'mirror-buffer-old
-      "\C-xo\C-xb\C-r\C-r\C-m")
-
-(fset 'mirror-buffer
-      "\C-xo\C-xb\C-p\C-m")
-
 (fset 'magit/remove-branch
       "bk\C-M\C-p")
 
-(global-set-key (kbd "M-i") 'mirror-buffer)
+(defun mirror-buffer-function ()
+  (interactive)
+  (let ((bname (buffer-name)))
+    (message "!!!bname %s" bname)
+    (other-buffer)
+    (open-buffer bname)))
+
+(global-set-key (kbd "M-i") 'mirror-buffer-function)
 
 (defun switch_to_results ()
   (interactive)
