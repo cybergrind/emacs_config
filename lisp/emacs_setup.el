@@ -28,6 +28,7 @@
   (ag-arguments (list "--smart-case" "--stats" "--hidden")))
 
 (use-package helm
+  :bind (("M-y" . helm-show-kill-ring))
   :custom
   (helm-adaptive-mode t nil (helm-adaptive))
   (helm-mode-fuzzy-match t))
