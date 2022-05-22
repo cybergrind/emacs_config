@@ -128,9 +128,8 @@
 (defun mirror-buffer-function ()
   (interactive)
   (let ((bname (buffer-name)))
-    (message "!!!bname %s" bname)
-    (other-buffer)
-    (open-buffer bname)))
+    (open-buffer bname))
+  (other-window 1 nil t))
 
 (global-set-key (kbd "M-i") 'mirror-buffer-function)
 
