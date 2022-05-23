@@ -34,10 +34,10 @@
        (repos (gethash 'repositories data))
        (items (seq-map
                '(lambda (item)
-                  `(,(format "%s => %s"
-                             (gethash 'name item)
-                             (gethash 'url item))
-                    . ,(gethash 'name item)))
+                  (let* ((url (gethash 'url item))
+                         (name (gethash 'name item))
+                         (fmt (format "%s => %s" name url)))
+                    `(,fmt . ,name)))
                repos)))
     items))
 
