@@ -2,28 +2,17 @@
 ;; https://github.com/abo-abo/helm-make/blob/master/helm-make.el
 
 (require 'helm)
+(require 'yaml)
 
 (defgroup helm-helm nil
   "kubernetes helm"
   :group 'helm-external)
-(defvar helm-source-helm-repos nil)
 
-(defcustom helm-source-helm-repos-fuzzy-match nil
-  "fff"
-  :group 'helm-helm
-  :type 'boolean
-  :set (lambda (var val)
-         (set var val)
-         (let ((helm-fuzzy-sort-fn 'helm-fuzzy-matching-sort-fn-preserve-ties-order))
-           (setq helm-source-helm-repos
-                 (helm-make-source "Helm Repos" 'helm-helm-repos-yaml-source
-                   :fuzzy-match helm-source-helm-repos-fuzzy-match)))))
 
 (defvar helm-versions-bname "*helm-proc*")
 
 (defun build-helm-proc-buffer (outbuff repo)
-  (with-current-buffer outbuff
-    (erase-buffer))
+  (message "Find versions in repo: %s" repo)
   (call-process "helm" nil  outbuff nil "search" "repo" repo "--versions"))
 
 (defun helm-source-helm-versions (outbuff repo)
@@ -34,9 +23,36 @@
 
 (defun helm-helm-versions (repo)
   (interactive)
-  (let ((outbuff (get-buffer-create helm-versions-bname)))
+  (let ((outbuff (generate-new-buffer helm-versions-bname)))
     (helm :sources (helm-source-helm-versions outbuff repo)
-          :buffer "*kube helm repos*")
-    ))
+          :buffer "*kube helm repo versions*")))
+
+
+(defun get-helm-repos ()
+  (let*
+      ((data (yaml-parse-string (f-read-text "~/.config/helm/repositories.yaml")))
+       (repos (gethash 'repositories data))
+       (items (seq-map
+               '(lambda (item)
+                  `(,(format "%s => %s"
+                             (gethash 'name item)
+                             (gethash 'url item))
+                    . ,(gethash 'name item)))
+               repos)))
+    items))
+
+
+(defun helm-source-helm-repos ()
+  (let ((items (get-helm-repos)))
+    (helm-build-sync-source "helm-repos-source"
+      :action (lambda (item) (helm-helm-versions item))
+      :candidates items)))
+
+(defun helm-helm-repos ()
+  "Show versions from helm repositories"
+  (interactive)
+  (helm :sources (helm-source-helm-repos)
+        :buffer "*kube helm repos*"))
+
 
 (provide 'helm_helm)

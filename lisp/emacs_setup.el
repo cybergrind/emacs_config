@@ -301,6 +301,8 @@
   :config
   (global-undo-tree-mode))
 
+(use-package yaml)
+
 
 (setq emacs-backup-dir "~/.cache/emacs")
 (if (not (file-directory-p emacs-backup-dir))
@@ -315,3 +317,4 @@
 
 (require 'init-ivy)
 (provide 'emacs_setup)
+(require 'helm_helm)
