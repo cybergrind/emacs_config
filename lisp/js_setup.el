@@ -65,21 +65,14 @@
 (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
 (add-hook 'flycheck-mode-hook #'my/use-flow-from-node-modules)
 
-;; Flycheck + Flowtype
-(use-package flycheck-flow
-  :after (flow)
-  :custom
-  (flycheck-javascript-flow-args nil)
-  :config
-  (flycheck-add-next-checker 'javascript-eslint 'javascript-flow))
 
 (defun myjs/eslint-fix ()
   (interactive)
-  (call-process "eslint" nil "npx" "eslint" "--fix" buffer-file-name)
+  (call-process "npx" nil "*eslint*" "npx" "eslint" "--fix" buffer-file-name)
   (revert-buffer :ignore-auto :noconfirm))
 
 (defun setup-prettify ()
-  (key-chord-define-local " p" 'myjs/eslint-fix))
+  (bind-key "M-p" 'myjs/eslint-fix js-mode-map))
 
 (add-hook 'js-mode-hook 'subword-mode)
 (add-hook 'js-mode-hook 'smartparens-mode)
