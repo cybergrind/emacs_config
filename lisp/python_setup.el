@@ -54,7 +54,7 @@
         (setq py-is-running-test t)
         (async-start
          `(lambda ()
-            ,(async-inject-variables "cmd")
+            ,(async-inject-variables "\\`\\(cmd\\)")
             (shell-command-to-string cmd))
          (lambda (result)
            (setq py-is-running-test nil)
@@ -115,7 +115,11 @@
     (pcase (car arg)
       (4 (assign-py-test))
       (16 (x-copy-string (py-build-test-command))
-          (setq run_test nil)))
+          (setq run_test nil))
+      (64
+       (setq py-is-running-test nil)
+       (message "run test")
+       (run-py-test)))
     (if run_test (run-py-test))))
 
 
