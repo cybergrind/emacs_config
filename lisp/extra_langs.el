@@ -26,7 +26,16 @@
 
 (use-package lua-mode)
 
-(use-package hcl-mode  :mode ("\\.tf" . hcl-mode))
+(defun terraform-fmt ()
+  (interactive)
+  (call-process "terraform" nil "*terraform*" "terraform" "fmt" buffer-file-name)
+  (revert-buffer :ignore-auto :noconfirm))
+
+(use-package hcl-mode
+  :mode ("\\.tf" . hcl-mode)
+  :bind
+  (:map hcl-mode-map
+        ("M-p" . terraform-fmt)))
 
 (use-package geiser
   :config
