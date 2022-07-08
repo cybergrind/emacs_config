@@ -21,7 +21,12 @@
 (use-package nim-mode
   :hook (nim-mode-hook . nimsuggest-mode)
   :mode "\\.nim")
-(use-package go-mode :mode "\\.go")
+
+(use-package go-mode
+  :mode "\\.go"
+  :bind
+  (:map go-mode-map
+        ("M-p" . gofmt)))
 
 
 (use-package lua-mode)
