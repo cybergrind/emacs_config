@@ -181,7 +181,8 @@
     ("c" aya-create)
     ("e" aya-expand)
     ("a" lsp-execute-code-action)
-    ("p" py/codestyle))
+    ("p" py/codestyle)
+    ("l" lsp-avy-lens))
   )
 
 (put 'narrow-to-region 'disabled nil)
