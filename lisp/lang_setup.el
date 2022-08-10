@@ -104,4 +104,18 @@
         ("M-l a" . lsp-execute-code-action))
   :hook (dart-mode . run-lsp))
 
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure t
+  :custom
+  (copilot-idle-delay 60.0)
+  :bind (:map copilot-mode-map
+              ("M-TAB" . 'copilot-complete)
+              :map copilot-completion-map
+              ("M-/" . 'copilot-accept-completion-by-word)
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion))
+  :config
+  (add-hook 'prog-mode-hook 'copilot-mode))
+
 (provide 'lang_setup)
