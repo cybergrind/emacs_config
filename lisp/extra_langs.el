@@ -72,7 +72,11 @@
   (setq lsp-julia-default-environment "~/.julia/environments/v1.7"))
 
 (use-package vterm
-  :ensure t)
+  :ensure t
+  :bind
+  (:map vterm-mode-map
+        ("C-v" . scroll-up-command)
+        ("M-v" . scroll-down-command)))
 
 (defun my/julia-repl-send-cell()
   ;; "Send the current julia cell (delimited by ###) to the julia shell"
