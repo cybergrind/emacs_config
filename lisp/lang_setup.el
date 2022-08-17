@@ -112,6 +112,8 @@
   :bind (:map copilot-mode-map
               ("M-TAB" . 'copilot-complete)
               :map copilot-completion-map
+              ("M-," . 'copilot-previous-completion)
+              ("M-." . 'copilot-next-completion)
               ("M-/" . 'copilot-accept-completion-by-word)
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion))
