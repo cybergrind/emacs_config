@@ -108,12 +108,12 @@
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :ensure t
   :custom
-  (copilot-idle-delay 60.0)
+  (copilot-idle-delay 2.0)
   :bind (:map copilot-mode-map
               ("M-TAB" . 'copilot-complete)
               :map copilot-completion-map
-              ("M-," . 'copilot-previous-completion)
-              ("M-." . 'copilot-next-completion)
+              ("C-M-]" . 'copilot-previous-completion)
+              ("M-]" . 'copilot-next-completion)
               ("M-/" . 'copilot-accept-completion-by-word)
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion))
