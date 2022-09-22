@@ -350,8 +350,7 @@ Return command process the exit code."
               ("M-?" . lsp-ui-peek-find-references)
               ("M-." . lsp-ui-peek-find-definitions)
               ("M-/" . company-complete)
-              ("M-TAB" . company-complete)
-              )
+              ("M-TAB" . company-complete))
         :custom
         (lsp-ui-sideline-show-hover nil))))
 
