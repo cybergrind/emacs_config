@@ -18,10 +18,8 @@
  '(flycheck-eslintrc nil t)
  '(flymake-log-level -1)
  '(flymake-no-changes-timeout 5)
- '(helm-adaptive-mode t nil (helm-adaptive))
  '(helm-ag-insert-at-point 'word)
  '(helm-ag-use-agignore t)
- '(helm-mode-fuzzy-match t)
  '(js2-strict-missing-semi-warning nil)
  '(lsp-eslint-working-directories ["./frontend" "./frontend/src"])
  '(lsp-keymap-prefix "M-l")
@@ -57,7 +55,9 @@
  '(ps-spool-duplex nil)
  '(ps-top-margin 5)
  '(safe-local-variable-values
-   '((eval progn
+   '((company-mode . 0)
+     (eval org-overview)
+     (eval progn
            (visual-line-mode))
      (logstash-indent . 2)
      (python-shell-extra-pythonpaths ".")
@@ -85,13 +85,11 @@
      (web-mode-content-type . "jsx")
      (web-mode-content-type . jsx)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook
-            (quote write-contents-functions)
-            (lambda nil
-              (delete-trailing-whitespace)
-              nil))
-           (require
-            (quote whitespace))
+           (add-hook 'write-contents-functions
+                     (lambda nil
+                       (delete-trailing-whitespace)
+                       nil))
+           (require 'whitespace)
            "Sometimes the mode needs to be toggled off and on."
            (whitespace-mode 0)
            (whitespace-mode 1))
@@ -112,4 +110,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(lsp-ui-sideline-global ((t (:background "color-17"))))
- '(lsp-ui-sideline-symbol-info ((t (:background "color-16" :height 0.99)))))
+ '(lsp-ui-sideline-symbol-info ((t (:background "color-16" :height 0.99))))
+ '(mmm-default-submode-face ((t nil))))
