@@ -319,3 +319,5 @@
 (require 'init-ivy)
 (provide 'emacs_setup)
 (require 'helm_helm)
+
+;; (require 'init-evil)
