@@ -21,6 +21,7 @@
  '(helm-ag-insert-at-point 'word)
  '(helm-ag-use-agignore t)
  '(js2-strict-missing-semi-warning nil)
+ '(lsp-disabled-clients '(rls))
  '(lsp-eslint-working-directories ["./frontend" "./frontend/src"])
  '(lsp-keymap-prefix "M-l")
  '(lsp-ui-flycheck-enable t t)

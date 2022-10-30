@@ -129,4 +129,12 @@
   :config
   (add-hook 'prog-mode-hook 'copilot-mode))
 
+(use-package rustic
+  :custom
+  (rustic-lsp-server 'rust-analyzer)
+  (lsp-disalbed-clients '(rls))
+  :bind
+  (:map rust-mode-map
+        ("M-TAB" . 'copilot-complete)))
+
 (provide 'lang_setup)
