@@ -302,7 +302,14 @@
   :config
   (global-undo-tree-mode))
 
+
+
 (use-package yaml)
+
+(use-package yaml-mode
+  :bind
+  (:map yaml-mode-map
+        ("C-M-i" . copilot-complete)))
 
 
 (setq emacs-backup-dir "~/.cache/emacs")
