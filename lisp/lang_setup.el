@@ -135,6 +135,7 @@
   (lsp-disalbed-clients '(rls))
   :bind
   (:map rust-mode-map
-        ("M-TAB" . 'copilot-complete)))
+        ("M-TAB" . 'copilot-complete)
+        ("M-p" . 'rustic-cargo-fmt)))
 
 (provide 'lang_setup)
