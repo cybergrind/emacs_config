@@ -47,10 +47,10 @@
   (setq geiser-active-implementations '(chicken)))
 
 
-(use-package idris-mode
-  :hook (idris-mode-hook . (lambda () (setq charged-kill-nil 'kill-line)))
-  :config
-  (message "Idris init"))
+;; (use-package idris-mode
+;;   :hook (idris-mode-hook . (lambda () (setq charged-kill-nil 'kill-line)))
+;;   :config
+;;   (message "Idris init"))
 
 ;; c++
 (use-package irony
