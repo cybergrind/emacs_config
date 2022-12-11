@@ -105,6 +105,16 @@
 
 (use-package vue-mode :mode "\\.vue")
 
-(use-package typescript-mode :mode "\\.ts")
+(use-package typescript-mode :mode "\\.ts"
+  :bind
+  (:map typescript-mode-map
+        ("M-p" . prettier-prettify)))
+
+
+(use-package svelte-mode :mode "\\.svelte"
+  :bind
+  (:map svelte-mode-map
+        ("M-p" . prettier-prettify))
+  )
 
 (provide 'js_setup)
