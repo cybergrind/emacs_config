@@ -114,7 +114,6 @@
 (use-package svelte-mode :mode "\\.svelte"
   :bind
   (:map svelte-mode-map
-        ("M-p" . prettier-prettify))
-  )
+        ("M-p" . prettier-prettify)))
 
 (provide 'js_setup)
