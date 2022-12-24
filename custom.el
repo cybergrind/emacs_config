@@ -102,6 +102,7 @@
      (erlang\;erlang-indent-level . 4)
      (encoding . utf-8)))
  '(sgml-basic-offset 4)
+ '(svelte-display-submode-name t)
  '(tab-width 4)
  '(undo-tree-auto-save-history nil))
 

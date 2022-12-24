@@ -105,10 +105,18 @@
 
 (use-package vue-mode :mode "\\.vue")
 
+
 (use-package typescript-mode :mode "\\.ts"
+  :straight t
   :bind
   (:map typescript-mode-map
         ("M-p" . prettier-prettify)))
+
+(use-package tide
+    :straight t
+    :after (typescript-mode company flycheck)
+    :hook ((typescript-mode . tide-setup)
+           (typescript-mode . tide-hl-identifier-mode)))
 
 
 (use-package svelte-mode :mode "\\.svelte"
