@@ -29,6 +29,20 @@
   :custom
   (ag-arguments (list "--smart-case" "--stats" "--hidden")))
 
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-x C-l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (python-mode . lsp)
+         (ts-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+(use-package which-key
+  :config
+  (which-key-mode))
+
 (use-package helm
   :bind (("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-mini))
