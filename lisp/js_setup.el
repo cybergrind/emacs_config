@@ -68,7 +68,8 @@
 
 (defun myjs/eslint-fix ()
   (interactive)
-  (call-process "npx" nil "*eslint*" "npx" "eslint" "--fix" buffer-file-name)
+  (let ((params (list "npx" nil "*eslint*" "npx" "eslint" "--fix" buffer-file-name)))
+    (apply #'call-process params))
   (revert-buffer :ignore-auto :noconfirm))
 
 (defun setup-prettify ()

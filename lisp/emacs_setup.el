@@ -315,9 +315,10 @@
 
 
 (use-package undo-tree
+  :custom
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   :config
   (global-undo-tree-mode))
-
 
 
 (use-package yaml)
