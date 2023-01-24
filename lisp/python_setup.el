@@ -503,7 +503,7 @@ Return command process the exit code."
 (add-hook 'editorconfig-after-apply-functions 'py/editorhook)
 ; (remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
 
-
+(require 'python_ruff)
 (provide 'python_setup)
 
 ;;; python_setup.el ends here
