@@ -26,7 +26,7 @@
 (add-hook 'python-mode-hook
           (lambda ()
             (if (not py/lsp)
-                (progn (flycheck-select-checker 'python-flake8)
+                (progn (flycheck-select-checker 'python-ruff)
                        (flycheck-mode)))))
 
 (defvar py/lsp t)
@@ -377,10 +377,10 @@ Return command process the exit code."
   (let*
       ((all-checkers (cons flycheck-checker (flycheck-get-next-checkers flycheck-checker)))
        (has-lsp (member 'lsp all-checkers))
-       (has-flake8 (member 'python-flake8 all-checkers)))
+       (has-flake8 (member 'python-ruff all-checkers)))
     (cond
-     ((and (not has-lsp) has-flake8) (flycheck-add-next-checker 'lsp 'python-flake8))
-     ((and has-lsp (not has-flake8)) (flycheck-add-next-checker 'lsp 'python-flake8)))))
+     ((and (not has-lsp) has-flake8) (flycheck-add-next-checker 'lsp 'python-ruff))
+     ((and has-lsp (not has-flake8)) (flycheck-add-next-checker 'lsp 'python-ruff)))))
 
 (add-hook 'flycheck-mode-hook
           (lambda ()
