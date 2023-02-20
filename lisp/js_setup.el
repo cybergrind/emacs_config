@@ -1,6 +1,12 @@
 ;; javascript / html
 (require 'flycheck)
 
+(require 'js)
+
+(use-package typescript-mode :mode "\\.ts"
+  :straight t)
+(require 'typescript-mode)
+
 (add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
 (add-to-list 'auto-mode-alist '("\\.eslintrc.*$" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.babelrc$" . json-mode))
@@ -72,12 +78,46 @@
     (apply #'call-process params))
   (revert-buffer :ignore-auto :noconfirm))
 
+(defun setup-eslint ()
+  (bind-key "M-p" 'myjs/eslint-fix js-mode-map)
+  (local-set-key (kbd "M-p") 'myjs/eslint-fix))
+
+
+(defun myjs/prettier-fix ()
+  (interactive)
+  (let ((params (list "npx" nil "*prettier*" "npx" "prettier" "-w" buffer-file-name)))
+    (apply #'call-process params))
+  (revert-buffer :ignore-auto :noconfirm))
+
 (defun setup-prettify ()
-  (bind-key "M-p" 'myjs/eslint-fix js-mode-map))
+  (bind-key "M-p" 'myjs/prettier-fix js-mode-map)
+  (local-set-key (kbd "M-p") 'myjs/prettier-fix))
+
+;; create empty hash
+(defvar-local editorconfig-props (make-hash-table :test 'equal))
+
+(defun js/postsetup ()
+  (let* ((js-formatter (gethash 'js_formatter editorconfig-props)))
+    (if (string= js-formatter "prettier")
+        (progn
+          (setup-prettify))
+      (progn
+        (setup-prettify)))))
+
+(defun js/editorhook (props)
+  (when (or (eq major-mode 'js-mode)
+            (eq major-mode 'typescript-mode)
+            (eq major-mode 'svelte-mode))
+    ;; set var
+    (setq editorconfig-props props)
+    (js/postsetup)))
+
+
+(add-hook 'editorconfig-after-apply-functions 'js/editorhook)
 
 (add-hook 'js-mode-hook 'subword-mode)
 (add-hook 'js-mode-hook 'smartparens-mode)
-(add-hook 'js-mode-hook 'setup-prettify)
+;; (add-hook 'js-mode-hook 'setup-prettify)
 (add-hook 'js2-mode-hook 'subword-mode)
 (add-hook 'js2-mode-hook 'smartparens-mode)
 (add-hook 'web-mode-hook 'subword-mode)
@@ -107,11 +147,6 @@
 (use-package vue-mode :mode "\\.vue")
 
 
-(use-package typescript-mode :mode "\\.ts"
-  :straight t
-  :bind
-  (:map typescript-mode-map
-        ("M-p" . prettier-prettify)))
 
 (use-package tide
     :straight t
