@@ -314,7 +314,12 @@
   (editorconfig-mode 1))
 
 
+(use-package company
+  :diminish)
+
+
 (use-package undo-tree
+  :diminish
   :custom
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   :config
