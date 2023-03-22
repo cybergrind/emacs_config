@@ -106,10 +106,13 @@
 
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :diminish
   :ensure t
   :custom
   (copilot-idle-delay 2.0)
+  (global-copilot-mode t)
   :bind
+  ("C-M-i" . 'copilot-complete)
   (:map copilot-mode-map
         ("M-TAB" . 'copilot-complete)
         :map copilot-completion-map
