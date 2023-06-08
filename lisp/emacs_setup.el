@@ -15,8 +15,9 @@
   (("C-x g" . magit-status))
   :custom
   (magit-pull-arguments nil)
+  :config
   (transient-append-suffix 'magit-push "-u"
-    '(1 "-s" "Set CI variable" "--push-option=ci.variable=SKIP_DB_RESET=1")))
+    '(1 "-s" "Set CI variable" "--push-option=ci.variable=SKIP_DB_RESET=0")))
 
 (setq enable-remote-dir-locals t)
 
