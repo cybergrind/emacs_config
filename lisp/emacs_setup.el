@@ -352,6 +352,14 @@
   (direnv-mode))
 
 
+(use-package combobulate
+  :straight t
+  :hook ((python-ts-mode js-ts-mode css-ts-mode yaml-ts-mode typescript-ts-mode tsx-ts-mode) . combobulate-mode)
+  :custom
+  (combobulate-key-prefix "C-c o"))
+
+
+
 (require 'init-ivy)
 (provide 'emacs_setup)
 (require 'helm_helm)
