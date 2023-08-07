@@ -22,12 +22,14 @@
   (string-join (cl-remove-if 'null strings) " "))
 
 
-; Python checker
-(add-hook 'python-mode-hook
-          (lambda ()
-            (if (not py/lsp)
-                (progn (flycheck-select-checker 'python-ruff)
-                       (flycheck-mode)))))
+(defun check-py-lsp ()
+  (interactive)
+  (if (not py/lsp)
+      (progn (flycheck-select-checker 'python-ruff)
+             (flycheck-mode))))
+
+(add-hook 'python-mode-hook 'check-py-lsp)
+(add-hook 'python-ts-mode-hook 'check-py-lsp)
 
 (defvar py/lsp t)
 (defvar py-test-name "")
@@ -203,19 +205,19 @@ t when called interactively."
       (cd py-project-root))
   (run-python))
 
-(add-hook 'python-mode-hook
-          #'(lambda ()
-              ;; (setq python-shell-interpreter "ipython")
-              (global-set-key (kbd "C-o") 'py-test-interactive)
-              (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
-              (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
-              (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
-              (define-key python-mode-map (kbd "M-p") 'py/codestyle)
-              (py/setup-interpreter)
-              (company-mode-on)
-              ;; (define-key python-mode-map (kbd "DEL") 'py-electric-backspace)
-              ;; (define-key python-mode-map (kbd "TAB") 'py-indent-line)
-              ))
+
+(defun py-keyboard-and-etc ()
+  (interactive)
+  (global-set-key (kbd "C-o") 'py-test-interactive)
+  (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
+  (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
+  (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
+  (define-key python-mode-map (kbd "M-p") 'py/codestyle)
+  (py/setup-interpreter)
+  (company-mode-on))
+
+(add-hook 'python-mode-hook 'py-keyboard-and-etc)
+(add-hook 'python-ts-mode-hook 'py-keyboard-and-etc)
 
 
 ;;; this is pretty common case, should already be in some library
