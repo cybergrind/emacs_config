@@ -141,4 +141,12 @@
         ("M-TAB" . 'copilot-complete)
         ("M-p" . 'rustic-cargo-fmt)))
 
+(use-package elixir-mode
+  :custom
+  (elixir-format-arguments '("--dot-formatter" "mix format"))
+  :hook (elixir-mode . lsp)
+  :bind
+  (:map elixir-mode-map
+        ("M-p" . 'elixir-format)))
+
 (provide 'lang_setup)
