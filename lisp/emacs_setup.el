@@ -346,6 +346,12 @@
       `((".*" ,emacs-backup-dir t)))
 
 
+(use-package direnv
+  :straight t
+  :config
+  (direnv-mode))
+
+
 (require 'init-ivy)
 (provide 'emacs_setup)
 (require 'helm_helm)
