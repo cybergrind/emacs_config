@@ -346,6 +346,16 @@
       `((".*" ,emacs-backup-dir t)))
 
 
+(use-package tramp)
+(use-package tagedit)
+(use-package rainbow-delimiters)
+(use-package fuzzy)
+
+(use-package zenburn-theme
+  :config
+  (load-theme 'zenburn t))
+
+
 (use-package direnv
   :straight t
   :config

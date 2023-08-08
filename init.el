@@ -25,26 +25,6 @@ Create the directory if it does not exist and CREATE is non-nil."
     (error "File name should not end with a slash")))
 
 
-(setq package-selected-packages
-      '(
-        docker
-        docker-tramp
-        dockerfile-mode
-        fuzzy
-        js2-mode
-        json-mode
-        markdown-mode
-        prettier-js
-        rainbow-delimiters
-        slim-mode
-        slime
-        tagedit
-        tramp
-        web-mode
-        use-package
-        zenburn-theme
-        ))
-
 (require 'package)
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -60,10 +40,6 @@ Create the directory if it does not exist and CREATE is non-nil."
 (unless package-archive-contents
   (package-refresh-contents))
 
-(dolist (package package-selected-packages)
-  (when (and (assq package package-archive-contents)
-             (not (package-installed-p package)))
-    (package-install package)))
 
 
 (defvar bootstrap-version)

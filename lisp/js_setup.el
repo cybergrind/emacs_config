@@ -3,6 +3,10 @@
 
 (require 'js)
 
+(use-package js2-mode)
+(use-package json-mode)
+(use-package prettier-js)
+
 (use-package typescript-mode :mode "\\.ts"
   :straight t)
 (require 'typescript-mode)

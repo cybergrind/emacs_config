@@ -11,6 +11,7 @@
            #'(lambda () (setq autopair-dont-activate t)))
 
 
+(use-package markdown-mode)
 (use-package puppet-mode :mode "\\.pp")
 (use-package prolog :mode ("\\.pl" . prolog-mode))
 
