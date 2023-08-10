@@ -214,7 +214,10 @@ t when called interactively."
   (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
   (define-key python-mode-map (kbd "M-p") 'py/codestyle)
   (py/setup-interpreter)
-  (company-mode-on))
+  (company-mode-on)
+  ;; if mode python-ts-mode => (yas-activate-extra-mode python-mode)
+  (when (eq major-mode 'python-ts-mode)
+    (yas-activate-extra-mode 'python-mode)))
 
 (add-hook 'python-mode-hook 'py-keyboard-and-etc)
 (add-hook 'python-ts-mode-hook 'py-keyboard-and-etc)
