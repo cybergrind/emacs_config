@@ -98,7 +98,12 @@
   :diminish yas-minor-mode
   :config
   (yas-global-mode 1)
-  (add-to-list 'company-backends 'company-yasnippet t))
+  (add-to-list 'company-backends 'company-yasnippet t)
+  (advice-add 'yas--modes-to-activate :around
+              (defun yas--get-snippet-tables@tree-sitter (orig-fn &optional mode)
+                (funcall orig-fn
+                         (or (car (rassq (or mode major-mode) major-mode-remap-alist))
+                             mode)))))
 
 
 (use-package yasnippet-snippets)
