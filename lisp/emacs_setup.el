@@ -167,28 +167,7 @@
 
 
 ;; hydra
-(use-package hydra
-  :config
-  (defhydra multiple-cursors-hydra (:hint nil)
-    "
-     ^Up^            ^Down^        ^Other^
-----------------------------------------------
-[_p_]   Next    [_n_]   Next    [_l_] Edit lines
-[_P_]   Skip    [_N_]   Skip    [_a_] Mark all
-[_M-p_] Unmark  [_M-n_] Unmark  [_r_] Mark by regexp
-^ ^             ^ ^             [_q_] Quit
-"
-    ("l" mc/edit-lines :exit t)
-    ("a" mc/mark-all-like-this :exit t)
-    ("n" mc/mark-next-like-this)
-    ("N" mc/skip-to-next-like-this)
-    ("M-n" mc/unmark-next-like-this)
-    ("p" mc/mark-previous-like-this)
-    ("P" mc/skip-to-previous-like-this)
-    ("M-p" mc/unmark-previous-like-this)
-    ("r" mc/mark-all-in-region-regexp :exit t)
-    ("q" nil))
-  )
+(use-package hydra)
 
 (use-package auto-yasnippet
   :after hydra
@@ -231,15 +210,6 @@
   (key-chord-define-global " v" 'x-paste)
   (key-chord-define-global " c" 'x-copy))
 
-
-(use-package multiple-cursors
-  :config
-  (progn
-    (global-set-key (kbd "M-N") 'mc/mark-next-like-this)
-    (global-set-key (kbd "M-P") 'mc/mark-previous-like-this)
-    (global-set-key (kbd "M-A") 'mc/mark-all-like-this)
-    (global-set-key (kbd "M-E") 'mc/mark-more-like-this-extended)
-    (define-key mc/keymap (kbd "M-'") 'mc-hide-unmatched-lines-mode)))
 
 (use-package expand-region
   :bind ("C-\\" . er/expand-region))
@@ -368,11 +338,15 @@
 (use-package combobulate
   :straight t
   :hook ((python-ts-mode js-ts-mode css-ts-mode yaml-ts-mode typescript-ts-mode tsx-ts-mode) . combobulate-mode)
+  :bind
+  (:map
+   combobulate-key-map
+   ("M-N" . mci/mark))
   :custom
   (combobulate-key-prefix "C-c o"))
 
 
-
+(require 'kpi_multiple_cursors)
 (require 'init-ivy)
 (provide 'emacs_setup)
 (require 'helm_helm)
