@@ -498,7 +498,8 @@ Return command process the exit code."
 
 
 (defun py/editorhook (props)
-  (when (and (eq major-mode 'python-mode)
+  (when (and (or (eq major-mode 'python-mode)
+                 (eq major-mode 'python-ts-mode))
              (projectile-project-root)
              ;; (getash 'emacs_py_project props)
              )
@@ -506,7 +507,8 @@ Return command process the exit code."
 
 ;; (debug-on-entry 'py/editorhook-wrapped)
 (add-hook 'editorconfig-after-apply-functions 'py/editorhook)
-; (remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
+
+;; (remove-hook 'editorconfig-after-apply-functions 'py/editorhook)
 
 (require 'python_ruff)
 (provide 'python_setup)
