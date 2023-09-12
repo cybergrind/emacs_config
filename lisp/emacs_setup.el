@@ -266,7 +266,10 @@
 (use-package projectile
   ;; :ensure nil
   ;; :pin manual
-  :bind (("C-c p p" . projectile-switch-project))
+  :bind
+  (("C-c p p" . projectile-switch-project)
+   :map projectile-mode-map
+   ("C-c p j" . helm-etags-select))
   :custom
   (projectile-completion-system (quote ido))
   (projectile-enable-caching t)
