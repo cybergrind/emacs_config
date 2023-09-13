@@ -53,7 +53,7 @@
 
 (use-package multiple-cursors
   :bind
-  (("M-N" . mc/mark-interactive)
+  (("M-N" . mci/mark)
    ("M-P" . mc/mark-previous-like-this)
    ("M-A" . mc/mark-all-like-this)
    ("M-E" . mc/mark-more-like-this-extended)
