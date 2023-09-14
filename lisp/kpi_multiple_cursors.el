@@ -33,21 +33,23 @@
 
 
 (defvar mc/interactive-keymap (make-sparse-keymap))
-(define-key mc/interactive-keymap (kbd "p") 'mci/up)
-(define-key mc/interactive-keymap (kbd "n") 'mci/down)
-(define-key mc/interactive-keymap (kbd "P") 'mci/left)
-(define-key mc/interactive-keymap (kbd "N") 'mci/right)
-(define-key mc/interactive-keymap (kbd ".") 'mc/cycle-forward)
-(define-key mc/interactive-keymap (kbd ",") 'mc/cycle-backward)
+(let ((keys '(("p" . mci/up)
+              ("n" . mci/down)
+              ("P" . mci/left)
+              ("N" . mci/right)
+              ("." . mc/cycle-forward)
+              ("," . mc/cycle-backward))))
+  (cl-loop for (key . cmd) in keys
+           do (define-key mc/keymap (kbd key) cmd)))
 
 
-(defun mci/mark ()
-  (interactive)
-  ;; if no selection - select current word with M-@
-  (if (not (use-region-p))
+(defun mci/mark (args)
+  "Selects word if there is no marked word.
+C-u - to skip this behavior"
+  (interactive "P")
+  (if (and (not (use-region-p)) (eq args nil) (< (mc/num-cursors) 2))
       (progn
-        (mark-word)
-        ))
+        (mark-word)))
   (mci/down)
   (set-transient-map mc/interactive-keymap t))
 
@@ -69,8 +71,7 @@
   (add-to-list 'mc--default-cmds-to-run-once 'mci/right)
 
   (define-key mc/mark-more-like-this-extended-keymap (kbd ".") 'mc/cycle-forward)
-  (define-key mc/mark-more-like-this-extended-keymap (kbd ",") 'mc/cycle-backward)
-  )
+  (define-key mc/mark-more-like-this-extended-keymap (kbd ",") 'mc/cycle-backward))
 
 
 (provide 'kpi_multiple_cursors)
