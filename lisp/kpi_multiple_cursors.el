@@ -47,7 +47,13 @@
   "Selects word if there is no marked word.
 C-u - to skip this behavior"
   (interactive "P")
-  (if (and (not (use-region-p)) (eq args nil) (< (mc/num-cursors) 2))
+  (if (and
+       ;; skip expanding for subsequent press
+       (< (mc/num-cursors) 2)
+       ;; skip expanding if C-u
+       (eq args nil)
+       ;; skip expanding if already have region
+       (not (use-region-p)))
       (progn
         (mark-word)))
   (mci/down)
