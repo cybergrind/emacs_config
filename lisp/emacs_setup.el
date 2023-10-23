@@ -341,7 +341,8 @@
   :bind
   (:map
    combobulate-key-map
-   ("M-N" . mci/mark))
+   ("M-N" . mci/mark)
+   ("M-p" . py/codestyle))
   :custom
   (combobulate-key-prefix "C-c o"))
 

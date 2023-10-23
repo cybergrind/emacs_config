@@ -291,7 +291,10 @@ Return command process the exit code."
 
 (defun py/codestyle ()
   (interactive)
-  (when (and (string-equal "python-mode" major-mode) (not py-disable-codestyle))
+  ;; only if major-mode is python-mode or python-ts-mode
+  (when (and (or (eq major-mode 'python-mode)
+                 (eq major-mode 'python-ts-mode))
+             (not py-disable-codestyle))
     (py/process-buffer "isort")
     (py/process-buffer "black")))
 
