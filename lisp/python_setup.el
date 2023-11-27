@@ -37,6 +37,7 @@
 (defvar py-chdir nil)
 (defvar py-is-running-test nil)
 (defvar py-disable-codestyle nil)
+(defvar py-ruff-formatting nil)
 
 (defvar py-current-test nil)
 
@@ -295,8 +296,11 @@ Return command process the exit code."
   (when (and (or (eq major-mode 'python-mode)
                  (eq major-mode 'python-ts-mode))
              (not py-disable-codestyle))
-    (py/process-buffer "isort")
-    (py/process-buffer "black")))
+    (if py-ruff-formatting
+        (py/process-buffer "ruff" :call-args '("format" "-"))
+      (progn
+       (py/process-buffer "isort")
+       (py/process-buffer "black")))))
 
 
 (use-package company
@@ -438,7 +442,8 @@ Return command process the exit code."
          (emacs_py_extra_path (gethash 'emacs_py_extra_path props))
          (emacs_py_interactive (gethash 'emacs_py_interactive props))
          (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
-         (emacs_disable_lsp (gethash 'emacs_disable_lsp props)))
+         (emacs_disable_lsp (gethash 'emacs_disable_lsp props))
+         (emacs_py_ruff_formatting (gethash 'emacs_py_ruff_formatting props)))
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
       (if emacs_py_env
@@ -481,6 +486,8 @@ Return command process the exit code."
             (print (format "py-project-root => %s" abs_root))
             (setq-local py-project-root abs_root))
         (setq-local py-project-root (f-join emacs_py_project "./")))
+      (if emacs_py_ruff_formatting
+          (setq-local py-ruff-formatting t))
       (if emacs_py_interactive
           (add-hook 'inferior-python-mode-hook
                     `(lambda ()
