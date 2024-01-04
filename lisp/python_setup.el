@@ -232,7 +232,7 @@ t when called interactively."
   (not (string-prefix-p "PYTHONPATH" s)))
 
 (cl-defun pop-pythonpath (cmd &key (drop-pypath t))
-  (print (format "Drop pypath: %s" drop-pypath))
+  ;; (print (format "Drop pypath: %s" drop-pypath))
   (cond
    (drop-pypath
     (let ((process-environment (seq-filter 'not_pythonpath process-environment)))
@@ -269,6 +269,7 @@ Return command process the exit code."
 (cl-defun py/process-buffer (command &key (display 't) (call-args '("-")))
   "Show output, if COMMAND exit abnormally and DISPLAY is t."
   (interactive (list t))
+  (print (format "run command: %s %s" command (s-join " " call-args)))
   (let* ((original-buffer (current-buffer))
          (original-window-pos (window-start))
          (tmpbuf (get-buffer-create (format "*py/process/%s*" command)))
@@ -297,7 +298,9 @@ Return command process the exit code."
                  (eq major-mode 'python-ts-mode))
              (not py-disable-codestyle))
     (if py-ruff-formatting
-        (py/process-buffer "ruff" :call-args '("format" "-"))
+        (progn
+          (py/process-buffer "ruff" :call-args `("check" "--fix" "-"))
+          (py/process-buffer "ruff" :call-args `("format" "-")))
       (progn
        (py/process-buffer "isort")
        (py/process-buffer "black")))))
