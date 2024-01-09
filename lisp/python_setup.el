@@ -37,7 +37,7 @@
 (defvar py-chdir nil)
 (defvar py-is-running-test nil)
 (defvar py-disable-codestyle nil)
-(defvar py-ruff-formatting nil)
+(defvar py-formatter nil)
 
 (defvar py-current-test nil)
 
@@ -281,7 +281,7 @@ Return command process the exit code."
         (erase-buffer)))
     (condition-case err
         (if (not (zerop (py/call-bin command original-buffer tmpbuf errbuf :call-args call-args)))
-            (error "Black failed, see %s buffer for details" (buffer-name errbuf))
+            (error "%s failed, see %s buffer for details" command (buffer-name errbuf))
           (unless (eq (compare-buffer-substrings tmpbuf nil nil original-buffer nil nil) 0)
             (with-current-buffer original-buffer
               (replace-buffer-contents tmpbuf)))
@@ -289,21 +289,6 @@ Return command process the exit code."
       (error (message "%s" (error-message-string err))
              (when display
                (pop-to-buffer errbuf))))))
-
-
-(defun py/codestyle ()
-  (interactive)
-  ;; only if major-mode is python-mode or python-ts-mode
-  (when (and (or (eq major-mode 'python-mode)
-                 (eq major-mode 'python-ts-mode))
-             (not py-disable-codestyle))
-    (if py-ruff-formatting
-        (progn
-          (py/process-buffer "ruff" :call-args `("check" "--fix" "-"))
-          (py/process-buffer "ruff" :call-args `("format" "-")))
-      (progn
-       (py/process-buffer "isort")
-       (py/process-buffer "black")))))
 
 
 (use-package company
@@ -316,6 +301,25 @@ Return command process the exit code."
   (company-dabbrev-downcase nil)
   :init
   (global-company-mode 1))
+
+
+;; only if major-mode is python-mode or python-ts-mode
+(defun py/codestyle ()
+  (interactive)
+  (when (and (or (eq major-mode 'python-mode)
+                 (eq major-mode 'python-ts-mode))
+             (not py-disable-codestyle))
+    (pcase
+        py-formatter
+      ("hatch" (progn (py/process-buffer "hatch" :call-args '("fmt" "-"))))
+      ("ruff"
+       (progn
+         (py/process-buffer "ruff" :call-args `("check" "--fix-only" "-"))
+         (py/process-buffer "ruff" :call-args `("format" "-"))))
+      ("black"
+       (progn
+         (py/process-buffer "black")
+         (py/process-buffer "isort"))))))
 
 (use-package python-environment
   :ensure t
@@ -446,7 +450,7 @@ Return command process the exit code."
          (emacs_py_interactive (gethash 'emacs_py_interactive props))
          (emacs_py_save_touch (gethash 'emacs_py_save_touch props))
          (emacs_disable_lsp (gethash 'emacs_disable_lsp props))
-         (emacs_py_ruff_formatting (gethash 'emacs_py_ruff_formatting props)))
+         (emacs_py_formatter (gethash 'emacs_py_formatter props)))
     (print (format "py_project before check: %s" emacs_py_project))
     (when emacs_py_project
       (if emacs_py_env
@@ -489,8 +493,9 @@ Return command process the exit code."
             (print (format "py-project-root => %s" abs_root))
             (setq-local py-project-root abs_root))
         (setq-local py-project-root (f-join emacs_py_project "./")))
-      (if emacs_py_ruff_formatting
-          (setq-local py-ruff-formatting t))
+      (if emacs_py_formatter
+          (setq-local py-formatter emacs_py_formatter)
+        (setq-local py-formatter "black"))
       (if emacs_py_interactive
           (add-hook 'inferior-python-mode-hook
                     `(lambda ()
