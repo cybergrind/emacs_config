@@ -40,6 +40,7 @@
 (defvar py-formatter nil)
 
 (defvar py-current-test nil)
+(defvar py/process-buffer-error nil)
 
 
 (defun py-build-test-command ()
@@ -52,7 +53,8 @@
   (cond
    ((equal py-is-running-test t) (message "there is test in progress"))
    ((not py-current-test) (message "please select test first"))
-   (t (let ((cmd py-current-test))
+   (t (let* ((root (projectile-project-root))
+             (cmd (format "cd %s && %s" root py-current-test)))
         (message "command: %s\n" cmd)
         (setq py-is-running-test t)
         (async-start
@@ -270,7 +272,9 @@ Return command process the exit code."
   "Show output, if COMMAND exit abnormally and DISPLAY is t."
   (interactive (list t))
   (print (format "run command: %s %s" command (s-join " " call-args)))
-  (let* ((original-buffer (current-buffer))
+  (if py/process-buffer-error
+      (print "prevent run due py/process-buffer-error")
+    (let* ((original-buffer (current-buffer))
          (original-window-pos (window-start))
          (tmpbuf (get-buffer-create (format "*py/process/%s*" command)))
          (errbuf (get-buffer-create (format "*py/process-error/%s*" command))))
@@ -281,14 +285,16 @@ Return command process the exit code."
         (erase-buffer)))
     (condition-case err
         (if (not (zerop (py/call-bin command original-buffer tmpbuf errbuf :call-args call-args)))
-            (error "%s failed, see %s buffer for details" command (buffer-name errbuf))
+            (progn
+              (setq py/process-buffer-error t)
+              (error "%s failed, see %s buffer for details" command (buffer-name errbuf)))
           (unless (eq (compare-buffer-substrings tmpbuf nil nil original-buffer nil nil) 0)
             (with-current-buffer original-buffer
               (replace-buffer-contents tmpbuf)))
           (mapc 'kill-buffer (list tmpbuf errbuf)))
       (error (message "%s" (error-message-string err))
              (when display
-               (pop-to-buffer errbuf))))))
+               (pop-to-buffer errbuf)))))))
 
 
 (use-package company
@@ -314,12 +320,14 @@ Return command process the exit code."
       ("hatch" (progn (py/process-buffer "hatch" :call-args '("fmt" "-"))))
       ("ruff"
        (progn
-         (py/process-buffer "ruff" :call-args `("check" "--fix-only" "-"))
-         (py/process-buffer "ruff" :call-args `("format" "-"))))
+         (py/process-buffer "ruff" :call-args `("check" "--fix" "-"))
+         (py/process-buffer "ruff" :call-args `("format" "-"))
+         ))
       ("black"
        (progn
          (py/process-buffer "black")
-         (py/process-buffer "isort"))))))
+         (py/process-buffer "isort")))))
+  (setq py/process-buffer-error nil))
 
 (use-package python-environment
   :ensure t
@@ -413,12 +421,13 @@ Return command process the exit code."
   (lsp-ui-mode)
   (lsp))
 
-
-;; [abv_api/**.py]
-;; emacs_py_project = (f-join (projectile-project-root) "abv_api")
-;; emacs_py_test_command = docker exec -i abvtest_web_1 pytest -n0
-;; emacs_py_project_root = tipsi_web/abv_api/
-
+;; [**.py]
+;; indent_style = space
+;; indent_size = 4
+;; emacs_py_project = .
+;; emacs_py_project_root = .
+;; emacs_py_formatter = ruff
+;; emacs_py_test_command = ./docker/dev/local_scripts/run_tests.sh
 
 ;; [tipsi_web/**.py]
 ;; emacs_py_project = (f-join (projectile-project-root) "tipsi_web")
@@ -439,10 +448,14 @@ Return command process the exit code."
 ;; emacs_py_project_root = integration/
 
 
+(defun py/binary-exists (maybe-binary)
+  "check if binary can be executed: in path or file exists"
+  (or (executable-find maybe-binary) (f-exists? maybe-binary)))
 
 (defun py/editorhook-wrapped (props)
   (let* ((emacs_py_project (f-join (projectile-project-root) (gethash 'emacs_py_project props "")))
          (emacs_py_env (py/get_py_env props emacs_py_project))
+         ;; binary in path, full path or path relative to current project root
          (emacs_py_test_command (gethash 'emacs_py_test_command props))
          (emacs_py_test_full_path (gethash 'emacs_py_test_full_path props))
          (emacs_py_project_root (gethash 'emacs_py_project_root props))
@@ -482,9 +495,13 @@ Return command process the exit code."
         (setq-local py-test-runner 'pytest)))
 
       (if emacs_py_test_command
-          (setq-local py-test-command emacs_py_test_command)
+          (if (py/binary-exists emacs_py_test_command)
+              (setq-local py-test-command emacs_py_test_command)
+            (setq-local py-test-command (f-join (projectile-project-root) emacs_py_test_command)))
         (if emacs_py_env
             (setq-local py-test-command (f-join emacs_py_env "./bin/py.test"))))
+
+      (message "py-test-command: %s" py-test-command)
 
       (if emacs_py_test_full_path
           (setq-local py-test-full-path t))
