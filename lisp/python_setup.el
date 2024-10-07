@@ -319,10 +319,11 @@ Return command process the exit code."
         py-formatter
       ("hatch" (progn (py/process-buffer "hatch" :call-args '("fmt" "-"))))
       ("ruff"
-       (progn
-         (py/process-buffer "ruff" :call-args `("check" "--fix" "-"))
-         (py/process-buffer "ruff" :call-args `("format" "-"))
-         ))
+       (with-environment-variables
+           (("NO_COLOR" "1"))
+         (progn
+           (py/process-buffer "ruff" :call-args `("check" "--fix" "-"))
+           (py/process-buffer "ruff" :call-args `("format" "-")))))
       ("black"
        (progn
          (py/process-buffer "black")
