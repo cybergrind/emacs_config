@@ -2,8 +2,8 @@
 
 (defun mci/message ()
   (if (eq mc/mark-more-like-this-extended-direction 'up)
-      (message "p to mark previous, P to skip, N to remove, n to mark next ./, cycle cursors")
-    (message "n to mark next, N to skip, P to remove, p to mark previous ./, cycle cursors")))
+      (message "j to end, p - revious, P - skip, N - remove, n - next ./, cycle cursors")
+    (message "j to end, n - next, N - skip, P - remove, p - previous ./, cycle cursors")))
 
 (defun mci/up ()
   (interactive)
@@ -31,9 +31,14 @@
     (mc/skip-to-next-like-this))
   (mci/message))
 
+(defvar mc/clear-transient-func nil)
+(defun mc/clear-transient ()
+  (interactive)
+  (funcall mc/clear-transient-func))
 
 (defvar mc/interactive-keymap (make-sparse-keymap))
-(let ((keys '(("p" . mci/up)
+(let ((keys '(("j" . mc/clear-transient)
+              ("p" . mci/up)
               ("n" . mci/down)
               ("P" . mci/left)
               ("N" . mci/right)
@@ -57,7 +62,7 @@ C-u - to skip this behavior"
       (progn
         (mark-word)))
   (mci/down)
-  (set-transient-map mc/interactive-keymap t))
+  (setq mc/clear-transient-func (set-transient-map mc/interactive-keymap t)))
 
 (use-package multiple-cursors
   :bind
