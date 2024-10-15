@@ -1,3 +1,10 @@
 projectile.cache
 var/ido
 smex-items
+venv
+venv_back
+tree-sitter
+.cache
+semanticdb
+elpa
+straight
