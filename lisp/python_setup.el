@@ -101,6 +101,7 @@
 
 (defun assign-py-test ()
   "Assign test."
+  (interactive)
   (cond ((boundp 'py-project-root)
          (cond
           ((equal py-is-running-test t) (message "there is test in progress"))
@@ -208,6 +209,12 @@ t when called interactively."
       (cd py-project-root))
   (run-python))
 
+(defvar py/test-micromap (make-sparse-keymap))
+(set-keymap-parent py/test-micromap my-leader-map)
+(define-key py/test-micromap (kbd "o") 'py-test-interactive)
+(define-key py/test-micromap (kbd "u o") '(lambda () (interactive) (py-test-interactive '(4))))
+(define-key py/test-micromap (kbd "u u o") '(lambda () (interactive) (py-test-interactive '(16))))
+(define-key py/test-micromap (kbd "u u u o") '(lambda () (interactive) (py-test-interactive '(64))))
 
 (defun py-keyboard-and-etc ()
   (interactive)
@@ -219,7 +226,9 @@ t when called interactively."
         (evil-define-key 'normal python-mode-map (kbd "C-c r") 'py/send-defun)
         (evil-define-key 'normal python-mode-map (kbd "C-c .") 'goto-last-change)
         (evil-define-key 'normal python-mode-map (kbd "M-p") 'py/codestyle)
-        (evil-define-key 'normal python-mode-map (kbd "C-o") 'py-test-interactive))
+        (evil-define-key 'insert python-mode-map (kbd "M-p") 'py/codestyle)
+        (evil-define-key 'normal python-mode-map (kbd "M-,") py/test-micromap)
+        (evil-define-key 'insert python-mode-map (kbd "M-,") py/test-micromap))
     (progn
       (global-set-key (kbd "C-o") 'py-test-interactive)
       (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)

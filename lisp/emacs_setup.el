@@ -380,12 +380,17 @@
   :custom
   (combobulate-key-prefix "C-c o"))
 
+(defvar my-leader-map (make-sparse-keymap))
+
 (use-package evil
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (define-key evil-motion-state-map "," my-leader-map)
+  (define-key my-leader-map "p" 'projectile-command-map))
 
 (use-package evil-collection
   :after evil
