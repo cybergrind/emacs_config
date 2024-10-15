@@ -81,6 +81,10 @@
         ("C-y" . yank)
         ("M-d" . sp-kill-sexp)))
 
+(use-package lispyville
+  :config
+  (add-hook 'lispy-mode-hook #'lispyville-mode))
+
 (use-package smartparens
   :ensure t
   :custom
