@@ -141,7 +141,7 @@
   :ensure t
   :custom
   (copilot-idle-delay 2.0)
-  (global-copilot-mode t)
+  (global-copilot-mode nil)
   :bind
   ("C-M-i" . 'copilot-complete)
   (:map copilot-mode-map

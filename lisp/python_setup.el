@@ -211,11 +211,23 @@ t when called interactively."
 
 (defun py-keyboard-and-etc ()
   (interactive)
-  (global-set-key (kbd "C-o") 'py-test-interactive)
-  (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
-  (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
-  (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
-  (define-key python-mode-map (kbd "M-p") 'py/codestyle)
+  ;; if evil mode
+  (if (boundp 'evil-mode)
+      (progn
+        (global-set-key (kbd "C-c o") 'py-test-interactive)
+        (evil-define-key 'normal python-mode-map (kbd "C-c C-p") 'py/run-python)
+        (evil-define-key 'normal python-mode-map (kbd "C-c r") 'py/send-defun)
+        (evil-define-key 'normal python-mode-map (kbd "C-c .") 'goto-last-change)
+        (evil-define-key 'normal python-mode-map (kbd "M-p") 'py/codestyle)
+        (evil-define-key 'normal python-mode-map (kbd "C-o") 'py-test-interactive))
+    (progn
+      (global-set-key (kbd "C-o") 'py-test-interactive)
+      (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
+      (define-key python-mode-map (kbd "C-c r") 'py/send-defun)
+      (define-key python-mode-map (kbd "C-c .") 'goto-last-change)
+      (define-key python-mode-map (kbd "M-p") 'py/codestyle)
+      (define-key python-mode-map (kbd "C-o") 'py-test-interactive)))
+
   (py/setup-interpreter)
   (company-mode-on)
   ;; if mode python-ts-mode => (yas-activate-extra-mode python-mode)
