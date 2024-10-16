@@ -57,6 +57,8 @@
              (cmd (format "cd %s && %s" root py-current-test)))
         (message "command: %s\n" cmd)
         (setq py-is-running-test t)
+        ;; save buffer if not saved
+        (if (buffer-modified-p) (save-buffer))
         (async-start
          `(lambda ()
             ,(async-inject-variables "\\`\\(cmd\\)")
