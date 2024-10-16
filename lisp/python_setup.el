@@ -219,6 +219,7 @@ t when called interactively."
 (defun py-keyboard-and-etc ()
   (interactive)
   ;; if evil mode
+  (modify-syntax-entry ?_ "w" python-mode-syntax-table)
   (if (boundp 'evil-mode)
       (progn
         (global-set-key (kbd "C-c o") 'py-test-interactive)
