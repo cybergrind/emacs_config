@@ -1,6 +1,8 @@
 ;;; Code:
 
 ;; defuns
+(defvar my-enable-evil t)
+
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
 
 (dolist (file (directory-files defuns-dir t "\\w+"))
@@ -29,6 +31,7 @@
 (defvar my-leader-map (make-sparse-keymap))
 
 (use-package evil
+  :after projectile
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -36,7 +39,14 @@
   :config
   (evil-mode 1)
   (define-key evil-motion-state-map "," my-leader-map)
-  (define-key my-leader-map "p" 'projectile-command-map))
+  (keymap-global-set "M-," my-leader-map)
+  (define-key my-leader-map "p" 'projectile-command-map)
+  (define-key my-leader-map "b" 'counsel-switch-buffer)
+  (define-key my-leader-map "l" 'avy-goto-line)
+  (define-key my-leader-map " " 'avy-goto-char)
+  (evil-define-key 'normal lispy-mode-map "e" 'lispy-eval)
+  (define-key evil-normal-state-map (kbd "<escape>") 'save-buffer)
+  (define-key projectile-command-map "j" 'helm-etags-select))
 
 (use-package evil-collection
   :after evil
@@ -285,13 +295,14 @@
 
 
 ;; (add-to-list 'load-path "/home/kpi/devel/github/projectile")
+(defun projectile-bind-non-evil ()
+    (keymap-global-set (kbd "C-c p p") 'projectile-switch-project)
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+    (define-key projectile-mode-map (kbd "C-c p j") 'helm-etags-select)
+  )
 (use-package projectile
   ;; :ensure nil
   ;; :pin manual
-  :bind
-  (("C-c p p" . projectile-switch-project)
-   :map projectile-mode-map
-   ("C-c p j" . helm-etags-select))
   :custom
   (projectile-completion-system (quote ido))
   (projectile-enable-caching t)
@@ -300,7 +311,7 @@
   (projectile-tags-exclude-supports-globs t)
   :config
   (projectile-global-mode)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (unless my-enable-evil (projectile-bind-non-evil))
 
   (defun projectile-regenerate-tags ()
     (interactive)
