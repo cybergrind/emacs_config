@@ -32,6 +32,8 @@
 
 (use-package evil
   :after projectile
+  :after lispy
+  :after lispyville
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -44,6 +46,8 @@
   (define-key my-leader-map "b" 'counsel-switch-buffer)
   (define-key my-leader-map "l" 'avy-goto-line)
   (define-key my-leader-map " " 'avy-goto-char)
+  (define-key my-leader-map "," 'evil-window-prev)
+  (define-key my-leader-map "g" 'magit-status)
   (evil-define-key 'normal lispy-mode-map "e" 'lispy-eval)
   (define-key evil-normal-state-map (kbd "<escape>") 'save-buffer)
   (define-key projectile-command-map "j" 'helm-etags-select))
