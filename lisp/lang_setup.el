@@ -82,6 +82,7 @@
         ("M-d" . sp-kill-sexp)))
 
 (use-package lispyville
+  :after evil-collection
   :config
   (add-hook 'lispy-mode-hook #'lispyville-mode))
 

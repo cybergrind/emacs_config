@@ -32,13 +32,12 @@
 
 (use-package evil
   :after projectile
-  :after lispy
-  :after lispyville
   :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-fine-undo t)
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
   (define-key evil-motion-state-map "," my-leader-map)
@@ -56,6 +55,11 @@
 (use-package evil-collection
   :after evil
   :config
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-fine-undo t)
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+
   (evil-collection-init))
 
 (use-package ag
