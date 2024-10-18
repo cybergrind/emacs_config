@@ -48,6 +48,7 @@
   (define-key my-leader-map " " 'avy-goto-char)
   (define-key my-leader-map "," 'evil-window-prev)
   (define-key my-leader-map "g" 'magit-status)
+  (define-key my-leader-map "a" 'ag)
   (evil-define-key 'normal lispy-mode-map "e" 'lispy-eval)
   (define-key evil-normal-state-map (kbd "<escape>") 'save-buffer)
   (define-key projectile-command-map "j" 'helm-etags-select))
