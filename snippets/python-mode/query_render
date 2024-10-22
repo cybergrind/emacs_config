@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# key: query_render
+# name: query_render
+# --
+rendered_query = query.statement.compile(dialect=engine.dialect, compile_kwargs={"literal_binds": True})
+print('rendered:')
+print(rendered_query)
