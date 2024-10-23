@@ -2,6 +2,6 @@
 # key: query_render
 # name: query_render
 # --
-rendered_query = query.statement.compile(dialect=engine.dialect, compile_kwargs={"literal_binds": True})
+rendered_query = ${0:query}.statement.compile(dialect=db.session.bind.dialect,compile_kwargs={"literal_binds": True})
 print('rendered:')
 print(rendered_query)
