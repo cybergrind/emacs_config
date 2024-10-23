@@ -230,7 +230,8 @@ t when called interactively."
         (evil-define-key 'normal python-mode-map (kbd "C-c .") 'goto-last-change)
         (evil-define-key 'normal python-mode-map (kbd "M-p") 'py/codestyle)
         (evil-define-key 'insert python-mode-map (kbd "M-p") 'py/codestyle)
-        (evil-define-key nil python-mode-map (kbd "M-,") py/test-micromap))
+        (evil-define-key nil python-mode-map (kbd "M-,") py/test-micromap)
+        (evil-define-key 'normal python-mode-map (kbd ",") py/test-micromap))
     (progn
       (global-set-key (kbd "C-o") 'py-test-interactive)
       (define-key python-mode-map (kbd "C-c C-p") 'py/run-python)
