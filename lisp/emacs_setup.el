@@ -20,6 +20,9 @@
   :config
   (transient-append-suffix 'magit-push "-u"
     '(1 "-s" "Set CI variable" "--push-option=ci.variable=SKIP_DB_RESET=0"))
+  ;; add default options for blame
+  (transient-append-suffix 'magit-blame "b"
+    '("-w" "-M" "-C" "-C"))
   (add-hook 'git-commit-mode-hook 'evil-insert-state))
 
 (setq enable-remote-dir-locals t)
@@ -49,7 +52,8 @@
   (define-key my-leader-map " " 'avy-goto-char)
   (define-key my-leader-map "," 'evil-window-prev)
   (define-key my-leader-map (kbd "g g") 'magit-status)
-  (define-key my-leader-map (kbd "g l") 'magit-log-branches)
+  (define-key my-leader-map (kbd "g l") 'magit-log-all-branches)
+  (define-key my-leader-map (kbd "g ,") 'magit-file-dispatch)
   (define-key my-leader-map "a" 'ag)
   (evil-define-key 'normal lispy-mode-map "e" 'lispy-eval)
   (define-key evil-normal-state-map (kbd "<escape>") 'save-buffer)
