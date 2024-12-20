@@ -34,6 +34,11 @@
 ;; evil-mode related
 (defvar my-leader-map (make-sparse-keymap))
 
+(defun projectile-find-file-refresh ()
+  (interactive)
+  (projectile-invalidate-cache nil)
+  (projectile-find-file))
+
 (use-package evil
   :after projectile
   :init
@@ -46,6 +51,7 @@
   (evil-mode 1)
   (define-key evil-motion-state-map "," my-leader-map)
   (keymap-global-set "M-," my-leader-map)
+  (define-key my-leader-map "u p f" 'projectile-find-file-refresh)
   (define-key my-leader-map "p" 'projectile-command-map)
   (define-key my-leader-map "b" 'counsel-switch-buffer)
   (define-key my-leader-map "l" 'avy-goto-line)
