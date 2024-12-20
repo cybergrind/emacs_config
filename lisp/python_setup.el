@@ -537,7 +537,7 @@ Return command process the exit code."
         (setq-local py-project-root (f-join emacs_py_project "./")))
       (if emacs_py_formatter
           (setq-local py-formatter emacs_py_formatter)
-        (setq-local py-formatter "black"))
+        (setq-local py-formatter "ruff"))
       (if emacs_py_interactive
           (add-hook 'inferior-python-mode-hook
                     `(lambda ()
