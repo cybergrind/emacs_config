@@ -36,16 +36,17 @@
   (interactive)
   (funcall mc/clear-transient-func))
 
-(defvar mc/interactive-keymap (make-sparse-keymap))
-(let ((keys '(("j" . mc/clear-transient)
-              ("p" . mci/up)
-              ("n" . mci/down)
-              ("P" . mci/left)
-              ("N" . mci/right)
-              ("." . mc/cycle-forward)
-              ("," . mc/cycle-backward))))
-  (cl-loop for (key . cmd) in keys
-           do (define-key mc/keymap (kbd key) cmd)))
+;; (defvar mc/interactive-keymap (make-sparse-keymap))
+;; (let ((keys '(("j" . mc/clear-transient)
+;; ;;               ("p" . mci/up)
+;; ;;               ("n" . mci/down)
+;; ;;               ("P" . mci/left)
+;; ;;               ("N" . mci/right)
+;; ;;               ("." . mc/cycle-forward)
+;; ;;               ("escape" . mc/clear-transient)
+;; ;;               ("," . mc/cycle-backward))))
+;; ;;   (cl-loop for (key . cmd) in keys
+;; ;;            do (define-key mc/keymap (kbd key) cmd)))
 
 
 (defun mci/mark (args)
@@ -62,7 +63,8 @@ C-u - to skip this behavior"
       (progn
         (mark-word)))
   (mci/down)
-  (setq mc/clear-transient-func (set-transient-map mc/interactive-keymap t)))
+  ;; (setq mc/clear-transient-func (set-transient-map mc/interactive-keymap t))
+  )
 
 (use-package multiple-cursors
   :bind
