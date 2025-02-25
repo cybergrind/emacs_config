@@ -2,7 +2,8 @@
   "insert text on X11's clipboard to current buffer."
   (interactive)
   (let ((input-method-function nil)
-        (str (shell-command-to-string "xsel -o")))
+        ;; xsel -o
+        (str (shell-command-to-string "wl-paste")))
     (insert str)))
 
 (defun x-copy ()
@@ -10,7 +11,8 @@
   (interactive)
   (copy-region-as-kill (point) (mark t))
   (let ((process-connection-type nil))
-    (let ((proc (start-process "xsel" "*Messages*" "xsel" "-i" "-b")))
+    ;; "xsel" "-i" "-b"
+    (let ((proc (start-process "xsel" "*Messages*" "wl-copy")))
       (process-send-string proc (car kill-ring))
               (process-send-eof proc))))
 
