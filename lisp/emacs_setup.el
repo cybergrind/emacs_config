@@ -80,6 +80,8 @@
   (ag-arguments (list "--smart-case" "--stats" "--hidden")))
 
 (use-package lsp-mode
+  :custom
+  (lsp-ruff-ruff-args '("--preview"))
   :init
   (setq lsp-keymap-prefix "C-x C-l")
 

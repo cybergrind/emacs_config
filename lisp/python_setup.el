@@ -346,8 +346,9 @@ Return command process the exit code."
        (with-environment-variables
            (("NO_COLOR" "1"))
          (progn
+           (py/process-buffer "ruff" :call-args `("format" "-"))
            (py/process-buffer "ruff" :call-args `("check" "--fix" "-"))
-           (py/process-buffer "ruff" :call-args `("format" "-")))))
+           )))
       ("black"
        (progn
          (py/process-buffer "black")
