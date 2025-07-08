@@ -6,6 +6,16 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (add-to-list 'load-path "~/.emacs.d/vendor")
 
+(add-to-list 'display-buffer-alist
+             '("\\*\\(Warnings\\)\\*"
+               (display-buffer-reuse-window
+                display-buffer-reuse-mode-window
+                display-buffer-in-previous-window
+                display-buffer-in-side-window)
+               (window-width . 0.5)
+               (side . right)
+               (slot . 1)))
+
 (defconst basis/emacs-dir
   (file-name-directory (file-chase-links (or load-file-name buffer-file-name)))
   "This Emacs's configuration directory.")
