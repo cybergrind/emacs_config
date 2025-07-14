@@ -49,6 +49,7 @@
   (setq evil-undo-system 'undo-tree)
   :config
   (evil-mode 1)
+  (define-key evil-motion-state-map "F" 'projectile-find-file)
   (define-key evil-motion-state-map "," my-leader-map)
   (keymap-global-set "M-," my-leader-map)
   (define-key my-leader-map "upf" 'projectile-find-file-refresh)
@@ -291,7 +292,7 @@
 (use-package use-package-chords
   :ensure t
   :custom
-  (key-chord-two-keys delay 0.02)
+  (key-chord-two-keys delay 0.003)
   (key-chord-in-macros nil)
   :config (key-chord-mode 1)
   (key-chord-define-global " v" 'x-paste)
