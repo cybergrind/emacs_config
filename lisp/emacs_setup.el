@@ -58,7 +58,7 @@
   (define-key my-leader-map "l" 'avy-goto-line)
   (define-key my-leader-map " " 'avy-goto-char)
   (define-key my-leader-map "." 'evil-window-prev)
-  (define-key my-leader-map "R" 'revert-buffer-quick)
+  (define-key my-leader-map ",R" 'revert-buffer-quick)
   (define-key my-leader-map (kbd "g g") 'magit-status)
   (define-key my-leader-map (kbd "g l") 'magit-log-all-branches)
   (define-key my-leader-map (kbd "g ,") 'magit-file-dispatch)
