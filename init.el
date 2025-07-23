@@ -19,7 +19,10 @@
                 display-buffer-in-side-window)
                (window-width . 0.5)
                (side . right)
-               (slot . 0)))
+               (slot . 0))
+             '("\\*\\(cargo-test\\)\\*"
+               (display-buffer-use-least-recent-window)))
+
 
 (defconst basis/emacs-dir
   (file-name-directory (file-chase-links (or load-file-name buffer-file-name)))
