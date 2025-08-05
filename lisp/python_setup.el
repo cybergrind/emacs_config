@@ -6,7 +6,6 @@
 
 (require 'python)
 
-(require 'async)
 (require 'kpi_utils)
 (require 'emacs_setup)
 (require 'f)
@@ -54,18 +53,24 @@
    ((equal py-is-running-test t) (message "there is test in progress"))
    ((not py-current-test) (message "please select test first"))
    (t (let* ((root (projectile-project-root))
-             (cmd (format "cd %s && %s" root py-current-test)))
+             (cmd (format "cd %s && %s" root py-current-test))
+             (output-buffer (get-buffer-create "*py-test-output*")))
         (message "command: %s\n" cmd)
         (setq py-is-running-test t)
         ;; save buffer if not saved
         (if (buffer-modified-p) (save-buffer))
-        (async-start
-         `(lambda ()
-            ,(async-inject-variables "\\`\\(cmd\\)")
-            (shell-command-to-string cmd))
-         (lambda (result)
-           (setq py-is-running-test nil)
-           (message "ret is: %s" result)))))))
+        ;; Clear the output buffer
+        (with-current-buffer output-buffer
+          (erase-buffer))
+        ;; Start the process
+        (let ((process (start-process "py-test" output-buffer
+                                      shell-file-name shell-command-switch cmd)))
+          (set-process-sentinel process
+                                (lambda (proc event)
+                                  (when (string-match-p "finished\\|exited" event)
+                                    (setq py-is-running-test nil)
+                                    (with-current-buffer (process-buffer proc)
+                                      (print (format "ret is: %S" (buffer-string))))))))))))
 
 
 (defun get-path-pytest ()
