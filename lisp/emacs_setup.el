@@ -51,6 +51,7 @@
   (evil-mode 1)
   (define-key evil-motion-state-map "F" 'projectile-find-file)
   (define-key evil-motion-state-map "," my-leader-map)
+  (define-key evil-motion-state-map (kbd "g c") 'comment-dwim)
   (keymap-global-set "M-," my-leader-map)
   (define-key my-leader-map "upf" 'projectile-find-file-refresh)
   (define-key my-leader-map "p" 'projectile-command-map)
