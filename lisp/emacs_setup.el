@@ -292,14 +292,14 @@
 
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
 
-(use-package use-package-chords
-  :ensure t
-  :custom
-  (key-chord-two-keys delay 0.003)
-  (key-chord-in-macros nil)
-  :config (key-chord-mode 1)
-  (key-chord-define-global " v" 'x-paste)
-  (key-chord-define-global " c" 'x-copy))
+;; (use-package use-package-chords
+;;   :ensure t
+;;   :custom
+;;   (key-chord-two-keys delay 0.003)
+;;   (key-chord-in-macros nil)
+;;   :config (key-chord-mode 1)
+;;   (key-chord-define-global " v" 'x-paste)
+;;   (key-chord-define-global " c" 'x-copy))
 
 
 (use-package expand-region

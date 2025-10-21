@@ -362,7 +362,8 @@ Return command process the exit code."
 
 (use-package python-environment
   :ensure t
-  :chords ((" p" . py/codestyle)))
+  ;; :chords ((" p" . py/codestyle))
+  )
 
 
 (defvar anaconda-ready-p nil)

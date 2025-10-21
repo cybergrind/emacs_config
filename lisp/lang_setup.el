@@ -120,26 +120,26 @@
 (defun run-lsp ()
   (lsp))
 
-(defun dart-test-interactive (arg)
-  (interactive "P")
-  (pcase (car arg)
-    (4 (lsp-dart-run-test-at-point))
-    (0 (lsp-dart-run-last-test))))
+;; (defun dart-test-interactive (arg)
+;;   (interactive "P")
+;;   (pcase (car arg)
+;;     (4 (lsp-dart-run-test-at-point))
+;;     (0 (lsp-dart-run-last-test))))
 
-(use-package dart-mode
-  :mode "\\.dart"
-  :custom
-  (lsp-dart-line-length 100)
-  (lsp-dart-main-code-lens nil)
-  (lsp-dart-test-code-lens nil)
-  :chords ((" p" . lsp-format-buffer))
-  :bind
-  (:map dart-mode-map
-        ("C-o" . dart-test-interactive)
-        ("M-o" . lsp-dart-dap-flutter-hot-reload)
-        ("M-p" . lsp-format-buffer)
-        ("M-l a" . lsp-execute-code-action))
-  :hook (dart-mode . run-lsp))
+;; (use-package dart-mode
+;;   :mode "\\.dart"
+;;   :custom
+;;   (lsp-dart-line-length 100)
+;;   (lsp-dart-main-code-lens nil)
+;;   (lsp-dart-test-code-lens nil)
+;;   :chords ((" p" . lsp-format-buffer))
+;;   :bind
+;;   (:map dart-mode-map
+;;         ("C-o" . dart-test-interactive)
+;;         ("M-o" . lsp-dart-dap-flutter-hot-reload)
+;;         ("M-p" . lsp-format-buffer)
+;;         ("M-l a" . lsp-execute-code-action))
+;;   :hook (dart-mode . run-lsp))
 
 (use-package copilot
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
