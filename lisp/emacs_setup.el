@@ -23,7 +23,10 @@
   ;; add default options for blame
   (transient-append-suffix 'magit-blame "b"
     '("-w" "-M" "-C" "-C"))
-  (add-hook 'git-commit-mode-hook 'evil-insert-state))
+  (add-hook 'git-commit-mode-hook 'evil-insert-state)
+  (define-key magit-mode-map "F" 'projectile-find-file)
+  (define-key magit-mode-map (kbd ", f") 'magit-pull)
+  )
 
 (setq enable-remote-dir-locals t)
 
