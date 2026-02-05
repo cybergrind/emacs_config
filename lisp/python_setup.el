@@ -43,9 +43,8 @@
 
 
 (defun py-build-test-command ()
-  (let* ((chdir (cond (py-chdir (sjoin (list "cd" py-chdir "&&")))))
-         (cmd (sjoin (list chdir py-test-command py-test-params py-test-name))))
-    cmd))
+ (sjoin (list py-test-command py-test-params py-test-name)))
+
 
 (defun run-py-test ()
   "Execute test and print result."
