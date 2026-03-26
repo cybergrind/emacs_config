@@ -170,6 +170,7 @@
   (add-hook 'prog-mode-hook 'copilot-mode))
 
 (use-package rustic
+  :straight t
   :custom
   (rustic-lsp-server 'rust-analyzer)
   (lsp-disalbed-clients '(rls))

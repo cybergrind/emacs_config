@@ -145,6 +145,7 @@
   (helm-mode-fuzzy-match t))
 
 (use-package helm-ag :after (helm ag)
+  :straight t
   :custom
   (helm-ag-insert-at-point (quote word))
   (helm-ag-use-agignore t))
@@ -160,6 +161,7 @@
     (t (helm-swoop :query ""))))
 
 (use-package helm-swoop
+  :straight t
   :bind
   (("C-s" . helm-swoop)
    :map helm-swoop-map

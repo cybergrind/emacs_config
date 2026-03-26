@@ -45,8 +45,9 @@ Create the directory if it does not exist and CREATE is non-nil."
 
 (require 'package)
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
+(setq package-archives '(
+                         ("gnu" . "http://elpa.gnu.org/packages/")
+                       ; ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")
                          ("melpa-stable" . "http://stable.melpa.org/packages/")
                          ("org" . "http://orgmode.org/elpa/")))
@@ -60,6 +61,7 @@ Create the directory if it does not exist and CREATE is non-nil."
 
 
 
+(setq straight-package--warning-displayed t)
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))

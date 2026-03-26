@@ -1,4 +1,4 @@
-(require 'multiple-cursors)
+;; (require 'multiple-cursors)
 
 (defun mci/message ()
   (if (eq mc/mark-more-like-this-extended-direction 'up)
@@ -67,6 +67,7 @@ C-u - to skip this behavior"
   )
 
 (use-package multiple-cursors
+  :straight t
   :bind
   (("M-N" . mci/mark)
    ("M-P" . mc/mark-previous-like-this)
