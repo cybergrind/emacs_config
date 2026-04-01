@@ -417,7 +417,7 @@
 
 
 (use-package tramp)
-(use-package tagedit)
+
 (use-package rainbow-delimiters)
 (use-package fuzzy)
 
