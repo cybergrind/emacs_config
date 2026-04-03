@@ -135,33 +135,32 @@
 ;;         ("M-l a" . lsp-execute-code-action))
 ;;   :hook (dart-mode . run-lsp))
 
-(use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :diminish
-  :ensure t
-  :custom
-  (copilot-idle-delay 2.0)
-  (global-copilot-mode nil)
-  :bind
-  ("C-M-i" . 'copilot-complete)
-  (:map copilot-mode-map
-        ("M-TAB" . 'copilot-complete)
-        :map copilot-completion-map
-        ("C-M-]" . 'copilot-previous-completion)
-        ("M-]" . 'copilot-next-completion)
-        ("M-/" . 'copilot-accept-completion-by-word)
-        ("<tab>" . 'copilot-accept-completion)
-        ("TAB" . 'copilot-accept-completion)
-        :map lsp-mode-map
-        ("M-TAB" . 'copilot-complete)
-        :map copilot-completion-map
-        ("C-M-]" . 'copilot-previous-completion)
-        ("M-]" . 'copilot-next-completion)
-        ("M-/" . 'copilot-accept-completion-by-word)
-        ("<tab>" . 'copilot-accept-completion)
-        ("TAB" . 'copilot-accept-completion))
-  :config
-  (add-hook 'prog-mode-hook 'copilot-mode))
+(run-with-idle-timer 3 nil
+  (lambda ()
+    (use-package copilot
+      :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+      :diminish
+      :ensure t
+      :custom
+      (copilot-idle-delay 2.0)
+      (global-copilot-mode nil)
+      :hook (prog-mode . copilot-mode)
+      :bind
+      (:map copilot-mode-map
+            ("C-M-i" . copilot-complete)
+            ("M-TAB" . copilot-complete)
+            :map copilot-completion-map
+            ("C-M-]" . copilot-previous-completion)
+            ("M-]" . copilot-next-completion)
+            ("M-/" . copilot-accept-completion-by-word)
+            ("<tab>" . copilot-accept-completion)
+            ("TAB" . copilot-accept-completion)
+            :map lsp-mode-map
+            ("M-TAB" . copilot-complete)))
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (when (derived-mode-p 'prog-mode)
+          (copilot-mode 1))))))
 
 (use-package rustic
   :straight t
