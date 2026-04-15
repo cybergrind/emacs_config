@@ -28,7 +28,8 @@
   (define-key magit-mode-map (kbd ", f") 'magit-pull)
   (with-eval-after-load 'magit-diff
     (define-key magit-hunk-section-map (kbd "RET") #'magit-diff-visit-worktree-file)
-    (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-worktree-file))
+    (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-worktree-file)
+    (define-key magit-hunk-section-map (kbd ", RET") #'magit-diff-visit-file))
   )
 
 (setq enable-remote-dir-locals t)
