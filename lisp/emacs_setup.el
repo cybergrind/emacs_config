@@ -26,6 +26,9 @@
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
   (define-key magit-mode-map "F" 'projectile-find-file)
   (define-key magit-mode-map (kbd ", f") 'magit-pull)
+  (with-eval-after-load 'magit-diff
+    (define-key magit-hunk-section-map (kbd "RET") #'magit-diff-visit-worktree-file)
+    (define-key magit-file-section-map (kbd "RET") #'magit-diff-visit-worktree-file))
   )
 
 (setq enable-remote-dir-locals t)
