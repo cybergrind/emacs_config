@@ -95,6 +95,7 @@
 
 
 (use-package yasnippet
+  :defer 1
   :diminish yas-minor-mode
   :config
   (yas-global-mode 1)
@@ -106,7 +107,7 @@
                              mode)))))
 
 
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets :defer t)
 
 (if (getenv "EMACS_EXTRA_LANGS")
     (require 'extra_langs))
@@ -162,8 +163,14 @@
         (when (derived-mode-p 'prog-mode)
           (copilot-mode 1))))))
 
+;; Pretend `rustic-babel' is already provided so rustic.el's top-level
+;; `(require 'rustic-babel)' is a no-op. rustic-babel drags in the entire
+;; org/gnus/message/epa/dbus chain (~60ms on load) which we don't use.
+(provide 'rustic-babel)
+
 (use-package rustic
   :straight t
+  :mode ("\\.rs\\'" . rustic-mode)
   :custom
   (rustic-lsp-server 'rust-analyzer)
   (lsp-disalbed-clients '(rls))

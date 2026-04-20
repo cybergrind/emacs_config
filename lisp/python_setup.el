@@ -395,14 +395,12 @@ Return command process the exit code."
     (progn
       (use-package lsp-pyright
         :ensure t
+        :defer t
         :custom
-        (lsp-enable-file-watchers nil)
-        ;; :config
-        ;; (lsp-dependency 'pyright
-        ;;                 '(:system "pylance-language-server"))
-        )
+        (lsp-enable-file-watchers nil))
       (use-package lsp-ui
         :ensure t
+        :defer t
         :bind
         (:map python-mode-map
               ("M-?" . lsp-ui-peek-find-references)
@@ -446,7 +444,7 @@ Return command process the exit code."
                 (ensure-lsp-checker))))
 
 (defun py/runlsp (root venv)
-  ;; (require 'lsp-pyright)
+  (require 'lsp-pyright)
   (lsp--suggest-project-root)
   (lsp-workspace-root root)
   (lsp-ui-mode)

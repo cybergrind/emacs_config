@@ -62,6 +62,10 @@ Create the directory if it does not exist and CREATE is non-nil."
 
 
 (setq straight-package--warning-displayed t)
+;; Skip straight's per-startup filesystem scan of every managed repo.
+;; Modifications are still picked up via `check-on-save' and on demand
+;; through `M-x straight-check-package' / `straight-pull-package'.
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))

@@ -267,19 +267,22 @@
 
 
 ;; hydra
-(use-package hydra)
-
-(use-package auto-yasnippet
-  :after hydra
+(use-package hydra
   :config
+  ;; Define here (not in auto-yasnippet's :config) so we can keep
+  ;; auto-yasnippet deferred. Heads point at autoloadable commands,
+  ;; so pressing the prefix loads them lazily.
   (defhydra actions (global-map "C-c a")
     "aya"
     ("c" aya-create)
     ("e" aya-expand)
     ("a" lsp-execute-code-action)
     ("p" py/codestyle)
-    ("l" lsp-avy-lens))
-  )
+    ("l" lsp-avy-lens)))
+
+(use-package auto-yasnippet
+  :defer t
+  :commands (aya-create aya-expand))
 
 (put 'narrow-to-region 'disabled nil)
 (put 'narrow-to-page 'disabled nil)
