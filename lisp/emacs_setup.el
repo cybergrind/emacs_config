@@ -47,6 +47,7 @@
   (projectile-find-file))
 
 (use-package evil
+  :straight t
   :after projectile
   :init
   (setq evil-want-C-u-scroll t)
@@ -78,6 +79,7 @@
   (define-key projectile-command-map "j" 'helm-etags-select))
 
 (use-package evil-collection
+  :straight t
   :after evil
   :config
   (setq evil-want-C-u-scroll t)
