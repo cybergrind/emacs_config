@@ -4,7 +4,8 @@
 (require 'files)
 
 (setq treesit-language-source-alist
-      '((dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")))
+      '((dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+        (kotlin "https://github.com/fwcd/tree-sitter-kotlin")))
 
 ;; Auto-install missing tree-sitter grammars
 (dolist (lang treesit-language-source-alist)
@@ -21,6 +22,8 @@
 
 
 (use-package yaml-mode :mode "\\.yaml")
+
+(use-package kotlin-ts-mode :mode "\\.kts?\\'")
 
 (use-package flycheck
   :custom
