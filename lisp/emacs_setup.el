@@ -452,6 +452,9 @@
   :custom
   (combobulate-key-prefix "C-c o"))
 
+(use-package visual-fill-column
+  :straight t)
+
 (require 'kpi_multiple_cursors)
 (require 'init-ivy)
 (provide 'emacs_setup)
