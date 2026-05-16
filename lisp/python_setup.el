@@ -562,11 +562,7 @@ Return command process the exit code."
 
 
 (defun py/editorhook (props)
-  (when (and (or (eq major-mode 'python-mode)
-                 (eq major-mode 'python-ts-mode))
-             (projectile-project-root)
-             ;; (getash 'emacs_py_project props)
-             )
+  (when (projectile-project-root)
     (py/editorhook-wrapped props)))
 
 ;; (debug-on-entry 'py/editorhook-wrapped)
