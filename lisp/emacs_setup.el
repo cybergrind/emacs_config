@@ -32,6 +32,8 @@
     (define-key magit-hunk-section-map (kbd ", RET") #'magit-diff-visit-file))
   )
 
+(require 'vc_annotate_setup)
+
 (setq enable-remote-dir-locals t)
 
 ;; C-t to save position. Go anywhere and then push M-, and return to last marked point
