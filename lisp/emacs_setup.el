@@ -66,6 +66,7 @@
   (define-key my-leader-map "upf" 'projectile-find-file-refresh)
   (define-key my-leader-map "p" 'projectile-command-map)
   (define-key my-leader-map "b" 'counsel-switch-buffer)
+  (define-key my-leader-map "f" 'counsel-find-file)
   (define-key my-leader-map "l" 'avy-goto-line)
   (define-key my-leader-map " " 'avy-goto-char)
   (define-key my-leader-map "." 'evil-window-prev)
