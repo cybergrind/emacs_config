@@ -30,7 +30,7 @@
      (woman . "^")))
   :config
   (ivy-mode)
-  (add-to-list 'ivy-height-alist (cons 'counsel-ag 20))
+  (add-to-list 'ivy-height-alist (cons 'counsel-rg 20))
   (add-to-list 'ivy-re-builders-alist
                '(t . ivy--regex-ignore-order))
   :bind

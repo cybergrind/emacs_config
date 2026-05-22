@@ -74,7 +74,7 @@
   (define-key my-leader-map (kbd "g g") 'magit-status)
   (define-key my-leader-map (kbd "g l") 'magit-log-all-branches)
   (define-key my-leader-map (kbd "g ,") 'magit-file-dispatch)
-  (define-key my-leader-map "a" 'ag)
+  (define-key my-leader-map "a" 'rg)
   (define-key my-leader-map (kbd ", p") 'x-paste)
   (define-key my-leader-map (kbd ", y") 'x-copy)
   (evil-define-key 'normal lispy-mode-map "e" 'lispy-eval)
@@ -92,9 +92,10 @@
 
   (evil-collection-init))
 
-(use-package ag
+(use-package rg
+  :straight t
   :custom
-  (ag-arguments (list "--smart-case" "--stats" "--hidden")))
+  (rg-command-line-flags '("--hidden")))
 
 (use-package lsp-mode
   :custom
@@ -151,13 +152,9 @@
          ("C-x b" . helm-mini))
   :custom
   (helm-adaptive-mode t nil (helm-adaptive))
-  (helm-mode-fuzzy-match t))
-
-(use-package helm-ag :after (helm ag)
-  :straight t
-  :custom
-  (helm-ag-insert-at-point (quote word))
-  (helm-ag-use-agignore t))
+  (helm-mode-fuzzy-match t)
+  (helm-grep-ag-command
+   "rg --color=always --smart-case --no-heading --line-number --hidden %s %s %s"))
 
 (defun swoop-query ()
   (interactive)
@@ -352,7 +349,7 @@
   :custom
   (projectile-completion-system (quote ido))
   (projectile-enable-caching t)
-  (projectile-generic-command "ag -g \"\" -0")
+  (projectile-generic-command "rg --files --hidden -0")
   (projectile-mode t nil (projectile))
   (projectile-tags-exclude-supports-globs t)
   :config
@@ -365,7 +362,7 @@
            (tags-exclude (projectile-tags-exclude-patterns))
            (default-directory project-root)
            (tags-file (expand-file-name projectile-tags-file-name))
-           (command (format "ctags -f \"%s\" -e $(echo $(ag -l -0)) %s"
+           (command (format "ctags -f \"%s\" -e $(echo $(rg --files --hidden -0)) %s"
                             (or (file-remote-p tags-file 'localname) tags-file)
                             tags-exclude))
            shell-output exit-code)
