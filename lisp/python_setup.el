@@ -1,4 +1,4 @@
-;;; python_setup.py --- python specific code -*- lexical-bindings: true -*-
+;;; python_setup.py --- python specific code -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -261,13 +261,13 @@ t when called interactively."
 (defun not_pythonpath (s)
   (not (string-prefix-p "PYTHONPATH" s)))
 
-(cl-defun pop-pythonpath (cmd &key (drop-pypath t))
+(cl-defun pop-pythonpath (fn &key (drop-pypath t))
   ;; (print (format "Drop pypath: %s" drop-pypath))
   (cond
    (drop-pypath
     (let ((process-environment (seq-filter 'not_pythonpath process-environment)))
-      (eval cmd)))
-   (t (eval cmd))))
+      (funcall fn)))
+   (t (funcall fn))))
 
 
 (cl-defun py/call-bin (command input-buffer output-buffer error-buffer &key (call-args '()) (drop-pypath t))
@@ -277,12 +277,13 @@ Send INPUT-BUFFER content to the process stdin.  Saving the
 output to OUTPUT-BUFFER.  Saving process stderr to ERROR-BUFFER.
 Return command process the exit code."
   (with-current-buffer input-buffer
-    (let ((process (pop-pythonpath '(make-process :name "py/call-bin"
-                                                  :command `(,command ,@call-args)
-                                                  :buffer output-buffer
-                                                  :stderr error-buffer
-                                                  :noquery t
-                                                  :sentinel (lambda (process event)))
+    (let ((process (pop-pythonpath (lambda ()
+                                     (make-process :name "py/call-bin"
+                                                   :command `(,command ,@call-args)
+                                                   :buffer output-buffer
+                                                   :stderr error-buffer
+                                                   :noquery t
+                                                   :sentinel #'ignore))
                                    :drop-pypath drop-pypath)))
 
       (set-process-query-on-exit-flag (get-buffer-process error-buffer) nil)

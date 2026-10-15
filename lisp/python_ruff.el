@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (require 'flycheck)
 
 (flycheck-define-checker python-ruff

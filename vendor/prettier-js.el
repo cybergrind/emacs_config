@@ -1,4 +1,4 @@
-;;; prettier-js.el --- utility functions to format reason code
+;;; prettier-js.el --- utility functions to format reason code  -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2014 The go-mode Authors. All rights reserved.
 ;; Portions Copyright (c) 2015-present, Facebook, Inc. All rights reserved.

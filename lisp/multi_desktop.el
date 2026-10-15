@@ -1,4 +1,4 @@
-;;; multi_desktop.el -- multi desktop implementation
+;;; multi_desktop.el -- multi desktop implementation  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (require 'cl)

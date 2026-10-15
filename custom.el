@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -10,7 +11,7 @@
  '(company-idle-delay 0.5)
  '(company-minimum-prefix-length 1)
  '(custom-safe-themes
-   '("5a68850c66edcf32eb859345c331c9b20a50ddfcb577b70e0a69ad5d939d10d9" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default))
+   '("0a5cc241036f4f62521d25c078192bbe81b17b68591b2ce3ca9fc22076a28fd1" "5a68850c66edcf32eb859345c331c9b20a50ddfcb577b70e0a69ad5d939d10d9" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "708df3cbb25425ccbf077a6e6f014dc3588faba968c90b74097d11177b711ad1" default))
  '(dired-dwim-target t)
  '(flycheck-disabled-checkers
    '(javascript-jshint json-python-json javascript-jshint javascript-gjslint javascript-jscs emacs-lisp-checkdoc))

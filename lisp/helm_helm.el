@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;;;
 ;; https://github.com/abo-abo/helm-make/blob/master/helm-make.el
 

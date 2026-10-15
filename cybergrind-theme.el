@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (deftheme cybergrind
   "Created 2019-04-22.")
 

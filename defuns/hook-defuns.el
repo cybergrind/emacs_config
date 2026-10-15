@@ -1,4 +1,4 @@
-;;; hook-defuns.el --- hooks
+;;; hook-defuns.el --- hooks  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 (require 'whitespace)

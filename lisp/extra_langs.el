@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (setq inferior-lisp-program "/usr/bin/sbcl") ; your Lisp system
 (add-to-list 'load-path "/usr/lib/sbcl")
 

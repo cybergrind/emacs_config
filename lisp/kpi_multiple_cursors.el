@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; (require 'multiple-cursors)
 
 (defun mci/message ()

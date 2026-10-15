@@ -1,4 +1,4 @@
-;;; vis_cust.el -- customization
+;;; vis_cust.el -- customization  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

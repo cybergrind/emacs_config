@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 (defun x-clipboard--ensure-wayland-display ()
   "Ensure WAYLAND_DISPLAY is set, detecting the socket if needed."
   (unless (getenv "WAYLAND_DISPLAY")

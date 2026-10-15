@@ -1,4 +1,4 @@
-;;; init.el --- emacs config
+;;; init.el --- emacs config  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; make elisp linter happy
 ;;; Code:

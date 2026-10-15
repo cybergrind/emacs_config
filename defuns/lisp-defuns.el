@@ -1,4 +1,4 @@
-;;; lisp-defuns.el --- lisp defuns
+;;; lisp-defuns.el --- lisp defuns  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;; https://github.com/magnars/.emacs.d/blob/master/defuns/lisp-defuns.el
 ;;; Code:

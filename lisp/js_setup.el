@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t; -*-
 ;; javascript / html
 (require 'flycheck)
 
