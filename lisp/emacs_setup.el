@@ -93,6 +93,24 @@
 
   (evil-collection-init))
 
+(use-package ghostel
+  :commands (ghostel ghostel-project)
+  :bind
+  (:map ghostel-semi-char-mode-map
+        ("C-v" . scroll-up-command)
+        ("M-v" . scroll-down-command))
+  :init
+  (define-key my-leader-map "t" 'ghostel-project))
+
+(use-package evil-ghostel
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode))
+
+;; run eshell-visual-commands (htop, less...) in ghostel instead of term
+(use-package ghostel-eshell
+  :ensure nil
+  :hook (eshell-load . ghostel-eshell-visual-command-mode))
+
 (use-package rg
   :straight t
   :custom
